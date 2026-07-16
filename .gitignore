@@ -33,3 +33,4 @@ exports/excel/
 resources/*.xlsx
 resources/*.zip
 .zoho_token_cache.json
+DRISHTI_Submission.pptx

@@ -412,6 +412,16 @@ these endpoints; then Phase 4 agentic layer; Phase 5 Catalyst deploy.
             time — the one built today predates this endpoint.
 - [ ] **Phase 6 — Submission** (Jul 24–26): demo video, deck (official template),
       final deploy, submit (early submission from ~Jul 18, re-submit until deadline)
+      - [x] Official submission DECK built (2026-07-16) in the KSP template →
+            DRISHTI_Submission.pptx (16 slides: team=Team-Alpha/leader Yashwanth
+            Kannamaneni; brief, USP, features, process-flow + architecture diagrams,
+            tech, Catalyst services, 7 live UI screenshots, benchmarks, links,
+            future work). Built via python-pptx from the template; visual-QA'd via
+            LibreOffice render (all 16 slides clean, validate PASS). Team size = 2
+            (confirm). docs/VIDEO_SCRIPT_3MIN.md = 3-min shot list for the video.
+      - [ ] REMAINING: (1) Catalyst deploy → paste live URL into deck slide 13;
+            (2) record 3-min demo video (script ready) → unlisted YouTube/Drive →
+            slide 13; (3) verify all 3 links open in incognito; submit the .pptx.
 
 ## Blocked / waiting on user
 
