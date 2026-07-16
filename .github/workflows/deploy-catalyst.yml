@@ -1,0 +1,52 @@
+# Build DRISHTI and deploy it to Zoho Catalyst AppSail — entirely on GitHub's
+# runners, so nothing needs to run on your Mac. GitHub's ubuntu runners are
+# linux/amd64 (exactly the platform AppSail requires), so the image builds
+# natively and fast, and self-provisions its database inside the build.
+#
+# ONE-TIME SETUP (details in docs/DEPLOYMENT.md → "Hands-off deploy"):
+#   1. Locally, once: run `catalyst init` in this repo, pick your Catalyst
+#      project + create/select the AppSail app named `drishti`, and COMMIT the
+#      generated `catalyst.json` (+ app-config.json). This just links the repo
+#      to your project — it holds no secrets.
+#   2. Run `catalyst token:generate`, then add the value as a GitHub repo secret
+#      named  CATALYST_TOKEN  (repo → Settings → Secrets and variables → Actions).
+#   3. In the AppSail console → drishti → Environment, set DRISHTI_SECRET and the
+#      ZOHO_* vars (runtime secrets — deliberately kept OUT of GitHub).
+#   4. Trigger this workflow from the Actions tab ("Run workflow"), or uncomment
+#      the `push` trigger below to auto-deploy on every push to main.
+
+name: Deploy to Catalyst AppSail
+
+on:
+  workflow_dispatch: {}       # manual "Run workflow" button in the Actions tab
+  # push:                     # <- uncomment AFTER CATALYST_TOKEN is set to
+  #   branches: [main]        #    auto-deploy on every push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest    # linux/amd64 — matches AppSail's required platform
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install the Catalyst CLI
+        run: npm install -g zcatalyst-cli
+
+      - name: Build the amd64 image (self-provisions the DB inside the build)
+        run: docker build --platform linux/amd64 -t localhost/drishti:latest .
+
+      - name: Deploy the image to AppSail (headless, via CATALYST_TOKEN)
+        env:
+          CATALYST_TOKEN: ${{ secrets.CATALYST_TOKEN }}
+        run: |
+          catalyst deploy appsail \
+            --name drishti \
+            --source docker://localhost/drishti:latest
+          # If your Catalyst plan requires the image via a container REGISTRY
+          # rather than the runner's local Docker store, push to Docker Hub first
+          # (docker login + docker push <user>/drishti) and change --source to
+          #   docker://docker.io/<user>/drishti:latest
+          # See docs/DEPLOYMENT.md → "Hands-off deploy".

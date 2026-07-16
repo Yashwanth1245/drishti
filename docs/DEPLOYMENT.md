@@ -70,6 +70,34 @@ catalyst deploy appsail --name drishti \
 A public GitHub repo is still required for the submission, but it is separate
 from this image-based deploy (the image, not the repo, carries the data).
 
+## Hands-off deploy (GitHub builds it — no local Docker)
+
+Reality check first: once deployed, the app runs ON CATALYST's servers, not on
+your machine. `catalyst deploy` UPLOADS the image to Catalyst; Catalyst then hosts
+and runs it 24/7. Your Mac's Docker is only needed at deploy time — after that the
+Catalyst URL keeps serving with Docker quit and the Mac off.
+
+To take your Mac out of the loop entirely, `.github/workflows/deploy-catalyst.yml`
+builds the image and deploys it from GitHub's runners (which are linux/amd64 — the
+exact platform AppSail requires, so no emulation). One-time setup:
+
+1. Locally, once: `npm i -g zcatalyst-cli && catalyst login && catalyst init` —
+   select your project, create/select the AppSail app `drishti`, and commit the
+   generated `catalyst.json` (it links the repo to the project; holds no secrets).
+2. `catalyst token:generate` → add the value as a GitHub Actions secret named
+   `CATALYST_TOKEN` (repo → Settings → Secrets and variables → Actions).
+3. AppSail console → drishti → Environment: set `DRISHTI_SECRET` + the `ZOHO_*`
+   vars (runtime secrets stay in Catalyst, never in GitHub).
+4. Actions tab → "Deploy to Catalyst AppSail" → Run workflow. Or uncomment the
+   `push:` trigger in the workflow to auto-deploy on every push to main.
+
+If your plan requires the image via a container registry rather than the runner's
+local Docker store, push to Docker Hub in the workflow and point `--source` at
+`docker://docker.io/<user>/drishti:latest`.
+
+Alternative: Catalyst's own **Pipelines** (console CI/CD) can build+deploy from
+this repo too — same idea, configured in the Catalyst console instead of GitHub.
+
 ## Path B — native AppSail bundle
 
 ```bash
