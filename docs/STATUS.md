@@ -11,6 +11,36 @@
 > auto-generated each datagen run. reference/README.md documents the curated
 > real-world data.
 
+## Audit + submission prep (2026-07-16)
+
+Full app audit (18 agents + hands-on verification). VERDICT: functionally strong
+— datagen --verify, selfcheck, apicheck ALL PASS; live UI verified (MapLibre +
+ECharts + Cytoscape, zero console errors); Zoho GLM probe PASS. Challenge
+coverage ~60%: Pillar 1 (viz) ~80%; Pillars 2-6 partial.
+
+Fixes applied this session (all verified):
+- schema.sql: removed DUPLICATE `idx_property_case` index that crashed a clean
+  `executescript` regen (the current DB was a pre-dup artifact). Clean regen now
+  works; determinism holds (ER 0.9406 / 215,789 entities reproduced).
+- auth.py: `_secret()` now FAILS CLOSED in a deployed env (X_ZOHO_CATALYST_
+  LISTEN_PORT set, or DRISHTI_ENV=production) when DRISHTI_SECRET is unset —
+  previously fell back to a public in-source secret (token-forgery risk).
+- Dockerfile: now SELF-PROVISIONS data at build (datagen + precompute inside the
+  build) so deploy-from-GitHub needs no committed DB; .dockerignore updated.
+- Added LICENSE (MIT). Initial git commit created (81 files, no secrets tracked).
+- DEPLOYMENT.md: clarified target is AppSail, NOT Slate (Slate = frontend-only;
+  cannot run FastAPI/SQLite) + added Catalyst connect steps.
+
+Top remaining GAPS vs challenge (for later planning): no forecasting/predictive
+model (Pillars 3,6); no genuine spatial hotspot clustering — CaseMaster lat/long
+populated but unread (Pillar 4); no organized-crime STRUCTURE/role detection
+(Pillar 5); victims+locations not graphed (Pillar 2); no trained ML lib anywhere
+(Pillar 6); ARCHITECTURE.md claims ML (isolation-forest/sklearn) that does not
+exist — honesty fix needed. Confirmed security items: restricted case detail
+leaks incident lat/long (main.py:624 `cm.*`); scan upload buffers before size
+check; brief.py weaker alert scope; no rate limiting. Excel workbook still stale
+(regenerate before submission — now that clean regen works).
+
 ## Done
 
 - [x] Challenge selected: **Challenge 2** (Crime Intelligence & Analytical Platform).
