@@ -12,18 +12,18 @@
     "hard_links": 16183,
     "fuzzy_merges": 1694,
     "mo_merges": 1418,
-    "elapsed_sec": 2.9,
-    "sec": 3.0
+    "elapsed_sec": 3.0,
+    "sec": 3.2
   },
   "network": {
     "co_accused_edges": 163922,
     "shared_phone_edges": 0,
-    "sec": 0.6
+    "sec": 0.8
   },
   "risk": {
     "entities_scored": 215789,
     "max_risk": 76.0,
-    "sec": 1.6
+    "sec": 1.7
   },
   "alerts": {
     "spikes": 301,
