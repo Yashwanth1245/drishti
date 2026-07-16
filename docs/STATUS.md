@@ -31,15 +31,23 @@ Fixes applied this session (all verified):
 - DEPLOYMENT.md: clarified target is AppSail, NOT Slate (Slate = frontend-only;
   cannot run FastAPI/SQLite) + added Catalyst connect steps.
 
-Top remaining GAPS vs challenge (for later planning): no forecasting/predictive
-model (Pillars 3,6); no genuine spatial hotspot clustering — CaseMaster lat/long
-populated but unread (Pillar 4); no organized-crime STRUCTURE/role detection
-(Pillar 5); victims+locations not graphed (Pillar 2); no trained ML lib anywhere
-(Pillar 6); ARCHITECTURE.md claims ML (isolation-forest/sklearn) that does not
-exist — honesty fix needed. Confirmed security items: restricted case detail
-leaks incident lat/long (main.py:624 `cm.*`); scan upload buffers before size
-check; brief.py weaker alert scope; no rate limiting. Excel workbook still stale
-(regenerate before submission — now that clean regen works).
+Second fix pass (2026-07-16, pushed ed43b28 — all verified, harnesses PASS):
+map never-blank background fallback; CaseView/EntityView err-reset; emerging-
+trend YoY derived from AS_OF; x_mo_tag + x_network_edge single-col indexes
+(/api/cases 169ms->23ms); restricted case_detail rebuilt from a field whitelist
+(was leaking incident lat/long via cm.*); brief.py alert scope = API scope;
+scan upload Content-Length precheck + bounded read + image magic-byte check;
+per-IP rate limiting on login/LLM + security headers + CORS allow-list; LLMError
+-> 503 (not 500); chat no longer echoes exception text. Excel workbook
+REGENERATED fresh (134MB, 3.13M rows) — regen now works post dup-index fix.
+GitHub public repo live: https://github.com/Yashwanth1245/drishti
+
+Still-open CAPABILITY gaps (bigger features for later planning, NOT bugs): no
+forecasting/predictive model (Pillars 3,6); no genuine spatial hotspot
+clustering — CaseMaster lat/long populated but unread (Pillar 4); no organized-
+crime STRUCTURE/role detection (Pillar 5); victims+locations not graphed
+(Pillar 2); no trained ML lib anywhere (Pillar 6); ARCHITECTURE.md claims ML
+(isolation-forest/sklearn) that does not exist — honesty fix needed.
 
 ## Done
 
