@@ -133,21 +133,26 @@ def build(conn):
             "GROUP BY 1, 2"):
         yearly[sub][year] = n
     n_trends = 0
+    # Compare the two most recent COMPLETE years, derived from AS_OF so this
+    # never goes stale as the data span advances. The current partial year is
+    # excluded on purpose — half a year would understate every trend.
+    last_year = int(AS_OF[:4]) - 1
+    prev_year = last_year - 1
     for sub, by_year in yearly.items():
-        prev, last = by_year.get(2024, 0), by_year.get(2025, 0)
+        prev, last = by_year.get(prev_year, 0), by_year.get(last_year, 0)
         if last < EMERGING_MIN_YEAR_N or prev == 0:
             continue
         growth = (last - prev) / prev
         if growth >= EMERGING_GROWTH:
             evidence = [r[0] for r in cur.execute(
                 "SELECT CaseMasterID FROM CaseMaster WHERE CrimeMinorHeadID=? "
-                "AND CrimeRegisteredDate >= '2025-01-01' LIMIT ?",
-                (sub, EVIDENCE_CAP))]
+                "AND CrimeRegisteredDate >= ? LIMIT ?",
+                (sub, f"{last_year}-01-01", EVIDENCE_CAP))]
             add("emerging-trend", "state", 1, head_of_sub.get(sub),
-                "2024-01-01", AS_OF, last, prev, round(growth, 2),
+                f"{prev_year}-01-01", AS_OF, last, prev, round(growth, 2),
                 f"{names['subhead'].get(sub, 'Crime')} rose "
                 f"{round(growth * 100)}% year-over-year statewide "
-                f"({prev} in 2024 to {last} in 2025)", evidence)
+                f"({prev} in {prev_year} to {last} in {last_year})", evidence)
             n_trends += 1
 
     # ---- anomalies ----------------------------------------------------------

@@ -10,8 +10,11 @@ behave exactly as documented in ARCHITECTURE.md. Run from backend/:
 """
 
 import json
+import os
 import sys
 import time
+
+os.environ.setdefault("DRISHTI_RATELIMIT", "0")   # don't rate-limit the test burst
 
 from fastapi.testclient import TestClient
 

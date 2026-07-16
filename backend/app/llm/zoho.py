@@ -48,6 +48,14 @@ def load_env() -> dict:
 
 
 class TokenError(RuntimeError):
+    """Credentials missing/invalid — the caller maps this to a 503 asking for
+    configuration."""
+    pass
+
+
+class LLMError(RuntimeError):
+    """The QuickML upstream failed (non-200, timeout, transport error). The
+    caller maps this to a 503 'AI temporarily unavailable' rather than a 500."""
     pass
 
 
@@ -116,12 +124,15 @@ class ZohoLLM:
             or "oauth_token" in text and "invalid" in text
 
     def _post(self, url: str, payload: dict) -> dict:
-        r = self.client.post(url, json=payload, headers=self._headers())
-        if self._token_rejected(r):
-            self.refresh()                          # one retry on expiry
+        try:
             r = self.client.post(url, json=payload, headers=self._headers())
+            if self._token_rejected(r):
+                self.refresh()                      # one retry on expiry
+                r = self.client.post(url, json=payload, headers=self._headers())
+        except httpx.HTTPError as e:                # timeout / connection reset
+            raise LLMError(f"QuickML request failed: {e}") from e
         if r.status_code != 200:
-            raise RuntimeError(f"QuickML {r.status_code}: {r.text[:800]}")
+            raise LLMError(f"QuickML {r.status_code}: {r.text[:800]}")
         return r.json()
 
     # ---- models ------------------------------------------------------------

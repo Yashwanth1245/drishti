@@ -8,6 +8,7 @@ export default function EntityView({ entityId }) {
 
   useEffect(() => {
     setE(null);
+    setErr(null);            // clear a prior error, else a failed fetch wedges the view
     api(`/api/entities/${entityId}`).then(setE).catch((x) => setErr(String(x)));
   }, [entityId]);
 

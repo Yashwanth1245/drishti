@@ -391,8 +391,9 @@ def ask(messages: list[dict], llm: ZohoLLM | None = None,
                 out = run_tool(c["name"], c["arguments"], scope)
             except ScopeError as exc:              # relayed, never bypassed
                 out = {"error": str(exc)}
-            except Exception as exc:               # tool bugs must not kill chat
-                out = {"error": str(exc)[:200]}
+            except Exception:                      # tool bugs must not kill chat
+                # Don't echo internal exception text to the client/model.
+                out = {"error": "tool failed to execute"}
             evidence.extend(_collect_evidence(out))
             trace.append({"tool": c["name"], "arguments": c["arguments"],
                           "result_preview": json.dumps(out)[:400]})

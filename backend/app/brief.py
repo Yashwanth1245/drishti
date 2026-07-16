@@ -43,8 +43,18 @@ def build_brief(district_id: int | None = None, alert_id: int | None = None,
             dname = conn.execute("SELECT DistrictName FROM District WHERE "
                                  "DistrictID=?", (district_id,)).fetchone()[0]
 
-        scope = "AND (scope_type!='district' OR scope_id=?)" if district_id else ""
-        args = [district_id] if district_id else []
+        # Same jurisdiction rule as the /api/alerts endpoint: state alerts for
+        # everyone, this district's district-alerts, and station alerts ONLY for
+        # stations inside this district. The old filter admitted every non-
+        # district alert statewide, leaking other districts' evidence FIRs.
+        if district_id:
+            scope = ("AND (scope_type='state' "
+                     "OR (scope_type='district' AND scope_id=?) "
+                     "OR (scope_type='station' AND scope_id IN "
+                     "(SELECT UnitID FROM Unit WHERE DistrictID=?)))")
+            args = [district_id, district_id]
+        else:
+            scope, args = "", []
         alerts, evidence = [], []
         for r in conn.execute(
                 f"SELECT alert_id, kind, summary, zscore, evidence FROM x_alert "

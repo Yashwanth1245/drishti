@@ -13,7 +13,13 @@ const BASE_STYLE = {
       attribution: "© OpenStreetMap contributors © CARTO",
     },
   },
-  layers: [{ id: "base", type: "raster", source: "carto" }],
+  layers: [
+    // Solid backdrop FIRST so the flagship lens is never blank if the CDN
+    // basemap is slow or blocked on a venue network — the district/station
+    // data layers render on top of this regardless of tile availability.
+    { id: "bg", type: "background", paint: { "background-color": "#0b1017" } },
+    { id: "base", type: "raster", source: "carto" },
+  ],
 };
 
 const HOUR_BANDS = ["", "00-03", "03-06", "06-09", "09-12", "12-15",
@@ -42,6 +48,11 @@ export default function MapView({ meta }) {
       maxBounds: [[72.5, 10.5], [80.5, 19.5]],
     });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+    // A failed basemap tile must not blank the lens or spam the console — the
+    // solid background + data layers still render, so swallow tile errors.
+    map.on("error", (e) => {
+      if (/tile|source|network/i.test(String(e?.error?.message || ""))) return;
+    });
     map.on("load", () => {
       map.addSource("districts", emptyFC());
       map.addSource("dspike", emptyFC());

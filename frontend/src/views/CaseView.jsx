@@ -9,6 +9,7 @@ export default function CaseView({ crimeNo }) {
 
   useEffect(() => {
     setC(null);
+    setErr(null);            // clear a prior error, else a failed fetch wedges the view
     setReqState(null);
     api(`/api/cases/${crimeNo}`).then(setC).catch((x) => setErr(String(x)));
   }, [crimeNo]);

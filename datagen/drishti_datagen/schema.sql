@@ -432,6 +432,14 @@ CREATE INDEX idx_pcr_person    ON x_person_case_role(person_id);
 CREATE INDEX idx_pcr_case      ON x_person_case_role(CaseMasterID);
 CREATE INDEX idx_edge_src      ON x_network_edge(src_type, src_id);
 CREATE INDEX idx_edge_dst      ON x_network_edge(dst_type, dst_id);
+-- Ego-graph queries filter `WHERE src_id=? OR dst_id=?`; the composite
+-- (type,id) indexes above can't serve that OR, so add single-column indexes.
+CREATE INDEX idx_edge_srcid    ON x_network_edge(src_id);
+CREATE INDEX idx_edge_dstid    ON x_network_edge(dst_id);
+-- x_mo_tag (266k rows) is joined by CaseMasterID (case detail) and by tag
+-- (similar-case retrieval) on hot endpoints; both were full scans.
+CREATE INDEX idx_motag_case    ON x_mo_tag(CaseMasterID);
+CREATE INDEX idx_motag_tag     ON x_mo_tag(tag);
 CREATE INDEX idx_occtime_case ON Inv_OccuranceTime(CaseMasterID);
 CREATE INDEX idx_property_case ON x_property(CaseMasterID);
 CREATE INDEX idx_agg_unit_date ON x_agg_daily(unit_id, date);

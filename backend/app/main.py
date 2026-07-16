@@ -25,12 +25,15 @@ import json
 import os
 import sqlite3
 import statistics
+import time
+from collections import deque
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, UploadFile
 from fastapi.exception_handlers import http_exception_handler
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -39,10 +42,49 @@ from .auth import (AUDIT, DEMO_PASSWORD, DEMO_USERS, User, current_user,
 from .config import AS_OF, DB_PATH, ROOT
 
 app = FastAPI(title="DRISHTI API", version="0.2.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
-                   allow_headers=["*"])
+
+# CORS: the production single container serves the UI same-origin (no CORS
+# needed); split dev runs the frontend on :5173. Configurable allow-list, not a
+# wildcard, so a stray origin can't call the API with a captured token.
+_CORS = os.environ.get("DRISHTI_CORS_ORIGINS",
+                       "http://localhost:5173,http://127.0.0.1:5173")
+app.add_middleware(CORSMiddleware,
+                   allow_origins=[o.strip() for o in _CORS.split(",") if o.strip()],
+                   allow_methods=["*"], allow_headers=["*"])
 # Map/meta payloads are large, repetitive JSON — gzip cuts them ~85%.
 app.add_middleware(GZipMiddleware, minimum_size=1500)
+
+# Per-IP sliding-window rate limiting on the expensive/abusable endpoints:
+# login runs 120k-round PBKDF2 (CPU-DoS) and the LLM endpoints cost real money.
+# Single process, so an in-memory window suffices. DRISHTI_RATELIMIT=0 disables
+# it (the test harness sets this). Every response also gets baseline security
+# headers.
+_RL_RULES = {"/api/auth/login": (30, 60), "/api/chat": (30, 60),
+             "/api/brief": (20, 60), "/api/ingest/scan": (20, 60)}
+_RL: dict[tuple, deque] = {}
+_SEC_HEADERS = {"X-Content-Type-Options": "nosniff",
+                "X-Frame-Options": "DENY", "Referrer-Policy": "no-referrer"}
+
+
+@app.middleware("http")
+async def guard(request: Request, call_next):
+    rule = _RL_RULES.get(request.url.path)
+    if rule and os.environ.get("DRISHTI_RATELIMIT", "1") != "0":
+        limit, window = rule
+        ip = request.client.host if request.client else "?"
+        now = time.time()
+        dq = _RL.setdefault((request.url.path, ip), deque())
+        while dq and dq[0] < now - window:
+            dq.popleft()
+        if len(dq) >= limit:
+            return JSONResponse({"detail": "Too many requests — slow down."},
+                                status_code=429)
+        dq.append(now)
+    resp = await call_next(request)
+    for k, v in _SEC_HEADERS.items():
+        resp.headers.setdefault(k, v)
+    return resp
+
 
 EVIDENCE_CAP = 50
 
@@ -653,6 +695,7 @@ def case_detail(crime_no: str, user: User = Depends(current_user)):
     else:
         in_scope = True
     cid = c["CaseMasterID"]
+    sub_id = c.get("CrimeMinorHeadID")   # captured before the restricted whitelist strips it
     c["sections"] = rows(conn.execute(
         "SELECT ActID AS act, SectionID AS section FROM ActSectionAssociation "
         "WHERE CaseMasterID=? ORDER BY ActOrderID", (cid,)))
@@ -691,14 +734,25 @@ def case_detail(crime_no: str, user: User = Depends(current_user)):
                            ("victims", "Victim"),
                            ("property", "x_property"),
                            ("captured_ids", "x_identity_capture"))}
+        note = (
+            f"Party details, narrative, identifiers and property of this FIR "
+            f"are held by {c['station']}, {c['district']} district. Request "
+            f"access to view the full record.")
+        # SELECT cm.* pulls RAW CaseMaster columns including the incident
+        # latitude/longitude — those must not leave the owning jurisdiction.
+        # Rebuild the restricted view from a whitelist of structural/legal
+        # fields only (number, dates, station, sections, MO, status).
+        keep = ("CrimeNo", "IncidentFromDate", "IncidentToDate",
+                "InfoReceivedPSDate", "CrimeRegisteredDate", "district_id",
+                "station", "district", "head", "subhead", "gravity", "status",
+                "court", "io_name", "sections", "accused", "arrests",
+                "chargesheet", "mo_tags", "access")
+        c = {k: c[k] for k in keep if k in c}
         c["BriefFacts"] = None
         c["complainants"], c["victims"] = [], []
         c["property"], c["captured_ids"] = [], []
         c["redacted"] = counts
-        c["restriction_note"] = (
-            f"Party details, narrative, identifiers and property of this FIR "
-            f"are held by {c['station']}, {c['district']} district. Request "
-            f"access to view the full record.")
+        c["restriction_note"] = note
     c["similar_cases"] = rows(conn.execute(
         "SELECT cm2.CrimeNo AS crime_no, cm2.CrimeRegisteredDate AS registered, "
         "d2.DistrictName AS district, COUNT(DISTINCT m2.tag) AS shared_tags "
@@ -711,7 +765,7 @@ def case_detail(crime_no: str, user: User = Depends(current_user)):
         "WHERE m1.CaseMasterID=? "
         "GROUP BY cm2.CaseMasterID ORDER BY shared_tags DESC, "
         "cm2.CrimeRegisteredDate DESC LIMIT 5",
-        (c["CrimeMinorHeadID"], cid)))
+        (sub_id, cid)))
     conn.close()
     AUDIT.write(user, "case-view",
                 {"summary": f"opened FIR {crime_no} ({c['station']}, "
@@ -842,7 +896,7 @@ def _chat_scope(user: User) -> dict | None:
 def chat_endpoint(body: dict, user: User = Depends(current_user)):
     """Ask-the-Data agent. Body: {"messages": [{"role","content"}...]}."""
     from .chat import ask
-    from .llm.zoho import TokenError
+    from .llm.zoho import TokenError, LLMError
     messages = [m for m in body.get("messages", [])
                 if m.get("role") in ("user", "assistant") and m.get("content")]
     if not messages:
@@ -854,6 +908,10 @@ def chat_endpoint(body: dict, user: User = Depends(current_user)):
         AUDIT.write(user, "chat",
                     {"summary": f'asked: "{question}" (LLM unavailable)'})
         raise HTTPException(503, f"LLM credentials not configured: {e}")
+    except LLMError:
+        AUDIT.write(user, "chat",
+                    {"summary": f'asked: "{question}" (LLM error)'})
+        raise HTTPException(503, "AI service temporarily unavailable — retry.")
     tools = ", ".join(dict.fromkeys(t["tool"] for t in out.get("trace", []))) \
         or "no tools"
     AUDIT.write(user, "chat",
@@ -866,7 +924,7 @@ def chat_endpoint(body: dict, user: User = Depends(current_user)):
 def brief_endpoint(body: dict, user: User = Depends(current_user)):
     """Intelligence brief. Body: {"district_id"?} or {"alert_id"?}."""
     from .brief import build_brief
-    from .llm.zoho import TokenError
+    from .llm.zoho import TokenError, LLMError
     district_id, alert_id = body.get("district_id"), body.get("alert_id")
     if alert_id and not district_id:
         conn = db()
@@ -895,6 +953,8 @@ def brief_endpoint(body: dict, user: User = Depends(current_user)):
         out = build_brief(district_id=district_id, alert_id=alert_id)
     except TokenError as e:
         raise HTTPException(503, f"LLM credentials not configured: {e}")
+    except LLMError:
+        raise HTTPException(503, "AI service temporarily unavailable — retry.")
     AUDIT.write(user, "brief",
                 {"summary": f"generated intelligence brief — "
                             f"{out.get('scope', district_id or 'statewide')}"
@@ -903,14 +963,26 @@ def brief_endpoint(body: dict, user: User = Depends(current_user)):
 
 
 @app.post("/api/ingest/scan")
-async def ingest_scan(file: UploadFile, user: User = Depends(current_user)):
+async def ingest_scan(request: Request, file: UploadFile,
+                      user: User = Depends(current_user)):
     """Qwen VLM: photographed/scanned FIR -> structured draft record."""
     import base64
     from .llm import ZohoLLM, chat_text as _text
-    from .llm.zoho import TokenError
-    raw = await file.read()
-    if len(raw) > 8_000_000:
+    from .llm.zoho import TokenError, LLMError
+    MAX = 8_000_000
+    # Reject oversized uploads BEFORE buffering/base64-encoding them (memory-DoS).
+    clen = request.headers.get("content-length")
+    if clen and clen.isdigit() and int(clen) > MAX + 4096:
         raise HTTPException(413, "image too large (8MB max)")
+    raw = await file.read(MAX + 1)                   # bounded read
+    if len(raw) > MAX:
+        raise HTTPException(413, "image too large (8MB max)")
+    sig = raw[:12]                                   # validate it is an image
+    if not (sig[:3] == b"\xff\xd8\xff"                        # JPEG
+            or sig[:8] == b"\x89PNG\r\n\x1a\n"                # PNG
+            or (sig[:4] == b"RIFF" and sig[8:12] == b"WEBP")  # WebP
+            or sig[:4] == b"GIF8" or sig[:2] == b"BM"):       # GIF / BMP
+        raise HTTPException(415, "unsupported file — upload a JPEG/PNG/WebP image")
     b64 = base64.b64encode(raw).decode()
     prompt = (
         "This is a photograph or scan of an Indian police FIR (First "
@@ -926,6 +998,8 @@ async def ingest_scan(file: UploadFile, user: User = Depends(current_user)):
                                   "from police documents. JSON only.")
     except TokenError as e:
         raise HTTPException(503, f"LLM credentials not configured: {e}")
+    except LLMError:
+        raise HTTPException(503, "AI service temporarily unavailable — retry.")
     text = _text(resp)
     fields = None
     try:
