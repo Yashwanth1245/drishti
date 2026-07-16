@@ -1,0 +1,269 @@
+{
+  "yearlyTotals": [
+    {
+      "year": 2021,
+      "ipcCases": 115728,
+      "sllCases": 47969
+    },
+    {
+      "year": 2022,
+      "ipcCases": 129461,
+      "sllCases": 51281
+    },
+    {
+      "year": 2023,
+      "ipcCases": 148648,
+      "sllCases": 65586
+    }
+  ],
+  "offenceRates": [
+    {
+      "offence": "Murder (Sec.302)",
+      "approxAnnual": 1322,
+      "pctOfIpc": 0.89,
+      "note": "NCRB CII-2023 Table 1A.4/2A.1. Trend: 1,357 (2021), 1,404 (2022), 1,322 (2023). Rate 1.9 per lakh."
+    },
+    {
+      "offence": "Attempt to murder (Sec.307)",
+      "approxAnnual": 3015,
+      "pctOfIpc": 2.03,
+      "note": "2023, Table 1A.4."
+    },
+    {
+      "offence": "Kidnapping & abduction",
+      "approxAnnual": 3744,
+      "pctOfIpc": 2.52,
+      "note": "Trend: 2,879 (2021), 3,365 (2022), 3,744 (2023); ~84% is Sec.363 incl. missing children deemed kidnapped (3,133). Table 2C.1."
+    },
+    {
+      "offence": "Rape (Sec.376)",
+      "approxAnnual": 656,
+      "pctOfIpc": 0.44,
+      "note": "2023. Karnataka's registered-rape rate (2.0/lakh female) is well below the national average — keep proportion low."
+    },
+    {
+      "offence": "Assault on women to outrage modesty (Sec.354)",
+      "approxAnnual": 4360,
+      "pctOfIpc": 2.93,
+      "note": "2023 total incl. sub-heads; sexual harassment 354A = 713, disrobing 354B = 1,423, stalking 354D = 242."
+    },
+    {
+      "offence": "Dowry deaths (Sec.304B)",
+      "approxAnnual": 156,
+      "pctOfIpc": 0.1,
+      "note": "2023. Small absolute count; Dowry Prohibition Act cases separately = 2,322 (SLL)."
+    },
+    {
+      "offence": "Cruelty by husband/relatives (Sec.498A)",
+      "approxAnnual": 3000,
+      "pctOfIpc": 2.02,
+      "note": "2023. Total crime-against-women (IPC+SLL) Karnataka: 14,468 (2021), 17,813 (2022), 20,336 (2023)."
+    },
+    {
+      "offence": "Theft (Sec.379, total)",
+      "approxAnnual": 24966,
+      "pctOfIpc": 16.8,
+      "note": "2023. Largest property-crime head; 53.5% of thefts are vehicle thefts."
+    },
+    {
+      "offence": "Vehicle theft (auto/motor)",
+      "approxAnnual": 13360,
+      "pctOfIpc": 8.99,
+      "note": "2023, sub-head of theft. Other thefts = 11,606."
+    },
+    {
+      "offence": "Snatching",
+      "approxAnnual": 153,
+      "note": "NCRB does not publish a separate snatching head for Karnataka (theft is split only into vehicle/other; snatching is booked under theft 379 or robbery 392). 153 = chain-snatching cases registered by Bengaluru City police in 2023 (city police data via Business Standard). Use as city-level calibration only; state figure not published."
+    },
+    {
+      "offence": "Robbery (Sec.392)",
+      "approxAnnual": 1842,
+      "pctOfIpc": 1.24,
+      "note": "2023. Includes many street/chain snatchings booked as robbery."
+    },
+    {
+      "offence": "Dacoity (Sec.395)",
+      "approxAnnual": 56,
+      "pctOfIpc": 0.04,
+      "note": "2023. Very rare — keep near-zero share."
+    },
+    {
+      "offence": "Burglary / house-breaking (Sec.454-460)",
+      "approxAnnual": 6035,
+      "pctOfIpc": 4.06,
+      "note": "2023. Night burglaries 4,858 vs day 1,177 (80.5% at night) — NCRB publishes this split directly."
+    },
+    {
+      "offence": "Cheating (Sec.420)",
+      "approxAnnual": 6268,
+      "pctOfIpc": 4.22,
+      "note": "2023. Whole forgery-cheating-fraud group = 7,556 (5.08% of IPC); much online fraud is instead booked under IT Act."
+    },
+    {
+      "offence": "Cyber crimes (all statutes)",
+      "approxAnnual": 21889,
+      "note": "Karnataka was No.1 in India: 8,136 (2021), 12,556 (2022), 21,889 (2023) = ~10.2% of ALL Karnataka cognizable crime. 21,870 of these are IT Act (SLL) cases (33.4% of SLL). NCRB Table 9A.1."
+    },
+    {
+      "offence": "Rioting (Sec.147-151)",
+      "approxAnnual": 4164,
+      "pctOfIpc": 2.8,
+      "note": "2023. Biggest sub-motives: land/property dispute (1,203) and 'other rioting' (2,197); communal only 18."
+    },
+    {
+      "offence": "Deaths by negligence - road accidents (Sec.304A)",
+      "approxAnnual": 11584,
+      "pctOfIpc": 7.79,
+      "note": "2023 road-accident negligence cases (hit-and-run 1,170); all 304A = 12,016 (8.08% of IPC). Related: rash driving (Sec.279 etc.) = 31,908 cases."
+    },
+    {
+      "offence": "NDPS Act",
+      "approxAnnual": 6763,
+      "note": "2023, = 10.3% of SLL. Split: possession for personal consumption 5,254 vs trafficking 1,509. Bengaluru alone 3,443."
+    },
+    {
+      "offence": "Gambling Act",
+      "approxAnnual": 13768,
+      "note": "2023, = 21.0% of Karnataka SLL cases (6.4% of all cognizable) — Karnataka books unusually many Gambling Act (Karnataka Police Act matka/betting) cases, mostly outside Bengaluru (city only 639)."
+    },
+    {
+      "offence": "Excise Act",
+      "approxAnnual": 9327,
+      "note": "2023, = 14.2% of SLL. Karnataka Excise Act; state Prohibition Act cases = 0 (no prohibition in Karnataka)."
+    }
+  ],
+  "chargesheetRates": [
+    {
+      "scope": "Karnataka overall (IPC+SLL, 2023)",
+      "ratePct": 76.9
+    },
+    {
+      "scope": "Karnataka IPC (2023)",
+      "ratePct": 76.7
+    },
+    {
+      "scope": "Karnataka SLL (2023)",
+      "ratePct": 77.5
+    },
+    {
+      "scope": "Karnataka murder (crimes-against-body proxy, 2023)",
+      "ratePct": 88.8
+    },
+    {
+      "scope": "Karnataka crimes against women (2023)",
+      "ratePct": 81.2
+    },
+    {
+      "scope": "Karnataka kidnapping & abduction (2023) - low because most 363 cases end with recovery/FR",
+      "ratePct": 6.9
+    },
+    {
+      "scope": "Karnataka cyber crimes (2023) - very low, pendency 55.5%",
+      "ratePct": 18.1
+    },
+    {
+      "scope": "All-India offences against human body (2023; Karnataka-specific split not published - use as body-crime calibration)",
+      "ratePct": 81.5
+    },
+    {
+      "scope": "All-India offences against property (2023; theft 29.8, burglary 43.6, robbery 73.5, dacoity 78.4)",
+      "ratePct": 35.8
+    },
+    {
+      "scope": "All-India total IPC (2023, for scaling: Karnataka runs ~4 points above national)",
+      "ratePct": 72.7
+    },
+    {
+      "scope": "Bengaluru City IPC (2023)",
+      "ratePct": 69
+    },
+    {
+      "scope": "Bengaluru City SLL (2023)",
+      "ratePct": 52.3
+    }
+  ],
+  "bengaluruShare": [
+    {
+      "offence": "All cognizable crime (IPC+SLL), 2023: 68,520 of 214,234",
+      "sharePct": 32
+    },
+    {
+      "offence": "IPC crimes (41,637 of 148,648)",
+      "sharePct": 28
+    },
+    {
+      "offence": "SLL crimes (26,883 of 65,586)",
+      "sharePct": 41
+    },
+    {
+      "offence": "Cyber crimes (17,631 of 21,889) - Bengaluru dominates; also ~52% of ALL-India metro cyber crime",
+      "sharePct": 80.5
+    },
+    {
+      "offence": "Vehicle theft (5,909 of 13,360)",
+      "sharePct": 44.2
+    },
+    {
+      "offence": "Theft total (10,438 of 24,966; 2nd highest among Indian metros after Delhi)",
+      "sharePct": 41.8
+    },
+    {
+      "offence": "Cheating Sec.420 (3,009 of 6,268)",
+      "sharePct": 48
+    },
+    {
+      "offence": "NDPS (3,443 of 6,763)",
+      "sharePct": 50.9
+    },
+    {
+      "offence": "Robbery (790 of 1,842)",
+      "sharePct": 42.9
+    },
+    {
+      "offence": "Kidnapping (1,158 of 3,744)",
+      "sharePct": 30.9
+    },
+    {
+      "offence": "Crimes against women (4,870 of 20,336)",
+      "sharePct": 23.9
+    },
+    {
+      "offence": "Burglary (1,142 of 6,035)",
+      "sharePct": 18.9
+    },
+    {
+      "offence": "Murder (206 of 1,322)",
+      "sharePct": 15.6
+    },
+    {
+      "offence": "Gambling Act (639 of 13,768) - gambling is mostly non-Bengaluru",
+      "sharePct": 4.6
+    }
+  ],
+  "seasonality": [
+    "Festival-season burglary risk in locked houses is a documented police concern: Bengaluru police run a formal 'locked house' monitoring/patrol scheme for residents travelling during holidays (Deccan Herald 2025), and South-Indian police forces issue Dasara/Deepavali advisories about home burglaries when families travel (e.g., Hyderabad police Dasara advisory, Siasat 2024). Calibrate a burglary uptick in Oct-Nov (Dasara-Deepavali) and school-holiday travel months (Apr-May).",
+    "Chain-snatching clusters around festival season when women wear gold in public: Bengaluru saw a same-night series of armed chain-snatchings (Girinagar, Indiranagar, Kottanur, Konanakunte) during Ganesh festival celebrations, Sept 2024 (Hans India). A modest Aug-Nov snatching uplift is defensible.",
+    "Monsoon: peer-reviewed India evidence (Blakeslee & Fishman, 'Weather Shocks, Agriculture, and Crime: Evidence from India') finds property crime rises after RAINFALL DEFICITS (drought-hit agricultural incomes), not during monsoon months themselves; direct month-of-monsoon effects on crime are statistically weak. Recommend: no strong monsoon (Jun-Sep) dampening/spike, but allow drought-year property-crime elevation in rural districts. Mark as approximate - Karnataka-specific monthly crime series is not published by NCRB.",
+    "NCRB publishes no month-wise data; any monthly curve for the synthetic DB should be gentle (roughly +/-10-15%) with the festival-quarter property-crime bump as the main feature."
+  ],
+  "timeOfDay": [
+    "Burglary is overwhelmingly nocturnal - this is hard NCRB data, not anecdote: Karnataka 2023 house-breaking split is 4,858 night vs 1,177 day (80.5% night; NCRB CII-2023 Table 1A.4); Bengaluru City: 878 night vs 264 day (76.9% night; Table 1B.4).",
+    "Chain/gold snatching targets morning walkers in the ~5-7 am window: Bengaluru gang case-study of snatchers scouting during 5 am walks (Deccan Herald, Annapoorneshwari Nagar cases); similar morning-walker targeting documented in Cyberabad arrests. Secondary peak in evening/late-night (documented ~10:30 pm festival-night snatchings, Hans India). Calibrate snatching bimodally: early morning + evening/night.",
+    "Road-negligence deaths (304A) and rash-driving cases skew to night/early-morning highway hours per road-safety literature, but NCRB gives no hour split - mark as approximation.",
+    "Cyber fraud has no time-of-day constraint; complaints are filed next day, so registration timestamps cluster in office hours - safe to model FIR times as daytime."
+  ],
+  "sources": [
+    "NCRB, Crime in India 2023 Vol I (Tables 1A.1-1A.5 state-wise IPC/SLL and crime-head tables; 1B.1-1B.5 Bengaluru city tables; 2A.1 murder; 2C.1 kidnapping; 3A.1/3A.6 crimes against women) - https://www.ncrb.gov.in/uploads/files/1CrimeinIndia2023PartI.pdf (mirror: https://data.opencity.in/dataset/crime-in-india-2023)",
+    "NCRB, Crime in India 2023 Vol II (Table 9A.1 cyber crimes state-wise 2021-2023; 9A.5 cyber police disposal; 9B.1 Bengaluru cyber 2021-2023) - https://www.ncrb.gov.in/uploads/files/2CrimeinIndia2023PartII.pdf",
+    "NCRB, Crime in India 2023 Vol III (Table 17A.1 police disposal of IPC cases: chargesheeting rates by crime head - body 81.5%, property 35.8%, theft 29.8%, burglary 43.6%) - https://www.ncrb.gov.in/uploads/files/3CrimeinIndia2023PartIII.pdf",
+    "NCRB Crime in India 2023 release summaries (Karnataka tops cyber crime with 21,889 cases) - https://visionias.in/current-affairs/news-today/2025-09-30/social-issues/national-crime-records-bureau-ncrb-releases-crime-in-india-2023 and https://www.nextias.com/ca/current-affairs/30-09-2025/ncrb-crime-in-india-2023",
+    "Business Standard / Vartha Bharati (Jan 2024): Bengaluru City police 2023 data - 153 chain-snatching cases - https://www.business-standard.com/india-news/crimes-against-women-children-rise-in-bengaluru-in-2023-show-police-data-124010400593_1.html",
+    "Deccan Herald: Bengaluru police locked-home patrol initiative for residents leaving town - https://www.deccanherald.com/india/karnataka/bengaluru/police-in-south-bengaluru-launch-new-security-initiative-to-protect-locked-homes-3384279",
+    "Deccan Herald: Bengaluru chain-snatching gang targeting 5 am morning walkers - https://www.deccanherald.com/india/karnataka/bengaluru/bengaluru-crime-mother-forces-minor-son-into-chain-snatching-arrested-2968229",
+    "Hans India (Sept 2024): festival-night armed chain-snatching series in Bengaluru (Girinagar etc.) - https://www.thehansindia.com/karnataka/chain-snatchers-attack-two-women-in-bengaluru-with-sword-loot-gold-jewellery-1006599",
+    "Siasat (2024): Hyderabad police Dasara-vacation burglary advisory (festival-season locked-house burglary pattern in South India) - https://www.siasat.com/ahead-of-dasara-vacation-hyderabad-police-issue-advisory-3105636/",
+    "Blakeslee & Fishman, 'Weather Shocks, Agriculture, and Crime: Evidence from India' (property crime rises with rainfall deficits, not monsoon months) - https://www.researchgate.net/publication/316332534_Weather_Shocks_Agriculture_and_Crime_Evidence_from_India",
+    "NOTES: (1) All Karnataka offence counts are NCRB 2023 (latest available; released Sept 2025); 2024+ data will use BNS sections, not IPC. (2) NCRB has no state-level 'snatching' head - snatching hides inside theft/robbery. (3) Karnataka property-vs-body chargesheeting split is not published; all-India crime-head rates supplied instead, with Karnataka ~4 pts above national overall. (4) Monthly/seasonal and hour-of-day distributions are NOT in NCRB except the day/night burglary split; treat seasonality entries as directional, sourced from news/studies."
+  ]
+}

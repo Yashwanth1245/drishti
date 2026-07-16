@@ -1,0 +1,66 @@
+{
+  "version": "0.1.0",
+  "seed": 2026,
+  "cases_target": 200000,
+  "stages_done": [
+    "lookups",
+    "org",
+    "persons",
+    "cases",
+    "process",
+    "stories",
+    "realism",
+    "report"
+  ],
+  "org": {
+    "districts": 31,
+    "units": 1209,
+    "stations": 1163,
+    "employees": 12540,
+    "courts": 240
+  },
+  "persons": {
+    "pool": 220000,
+    "repeaters": 26484,
+    "case_capacity": 286175,
+    "with_spelling_variants": 9362,
+    "with_true_alias": 1336,
+    "distinct_display_names": 43166,
+    "cross_district": 15876
+  },
+  "cases": {
+    "cases": 200000,
+    "accused_rows": 235037,
+    "victim_rows": 170285,
+    "unknown_cases": 60415,
+    "persons_used": 186937,
+    "aliases": 14032,
+    "minted_extra_persons": 6179
+  },
+  "process": {
+    "arrests": 180750,
+    "surrenders": 11989,
+    "chargesheets": 93080,
+    "false_cases": 2889,
+    "undetected": 32315,
+    "disposed": 31289,
+    "arrest_aadhaar_captures": 97088,
+    "slow_stations": 58
+  },
+  "stories": {
+    "stories": 5,
+    "story_cases": 46
+  },
+  "realism": {
+    "coords_missing": 14000,
+    "coords_station_default": 20000,
+    "coords_swapped": 600,
+    "gender_noise_victim": 3405,
+    "gender_noise_accused": 4700,
+    "name_typos": 24212,
+    "duplicate_firs": 800,
+    "wrong_act_citations": 144
+  },
+  "export": {},
+  "elapsed_sec": 14.2
+}

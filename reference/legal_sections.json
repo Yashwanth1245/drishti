@@ -1,0 +1,695 @@
+{
+  "cutover": {
+    "date": "2024-07-01",
+    "note": "The Bharatiya Nyaya Sanhita 2023 (Act 45 of 2023), together with BNSS 2023 (replacing CrPC) and BSA 2023 (replacing Evidence Act), was brought into force on 1 July 2024 by MHA notifications issued in February 2024 (verified via India Code and PRS). Rule for FIRs: the substantive law follows the DATE OF OFFENCE, not the FIR date. Offences committed on/after 1 July 2024 are registered under BNS sections; offences committed before 1 July 2024 continue to be booked under IPC even if the FIR is registered later (BNS s.358 repeal-and-savings read with s.6 General Clauses Act 1897). Procedure (FIR format, investigation, e-FIR/Zero FIR under BNSS s.173) applies to all FIRs registered on/after 1 July 2024. Exception: BNS s.106(2) (hit-and-run escalated punishment) has NOT been brought into force, per the official comparative table; hit-and-run cases are booked under BNS 106(1) with MV Act sections."
+  },
+  "offences": [
+    {
+      "name": "Murder — intentionally causing death; punishable with death or life imprisonment",
+      "ipcSection": "302",
+      "bnsSection": "103(1)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Murder",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Murder by group on ground of race/caste/community (mob lynching) — new aggravated form",
+      "ipcSection": "302 (no separate IPC provision)",
+      "bnsSection": "103(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Murder",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Attempt to murder — act done with intention/knowledge to cause death",
+      "ipcSection": "307",
+      "bnsSection": "109(1)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Attempt to Commit Murder",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Culpable homicide not amounting to murder — causing death without full mens rea of murder",
+      "ipcSection": "304",
+      "bnsSection": "105",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Culpable Homicide not amounting to Murder",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Voluntarily causing hurt — simple bodily injury (common in assault/affray FIRs)",
+      "ipcSection": "323",
+      "bnsSection": "115(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Hurt",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Voluntarily causing grievous hurt — fracture, loss of limb/sight, injury endangering life etc.",
+      "ipcSection": "325",
+      "bnsSection": "117(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Grievous Hurt",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Grievous hurt by dangerous weapons or means — knife, acid, fire, poison etc.; min 1 yr under BNS",
+      "ipcSection": "326",
+      "bnsSection": "118(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Grievous Hurt",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Assault or criminal force on woman with intent to outrage her modesty",
+      "ipcSection": "354",
+      "bnsSection": "74",
+      "crimeHead": "Crimes Against Women",
+      "crimeSubHead": "Assault on Women with Intent to Outrage her Modesty",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Kidnapping — taking minor from lawful guardianship or conveying person beyond India",
+      "ipcSection": "363",
+      "bnsSection": "137(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Kidnapping & Abduction",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Kidnapping for ransom — abduction with threat of death/hurt to extort ransom",
+      "ipcSection": "364A",
+      "bnsSection": "140(2)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Kidnapping & Abduction (for Ransom)",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Rape — sexual assault as defined; min 10 yrs rigorous imprisonment",
+      "ipcSection": "376",
+      "bnsSection": "64(1)",
+      "crimeHead": "Crimes Against Women",
+      "crimeSubHead": "Rape",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Theft — dishonest taking of movable property; petty theft (<Rs.5,000, first offence) can attract community service under BNS",
+      "ipcSection": "379",
+      "bnsSection": "303(2)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Theft (incl. Vehicle Theft)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Theft in a dwelling house or means of transportation — aggravated theft",
+      "ipcSection": "380",
+      "bnsSection": "305",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Theft (Dwelling House)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Snatching — sudden/quick/forcible seizing of movable property from a person; NEW distinct offence in BNS (no IPC equivalent, earlier booked as 379/356 IPC); up to 3 yrs",
+      "ipcSection": "— (new; formerly 379/356 IPC)",
+      "bnsSection": "304(2)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Theft — Snatching (incl. Chain Snatching)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Robbery — theft or extortion with violence or fear of instant hurt/death",
+      "ipcSection": "392",
+      "bnsSection": "309(4)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Robbery",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Dacoity — robbery by five or more persons conjointly",
+      "ipcSection": "395",
+      "bnsSection": "310(2)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Dacoity",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "House-breaking / lurking house-trespass in order to commit an offence (day burglary)",
+      "ipcSection": "454",
+      "bnsSection": "331(3)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Burglary — House-Breaking (Day)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "House-breaking by night (after sunset, before sunrise) to commit an offence — classic night burglary; up to 14 yrs if intended offence is theft",
+      "ipcSection": "457",
+      "bnsSection": "331(4)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Burglary — House-Breaking (Night)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Criminal breach of trust — dishonest misappropriation of entrusted property",
+      "ipcSection": "406",
+      "bnsSection": "316(2)",
+      "crimeHead": "Economic Offences (Documents & Property Marks)",
+      "crimeSubHead": "Criminal Breach of Trust",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Cheating and dishonestly inducing delivery of property — the classic '420' fraud",
+      "ipcSection": "420",
+      "bnsSection": "318(4)",
+      "crimeHead": "Economic Offences (Documents & Property Marks)",
+      "crimeSubHead": "Cheating (Forgery-Cheating-Fraud/FCF)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Forgery — making a false document/electronic record to cause damage or fraud",
+      "ipcSection": "465",
+      "bnsSection": "336(2)",
+      "crimeHead": "Economic Offences (Documents & Property Marks)",
+      "crimeSubHead": "Forgery",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Forgery of valuable security, will etc. — aggravated forgery, up to life imprisonment",
+      "ipcSection": "467",
+      "bnsSection": "338",
+      "crimeHead": "Economic Offences (Documents & Property Marks)",
+      "crimeSubHead": "Forgery",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Criminal intimidation — threat of injury to person, reputation or property; 351(3) if threat is of death/grievous hurt",
+      "ipcSection": "506",
+      "bnsSection": "351(2)/351(3)",
+      "crimeHead": "Miscellaneous IPC/BNS Crimes",
+      "crimeSubHead": "Criminal Intimidation",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Rioting — use of force/violence by an unlawful assembly",
+      "ipcSection": "147",
+      "bnsSection": "191(2)",
+      "crimeHead": "Offences Against Public Tranquillity",
+      "crimeSubHead": "Rioting",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Rioting armed with deadly weapon",
+      "ipcSection": "148",
+      "bnsSection": "191(3)",
+      "crimeHead": "Offences Against Public Tranquillity",
+      "crimeSubHead": "Rioting (Armed with Deadly Weapon)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Dowry death — death of woman by burns/injury within 7 years of marriage with prior dowry cruelty; min 7 yrs",
+      "ipcSection": "304B",
+      "bnsSection": "80(2)",
+      "crimeHead": "Crimes Against Women",
+      "crimeSubHead": "Dowry Deaths",
+      "gravity": "Heinous"
+    },
+    {
+      "name": "Cruelty by husband or his relatives — harassment/cruelty of married woman (cruelty defined in BNS 86)",
+      "ipcSection": "498A",
+      "bnsSection": "85",
+      "crimeHead": "Crimes Against Women",
+      "crimeSubHead": "Cruelty by Husband or his Relatives",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Causing death by negligence — rash/negligent act causing death (fatal road accidents); up to 5 yrs under BNS (was 2 yrs under IPC)",
+      "ipcSection": "304A",
+      "bnsSection": "106(1)",
+      "crimeHead": "Offences Affecting the Human Body",
+      "crimeSubHead": "Causing Death by Negligence (incl. Road Accidents / Hit & Run)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Rash driving or riding on a public way — endangering life or safety; usual accident-FIR section with MV Act",
+      "ipcSection": "279",
+      "bnsSection": "281",
+      "crimeHead": "Miscellaneous IPC/BNS Crimes",
+      "crimeSubHead": "Rash / Negligent Driving on Public Way",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Mischief — causing wrongful loss/damage to property (IPC 427 damage-value variant maps to BNS 324(4))",
+      "ipcSection": "426 (427 for damage by value)",
+      "bnsSection": "324(2) (324(4) for damage)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Mischief (incl. Arson if by fire)",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "Criminal trespass — unlawful entry on property with intent to commit offence/intimidate/annoy",
+      "ipcSection": "447",
+      "bnsSection": "329(3)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Criminal Trespass",
+      "gravity": "Non-Heinous"
+    },
+    {
+      "name": "House-trespass — criminal trespass into a dwelling or building",
+      "ipcSection": "448",
+      "bnsSection": "329(4)",
+      "crimeHead": "Offences Against Property",
+      "crimeSubHead": "Criminal Trespass (House-Trespass)",
+      "gravity": "Non-Heinous"
+    }
+  ],
+  "acts": [
+    {
+      "name": "Narcotic Drugs and Psychotropic Substances Act",
+      "code": "NDPS Act",
+      "year": "1985",
+      "commonSections": [
+        {
+          "section": "8(c)",
+          "desc": "Prohibition of production/possession/sale/transport of narcotic drugs and psychotropic substances (cited with punishing sections)"
+        },
+        {
+          "section": "20(b)",
+          "desc": "Offences relating to cannabis (ganja) — punishment scales by small/intermediate/commercial quantity"
+        },
+        {
+          "section": "21",
+          "desc": "Manufactured drugs and preparations (e.g. heroin, MDMA preparations) — quantity-scaled punishment"
+        },
+        {
+          "section": "22",
+          "desc": "Psychotropic substances — quantity-scaled punishment"
+        },
+        {
+          "section": "27",
+          "desc": "Consumption of narcotic drug or psychotropic substance"
+        },
+        {
+          "section": "27A",
+          "desc": "Financing illicit traffic and harbouring offenders"
+        },
+        {
+          "section": "29",
+          "desc": "Abetment and criminal conspiracy"
+        }
+      ]
+    },
+    {
+      "name": "Arms Act",
+      "code": "Arms Act",
+      "year": "1959",
+      "commonSections": [
+        {
+          "section": "3",
+          "desc": "Licence required for acquisition/possession of firearms (cited with s.25)"
+        },
+        {
+          "section": "25(1)(a) / 25(1-B)(a)",
+          "desc": "Possession/manufacture/sale of arms or ammunition without licence"
+        },
+        {
+          "section": "27",
+          "desc": "Punishment for using arms in contravention of s.5"
+        }
+      ]
+    },
+    {
+      "name": "Information Technology Act",
+      "code": "IT Act",
+      "year": "2000",
+      "commonSections": [
+        {
+          "section": "43 r/w 66",
+          "desc": "Computer-related offences — hacking, data theft, dishonest damage to computer resource"
+        },
+        {
+          "section": "66C",
+          "desc": "Identity theft — fraudulent use of password/digital signature/unique ID (OTP frauds)"
+        },
+        {
+          "section": "66D",
+          "desc": "Cheating by personation using computer resource (most-cited section in cyber-fraud FIRs, with BNS 318(4))"
+        },
+        {
+          "section": "66E",
+          "desc": "Violation of privacy — capturing/publishing private images"
+        },
+        {
+          "section": "67 / 67A / 67B",
+          "desc": "Publishing/transmitting obscene material; sexually explicit material; child sexual abuse material"
+        }
+      ]
+    },
+    {
+      "name": "Protection of Children from Sexual Offences Act",
+      "code": "POCSO Act",
+      "year": "2012",
+      "commonSections": [
+        {
+          "section": "4",
+          "desc": "Punishment for penetrative sexual assault on child (min 10 yrs; cited with BNS 64/65)"
+        },
+        {
+          "section": "6",
+          "desc": "Aggravated penetrative sexual assault (min 20 yrs to life/death)"
+        },
+        {
+          "section": "8",
+          "desc": "Punishment for sexual assault (non-penetrative, 3-5 yrs)"
+        },
+        {
+          "section": "10",
+          "desc": "Aggravated sexual assault (5-7 yrs)"
+        },
+        {
+          "section": "12",
+          "desc": "Punishment for sexual harassment of a child"
+        },
+        {
+          "section": "17",
+          "desc": "Abetment of POCSO offence"
+        }
+      ]
+    },
+    {
+      "name": "Motor Vehicles Act",
+      "code": "MV Act",
+      "year": "1988",
+      "commonSections": [
+        {
+          "section": "184",
+          "desc": "Dangerous driving (cited with BNS 281 / old IPC 279)"
+        },
+        {
+          "section": "185",
+          "desc": "Driving under influence of alcohol/drugs (drunken driving)"
+        },
+        {
+          "section": "134(a) & (b)",
+          "desc": "Duty of driver in accident — failure to give aid/report (hit-and-run FIRs, r/w s.187)"
+        },
+        {
+          "section": "187",
+          "desc": "Punishment for offences relating to accident (non-compliance with s.132/133/134)"
+        },
+        {
+          "section": "196",
+          "desc": "Driving uninsured vehicle"
+        }
+      ]
+    },
+    {
+      "name": "Dowry Prohibition Act",
+      "code": "DP Act",
+      "year": "1961",
+      "commonSections": [
+        {
+          "section": "3",
+          "desc": "Penalty for giving or taking dowry (min 5 yrs) — cited with BNS 85 / IPC 498A"
+        },
+        {
+          "section": "4",
+          "desc": "Penalty for demanding dowry (6 months to 2 yrs)"
+        },
+        {
+          "section": "6",
+          "desc": "Dowry to be for benefit of the wife — failure to transfer"
+        }
+      ]
+    },
+    {
+      "name": "Scheduled Castes and Scheduled Tribes (Prevention of Atrocities) Act",
+      "code": "SC/ST (PoA) Act",
+      "year": "1989",
+      "commonSections": [
+        {
+          "section": "3(1)(r)",
+          "desc": "Intentional insult or intimidation with intent to humiliate SC/ST member in public view"
+        },
+        {
+          "section": "3(1)(s)",
+          "desc": "Abuse by caste name in public view"
+        },
+        {
+          "section": "3(2)(v)",
+          "desc": "IPC/BNS offence punishable with 10+ yrs committed against SC/ST person on caste ground — enhanced to life"
+        },
+        {
+          "section": "3(2)(va)",
+          "desc": "Listed IPC/BNS offences against SC/ST members — enhanced punishment"
+        }
+      ]
+    },
+    {
+      "name": "Karnataka Police Act (gambling provisions)",
+      "code": "KP Act",
+      "year": "1963",
+      "commonSections": [
+        {
+          "section": "78",
+          "desc": "Opening, etc., of certain forms of gaming — matka/satta betting, bookmaking (78(1)(a) etc. cited in gambling raids)"
+        },
+        {
+          "section": "79",
+          "desc": "Keeping a common gaming-house"
+        },
+        {
+          "section": "80",
+          "desc": "Gaming in a common gaming-house (persons found playing)"
+        },
+        {
+          "section": "87",
+          "desc": "Gaming in public streets — petty street gambling (cards, dice)"
+        }
+      ]
+    },
+    {
+      "name": "Karnataka Excise Act",
+      "code": "KE Act",
+      "year": "1965",
+      "commonSections": [
+        {
+          "section": "32",
+          "desc": "Penalty for illegal import/export/transport/manufacture/sale/possession of intoxicants (bootlegging FIRs; up to 5 yrs RI)"
+        },
+        {
+          "section": "34",
+          "desc": "Penalty for possession of intoxicant unlawfully imported/manufactured or duty-unpaid"
+        },
+        {
+          "section": "38A",
+          "desc": "Penalty for owner/occupier knowingly permitting premises/vehicle to be used for excise offences"
+        }
+      ]
+    },
+    {
+      "name": "Explosive Substances Act",
+      "code": "ES Act",
+      "year": "1908",
+      "commonSections": [
+        {
+          "section": "3",
+          "desc": "Causing explosion likely to endanger life or property"
+        },
+        {
+          "section": "4",
+          "desc": "Attempt to cause explosion, or making/keeping explosive with intent to endanger life/property"
+        },
+        {
+          "section": "5",
+          "desc": "Making or possessing explosives under suspicious circumstances"
+        },
+        {
+          "section": "6",
+          "desc": "Abetment"
+        }
+      ]
+    },
+    {
+      "name": "Prevention of Corruption Act",
+      "code": "PC Act",
+      "year": "1988 (amended 2018)",
+      "commonSections": [
+        {
+          "section": "7",
+          "desc": "Public servant obtaining/accepting undue advantage (bribe) — typical Lokayukta trap FIR section"
+        },
+        {
+          "section": "7A",
+          "desc": "Taking undue advantage to influence public servant by corrupt means"
+        },
+        {
+          "section": "8",
+          "desc": "Bribing a public servant (bribe-giver liability)"
+        },
+        {
+          "section": "13(1)(a)/(b) r/w 13(2)",
+          "desc": "Criminal misconduct — misappropriation / assets disproportionate to known sources of income"
+        },
+        {
+          "section": "12",
+          "desc": "Abetment of offences under the Act"
+        }
+      ]
+    },
+    {
+      "name": "Immoral Traffic (Prevention) Act",
+      "code": "ITP Act",
+      "year": "1956",
+      "commonSections": [
+        {
+          "section": "3",
+          "desc": "Keeping or managing a brothel, or allowing premises to be used as one"
+        },
+        {
+          "section": "4",
+          "desc": "Living on the earnings of prostitution"
+        },
+        {
+          "section": "5",
+          "desc": "Procuring, inducing or taking person for prostitution"
+        },
+        {
+          "section": "6",
+          "desc": "Detaining a person in premises where prostitution is carried on"
+        },
+        {
+          "section": "7",
+          "desc": "Prostitution in or in the vicinity of public places"
+        },
+        {
+          "section": "8",
+          "desc": "Seducing or soliciting for purpose of prostitution"
+        }
+      ]
+    }
+  ],
+  "crimeHeads": [
+    {
+      "head": "Offences Affecting the Human Body",
+      "subHeads": [
+        "Murder",
+        "Culpable Homicide not amounting to Murder",
+        "Dowry Deaths",
+        "Abetment of Suicide",
+        "Attempt to Commit Murder",
+        "Hurt",
+        "Grievous Hurt",
+        "Wrongful Restraint / Wrongful Confinement",
+        "Assault on Women with Intent to Outrage her Modesty",
+        "Kidnapping & Abduction",
+        "Human Trafficking",
+        "Causing Death by Negligence (incl. Road Accidents / Hit & Run / Medical Negligence)",
+        "Rape",
+        "Attempt to Commit Rape"
+      ]
+    },
+    {
+      "head": "Offences Against Public Tranquillity",
+      "subHeads": [
+        "Rioting",
+        "Unlawful Assembly",
+        "Promoting Enmity Between Groups",
+        "Affray"
+      ]
+    },
+    {
+      "head": "Offences Against Property",
+      "subHeads": [
+        "Theft (incl. Auto/Vehicle Theft)",
+        "Snatching (incl. Chain Snatching)",
+        "Burglary / House-Breaking (Day & Night)",
+        "Robbery",
+        "Dacoity",
+        "Preparation & Assembly for Dacoity",
+        "Extortion",
+        "Criminal Misappropriation",
+        "Arson",
+        "Mischief",
+        "Criminal Trespass"
+      ]
+    },
+    {
+      "head": "Economic Offences (Documents & Property Marks)",
+      "subHeads": [
+        "Criminal Breach of Trust",
+        "Cheating",
+        "Forgery, Cheating & Fraud (FCF)",
+        "Counterfeiting (Currency/Stamps/Documents)"
+      ]
+    },
+    {
+      "head": "Crimes Against Women",
+      "subHeads": [
+        "Rape",
+        "Attempt to Commit Rape",
+        "Kidnapping & Abduction of Women",
+        "Dowry Deaths",
+        "Assault on Women with Intent to Outrage her Modesty (incl. Sexual Harassment, Voyeurism, Stalking)",
+        "Insult to the Modesty of Women",
+        "Cruelty by Husband or his Relatives",
+        "Dowry Prohibition Act",
+        "Immoral Traffic (Prevention) Act",
+        "Protection of Women from Domestic Violence Act",
+        "Indecent Representation of Women (Prohibition) Act"
+      ]
+    },
+    {
+      "head": "Crimes Against Children",
+      "subHeads": [
+        "Kidnapping & Abduction of Children",
+        "POCSO Act Offences",
+        "Child Marriage (PCMA)",
+        "Juvenile Justice Act Offences",
+        "Child Labour"
+      ]
+    },
+    {
+      "head": "Crimes Against SC/ST",
+      "subHeads": [
+        "SC/ST (Prevention of Atrocities) Act r/w BNS/IPC offences",
+        "Protection of Civil Rights Act"
+      ]
+    },
+    {
+      "head": "Cyber Crimes",
+      "subHeads": [
+        "Computer-Related Offences (IT Act 66)",
+        "Identity Theft (66C)",
+        "Cheating by Personation / Online Fraud (66D r/w BNS 318(4))",
+        "Publication of Obscene/Sexually Explicit Material (67/67A/67B)",
+        "Cyber Stalking / Bullying"
+      ]
+    },
+    {
+      "head": "Special & Local Laws (SLL)",
+      "subHeads": [
+        "NDPS Act",
+        "Arms Act",
+        "Explosives & Explosive Substances Acts",
+        "Karnataka Excise Act (Prohibition/Bootlegging)",
+        "Gambling (Karnataka Police Act 78/79/80/87)",
+        "Motor Vehicles Act",
+        "Prevention of Corruption Act",
+        "Immoral Traffic (Prevention) Act",
+        "Dowry Prohibition Act",
+        "COTPA / Other Regulatory Acts"
+      ]
+    },
+    {
+      "head": "Miscellaneous IPC/BNS Crimes",
+      "subHeads": [
+        "Criminal Intimidation",
+        "Insult to Modesty of Women",
+        "Rash / Negligent Driving on Public Way",
+        "Public Nuisance",
+        "Offences Relating to Religion",
+        "Offences Against Public Servants"
+      ]
+    }
+  ],
+  "notes": "Verification: cutover date and BNS enactment verified against India Code (indiacode.nic.in, Act 45 of 2023), PRS Legislative Research and Wikipedia. All IPC-to-BNS subsection mappings verified against the official government comparative table (BNS-IPC Corresponding Section Table PDF published on uppolice.gov.in, extracted and read directly) — including 302→103(1), 307→109, 304→105, 323→115(2), 325→117(2), 326→118(2), 354→74, 363→137(2), 364A→140(2), 376→64, 379→303(2), 380→305, snatching→304 (new), 392→309(4), 395→310(2), 454→331(3), 457→331(4), 406→316(2), 420→318(4), 465→336(2), 468→336(3), 467→338, 506→351(2)/(3), 147→191(2), 148→191(3), 304B→80, 498A→85, 304A→106(1), 279→281, 426→324(2), 427→324(4), 447→329(3), 448→329(4). Karnataka Police Act ss.78/79/80/87 titles verified from the full Act text (policehumanrightsresources.org PDF); post-2021 amendment these gambling offences (incl. online betting) are cognizable and punishments were enhanced (up to 3 yrs for 79/80). Karnataka Excise Act ss.32/34/38A verified via India Code and Indian Kanoon. FIR realism tips: Karnataka FIRs (CCTNS/Police IT) cite sections as e.g. 'u/s 303(2), 331(4) BNS' after 1 July 2024 and 'u/s 379, 457 IPC' before; accident FIRs typically read 'u/s 281, 106(1) BNS r/w 134(a)(b), 187 MV Act'; cyber-fraud FIRs read 'u/s 318(4) BNS r/w 66C, 66D IT Act'. Gravity caveat: NCRB does not publish a formal heinous definition (its Principal Offence Rule counts the offence with maximum punishment per FIR); the only statutory definition is JJ Act 2015 s.2(33) (min 7 yrs). The Heinous/Non-Heinous tags follow standard Karnataka police/SCRB crime-review practice (murder, attempt to murder, culpable homicide, rape, POCSO, kidnapping, dacoity, robbery, dowry death and grievous hurt by dangerous weapons treated as heinous; property, economic, matrimonial-cruelty and negligence offences as non-heinous) — house-breaking by night and IPC 467 forgery are borderline and sometimes shown as grave/serious. Crime-head taxonomy is an NCRB 'Crime in India'-style adaptation (heads overlap: e.g. rape appears under both Human Body and Crimes Against Women; NCRB counts each crime once by principal offence). BNS 106(2) (hit-and-run, up to 10 yrs) is notified but NOT in force per the official comparative table — do not cite it in generated FIRs. Unverified/lower-confidence items: exact MHA notification numbers omitted intentionally; Karnataka Excise punishment quanta reflect amended figures from secondary sources."
+}

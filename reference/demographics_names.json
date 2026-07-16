@@ -1,0 +1,702 @@
+{
+  "districts": [
+    {
+      "name": "Bagalkote (Bagalkot)",
+      "pop2011": 1889752,
+      "popEstimate": 2100000,
+      "urbanPct": 31.64,
+      "literacyPct": 68.82,
+      "sexRatio": 989
+    },
+    {
+      "name": "Ballari (Bellary, post-2021 residual)",
+      "pop2011": 1400970,
+      "popEstimate": 1650000,
+      "urbanPct": 43.37,
+      "literacyPct": 67.43,
+      "sexRatio": 984
+    },
+    {
+      "name": "Belagavi (Belgaum)",
+      "pop2011": 4779661,
+      "popEstimate": 5350000,
+      "urbanPct": 25.34,
+      "literacyPct": 73.48,
+      "sexRatio": 973
+    },
+    {
+      "name": "Bengaluru Urban",
+      "pop2011": 9621551,
+      "popEstimate": 13700000,
+      "urbanPct": 90.94,
+      "literacyPct": 87.67,
+      "sexRatio": 916
+    },
+    {
+      "name": "Bengaluru Rural",
+      "pop2011": 990923,
+      "popEstimate": 1280000,
+      "urbanPct": 27.12,
+      "literacyPct": 77.93,
+      "sexRatio": 946
+    },
+    {
+      "name": "Bidar",
+      "pop2011": 1703300,
+      "popEstimate": 1900000,
+      "urbanPct": 25.01,
+      "literacyPct": 70.51,
+      "sexRatio": 956
+    },
+    {
+      "name": "Chamarajanagara",
+      "pop2011": 1020791,
+      "popEstimate": 1070000,
+      "urbanPct": 17.14,
+      "literacyPct": 61.43,
+      "sexRatio": 993
+    },
+    {
+      "name": "Chikkaballapura",
+      "pop2011": 1255104,
+      "popEstimate": 1350000,
+      "urbanPct": 22.4,
+      "literacyPct": 69.76,
+      "sexRatio": 972
+    },
+    {
+      "name": "Chikkamagaluru (Chikmagalur)",
+      "pop2011": 1137961,
+      "popEstimate": 1140000,
+      "urbanPct": 21.05,
+      "literacyPct": 79.25,
+      "sexRatio": 1008
+    },
+    {
+      "name": "Chitradurga",
+      "pop2011": 1659456,
+      "popEstimate": 1750000,
+      "urbanPct": 19.86,
+      "literacyPct": 73.71,
+      "sexRatio": 974
+    },
+    {
+      "name": "Dakshina Kannada",
+      "pop2011": 2089649,
+      "popEstimate": 2250000,
+      "urbanPct": 47.67,
+      "literacyPct": 88.57,
+      "sexRatio": 1020
+    },
+    {
+      "name": "Davanagere (post-2019 boundaries, excl. Harapanahalli)",
+      "pop2011": 1643494,
+      "popEstimate": 1750000,
+      "urbanPct": 35.41,
+      "literacyPct": 75.74,
+      "sexRatio": 975
+    },
+    {
+      "name": "Dharwad",
+      "pop2011": 1847023,
+      "popEstimate": 2100000,
+      "urbanPct": 56.82,
+      "literacyPct": 80,
+      "sexRatio": 971
+    },
+    {
+      "name": "Gadag",
+      "pop2011": 1064570,
+      "popEstimate": 1150000,
+      "urbanPct": 35.63,
+      "literacyPct": 75.12,
+      "sexRatio": 982
+    },
+    {
+      "name": "Hassan",
+      "pop2011": 1776421,
+      "popEstimate": 1820000,
+      "urbanPct": 21.21,
+      "literacyPct": 76.07,
+      "sexRatio": 1010
+    },
+    {
+      "name": "Haveri",
+      "pop2011": 1597668,
+      "popEstimate": 1700000,
+      "urbanPct": 22.25,
+      "literacyPct": 77.4,
+      "sexRatio": 950
+    },
+    {
+      "name": "Kalaburagi (Gulbarga)",
+      "pop2011": 2566326,
+      "popEstimate": 3000000,
+      "urbanPct": 32.56,
+      "literacyPct": 64.85,
+      "sexRatio": 971
+    },
+    {
+      "name": "Kodagu",
+      "pop2011": 554519,
+      "popEstimate": 560000,
+      "urbanPct": 14.61,
+      "literacyPct": 82.61,
+      "sexRatio": 1019
+    },
+    {
+      "name": "Kolar",
+      "pop2011": 1536401,
+      "popEstimate": 1680000,
+      "urbanPct": 31.25,
+      "literacyPct": 74.39,
+      "sexRatio": 979
+    },
+    {
+      "name": "Koppal",
+      "pop2011": 1389920,
+      "popEstimate": 1600000,
+      "urbanPct": 16.81,
+      "literacyPct": 68.09,
+      "sexRatio": 986
+    },
+    {
+      "name": "Mandya",
+      "pop2011": 1805769,
+      "popEstimate": 1830000,
+      "urbanPct": 17.08,
+      "literacyPct": 70.4,
+      "sexRatio": 995
+    },
+    {
+      "name": "Mysuru (Mysore)",
+      "pop2011": 3001127,
+      "popEstimate": 3250000,
+      "urbanPct": 41.5,
+      "literacyPct": 72.79,
+      "sexRatio": 985
+    },
+    {
+      "name": "Raichur",
+      "pop2011": 1928812,
+      "popEstimate": 2250000,
+      "urbanPct": 25.42,
+      "literacyPct": 59.56,
+      "sexRatio": 1000
+    },
+    {
+      "name": "Ramanagara (renamed Bengaluru South, 2024)",
+      "pop2011": 1082636,
+      "popEstimate": 1170000,
+      "urbanPct": 24.73,
+      "literacyPct": 69.22,
+      "sexRatio": 976
+    },
+    {
+      "name": "Shivamogga (Shimoga)",
+      "pop2011": 1752753,
+      "popEstimate": 1830000,
+      "urbanPct": 35.59,
+      "literacyPct": 80.45,
+      "sexRatio": 998
+    },
+    {
+      "name": "Tumakuru (Tumkur)",
+      "pop2011": 2678980,
+      "popEstimate": 2800000,
+      "urbanPct": 22.36,
+      "literacyPct": 75.14,
+      "sexRatio": 984
+    },
+    {
+      "name": "Udupi",
+      "pop2011": 1177361,
+      "popEstimate": 1220000,
+      "urbanPct": 28.37,
+      "literacyPct": 86.24,
+      "sexRatio": 1094
+    },
+    {
+      "name": "Uttara Kannada",
+      "pop2011": 1437169,
+      "popEstimate": 1500000,
+      "urbanPct": 29.15,
+      "literacyPct": 84.06,
+      "sexRatio": 979
+    },
+    {
+      "name": "Vijayanagara (created 2021 from Ballari + Harapanahalli)",
+      "pop2011": 1353628,
+      "popEstimate": 1580000,
+      "urbanPct": 26.57,
+      "sexRatio": 976
+    },
+    {
+      "name": "Vijayapura (Bijapur)",
+      "pop2011": 2177331,
+      "popEstimate": 2600000,
+      "urbanPct": 23.05,
+      "literacyPct": 67.15,
+      "sexRatio": 960
+    },
+    {
+      "name": "Yadgir",
+      "pop2011": 1174271,
+      "popEstimate": 1450000,
+      "urbanPct": 18.79,
+      "literacyPct": 51.83,
+      "sexRatio": 989
+    }
+  ],
+  "names": {
+    "maleHindu": [
+      "Manjunath",
+      "Shivakumar",
+      "Ravi",
+      "Ravikumar",
+      "Ramesh",
+      "Suresh",
+      "Mahesh",
+      "Umesh",
+      "Girish",
+      "Harish",
+      "Lokesh",
+      "Nagaraju",
+      "Nagaraj",
+      "Venkatesh",
+      "Srinivas",
+      "Krishnamurthy",
+      "Puttaswamy",
+      "Shivanna",
+      "Devaraj",
+      "Mahadeva",
+      "Swamy",
+      "Naveen",
+      "Praveen",
+      "Santosh",
+      "Kiran",
+      "Pavan",
+      "Vinay",
+      "Vijay",
+      "Anil",
+      "Sunil",
+      "Raghavendra",
+      "Chandrashekar",
+      "Guruprasad",
+      "Gururaj",
+      "Darshan",
+      "Rakshith",
+      "Chetan",
+      "Karthik",
+      "Abhishek",
+      "Sandeep",
+      "Madhu",
+      "Dinesh",
+      "Yogesh",
+      "Prakash",
+      "Gopal",
+      "Murali",
+      "Mohan",
+      "Arun",
+      "Anand",
+      "Basavaraj",
+      "Mallikarjun",
+      "Sharanappa",
+      "Sharanabasappa",
+      "Siddappa",
+      "Ningappa",
+      "Hanumanthappa",
+      "Hanamant",
+      "Yallappa",
+      "Bheemappa",
+      "Mallappa",
+      "Basappa",
+      "Irappa",
+      "Veeresh",
+      "Shankrappa",
+      "Siddharam",
+      "Prabhugouda",
+      "Vittal",
+      "Maruti",
+      "Dattatreya",
+      "Kumar"
+    ],
+    "femaleHindu": [
+      "Lakshmi",
+      "Saraswathi",
+      "Parvathi",
+      "Kavitha",
+      "Savitha",
+      "Latha",
+      "Geetha",
+      "Shobha",
+      "Manjula",
+      "Sumithra",
+      "Padma",
+      "Pushpa",
+      "Renuka",
+      "Sharada",
+      "Veena",
+      "Vani",
+      "Deepa",
+      "Divya",
+      "Pooja",
+      "Priya",
+      "Ramya",
+      "Rashmi",
+      "Shruthi",
+      "Shwetha",
+      "Sowmya",
+      "Soujanya",
+      "Spandana",
+      "Anitha",
+      "Sunitha",
+      "Vanitha",
+      "Asha",
+      "Usha",
+      "Uma",
+      "Bhagya",
+      "Bhavya",
+      "Chaitra",
+      "Meghana",
+      "Namratha",
+      "Pallavi",
+      "Rekha",
+      "Suma",
+      "Mamatha",
+      "Nirmala",
+      "Susheela",
+      "Vijayalakshmi",
+      "Gowramma",
+      "Jayamma",
+      "Nagamma",
+      "Yallamma",
+      "Basamma",
+      "Sharanamma",
+      "Ningavva",
+      "Basavva",
+      "Rathnamma",
+      "Siddamma",
+      "Mahadevamma"
+    ],
+    "maleMuslim": [
+      "Mohammed",
+      "Abdul",
+      "Syed",
+      "Imran",
+      "Irfan",
+      "Arif",
+      "Asif",
+      "Akbar",
+      "Anwar",
+      "Iqbal",
+      "Ismail",
+      "Ibrahim",
+      "Rafiq",
+      "Riyaz",
+      "Fayaz",
+      "Feroz",
+      "Salim",
+      "Sameer",
+      "Sadiq",
+      "Naseer",
+      "Nawaz",
+      "Rehman",
+      "Khaja",
+      "Mahboob",
+      "Maqbool",
+      "Zakir",
+      "Zabiulla",
+      "Dastagir",
+      "Ghouse",
+      "Tanveer",
+      "Sohail",
+      "Wasim",
+      "Usman",
+      "Yusuf",
+      "Aslam",
+      "Mubarak",
+      "Moin",
+      "Shabbir",
+      "Kaleem",
+      "Ameen"
+    ],
+    "femaleMuslim": [
+      "Ayesha",
+      "Fathima",
+      "Khatija",
+      "Zainab",
+      "Rukhsana",
+      "Shabana",
+      "Farhana",
+      "Farzana",
+      "Nasreen",
+      "Yasmin",
+      "Shaheen",
+      "Sameena",
+      "Rizwana",
+      "Tabassum",
+      "Reshma",
+      "Salma",
+      "Sana",
+      "Heena",
+      "Afreen",
+      "Mumtaz",
+      "Noorjahan",
+      "Asma",
+      "Nazia",
+      "Shazia",
+      "Arshiya"
+    ],
+    "christian": [
+      "Ronald",
+      "Melwyn",
+      "Alwyn",
+      "Wilfred",
+      "Lawrence",
+      "Vincent",
+      "Francis",
+      "Xavier",
+      "Clifford",
+      "Roshan",
+      "Joel",
+      "Gregory",
+      "Valerian",
+      "Stany",
+      "Gracy",
+      "Flavia",
+      "Juliet",
+      "Celine",
+      "Philomena",
+      "Lavina",
+      "Prescilla",
+      "Reena"
+    ],
+    "surnames": [
+      "Gowda",
+      "Shetty",
+      "Hegde",
+      "Naik",
+      "Nayak",
+      "Poojary",
+      "Rai",
+      "Alva",
+      "Salian",
+      "Kotian",
+      "Suvarna",
+      "Devadiga",
+      "Bangera",
+      "Amin",
+      "Karkera",
+      "Moily",
+      "Shenoy",
+      "Pai",
+      "Kamath",
+      "Prabhu",
+      "Kini",
+      "Mallya",
+      "Baliga",
+      "Bhat",
+      "Adiga",
+      "Udupa",
+      "Acharya",
+      "Rao",
+      "Reddy",
+      "Murthy",
+      "Urs",
+      "Kulkarni",
+      "Desai",
+      "Patil",
+      "Deshpande",
+      "Joshi",
+      "Hiremath",
+      "Math",
+      "Biradar",
+      "Angadi",
+      "Badiger",
+      "Kumbar",
+      "Talwar",
+      "Mane",
+      "Jadhav",
+      "Chavan",
+      "D'Souza",
+      "Fernandes",
+      "Pinto",
+      "Lobo",
+      "Rodrigues",
+      "Pereira",
+      "Mascarenhas",
+      "Sequeira",
+      "Menezes",
+      "Khan",
+      "Sheikh",
+      "Pasha",
+      "Mulla",
+      "Nadaf",
+      "Bagwan",
+      "Mujawar"
+    ],
+    "initialsConvention": "Old Mysuru (southern Karnataka) convention: one or two initials precede the given name — first initial = native village/town, second = father's given name; e.g. H. D. Deve Gowda (Haradanahalli + Doddegowda), B. S. Yediyurappa (Bookanakere + Siddalingappa), S. M. Krishna (Somanahalli + Mallaiah), D. K. Shivakumar (Doddaalahalli + Kempegowda), K. R. Ramesh. Single father-initial forms (M. Manjunath, B. Savitha) are extremely common on voter rolls, FIRs and school records; the initials are usually never expanded except in official documents, and the same person may appear with and without initials in different databases. In north Karnataka (Kittur/Kalyana Karnataka) surnames (Patil, Kulkarni, Biradar, Hiremath) largely replace initials; a village-name surname (e.g. Jamakhandi, Gokak) also occurs. Coastal Karnataka uses community surnames (Shetty, Rai, Poojary, D'Souza) with Western-style ordering.",
+    "variants": [
+      {
+        "canonical": "Ravi Kumar",
+        "variants": [
+          "Ravikumar",
+          "Ravi Kumar",
+          "Ravi Kumar K."
+        ]
+      },
+      {
+        "canonical": "Mohammed",
+        "variants": [
+          "Mohammad",
+          "Muhammad",
+          "Mohamed",
+          "Md.",
+          "Mohd."
+        ]
+      },
+      {
+        "canonical": "Manjunath",
+        "variants": [
+          "Manjunatha",
+          "Manjunath",
+          "M. Manjunath"
+        ]
+      },
+      {
+        "canonical": "Shivakumar",
+        "variants": [
+          "Shiva Kumar",
+          "Shivkumar",
+          "Sivakumar"
+        ]
+      },
+      {
+        "canonical": "Nagaraj",
+        "variants": [
+          "Nagaraja",
+          "Nagaraju",
+          "Nagraj"
+        ]
+      },
+      {
+        "canonical": "Basavaraj",
+        "variants": [
+          "Basavaraja",
+          "Basvaraj",
+          "Basawaraj",
+          "Basavraj"
+        ]
+      },
+      {
+        "canonical": "Geetha",
+        "variants": [
+          "Geeta",
+          "Gita",
+          "Githa"
+        ]
+      },
+      {
+        "canonical": "Lakshmi",
+        "variants": [
+          "Laxmi",
+          "Lakshmy",
+          "Lakshmamma (elder rural form)"
+        ]
+      },
+      {
+        "canonical": "Venkatesh",
+        "variants": [
+          "Venkatesha",
+          "Venktesh",
+          "Venkateshappa (rural form)"
+        ]
+      },
+      {
+        "canonical": "Syed",
+        "variants": [
+          "Sayed",
+          "Sayyed",
+          "Saiyed"
+        ]
+      },
+      {
+        "canonical": "Sheikh",
+        "variants": [
+          "Shaikh",
+          "Shaik",
+          "Sheik"
+        ]
+      },
+      {
+        "canonical": "Fathima",
+        "variants": [
+          "Fatima",
+          "Fathimath",
+          "Fathuma (Beary/coastal form)"
+        ]
+      },
+      {
+        "canonical": "Shruthi",
+        "variants": [
+          "Shruti",
+          "Sruthi",
+          "Shruthi"
+        ]
+      },
+      {
+        "canonical": "Shwetha",
+        "variants": [
+          "Shweta",
+          "Swetha",
+          "Sweta"
+        ]
+      },
+      {
+        "canonical": "Poojary",
+        "variants": [
+          "Poojari",
+          "Pujari",
+          "Poojarthi"
+        ]
+      },
+      {
+        "canonical": "Gowda",
+        "variants": [
+          "Gouda",
+          "Gauda",
+          "Gowdar"
+        ]
+      },
+      {
+        "canonical": "Chandrashekar",
+        "variants": [
+          "Chandrashekhar",
+          "Chandrasekhar",
+          "Chandrasekar",
+          "Chandru (nickname)"
+        ]
+      },
+      {
+        "canonical": "Abdul Rahman",
+        "variants": [
+          "Abdur Rahman",
+          "Abdul Rehman",
+          "A. Rahman"
+        ]
+      }
+    ]
+  },
+  "notes": "TASK A caveats: (1) pop2011, literacyPct, sexRatio and urbanPct verified against Census 2011 tables (census2011.co.in district pages, which reproduce official PCA data); the official censusindia.gov.in PCA Highlights PDF for Karnataka is a scanned document and could not be text-verified directly. (2) Boundary basis is the current 31-district map: Ballari figures are post-2021 residual (pop 1,400,970; 43.37% urban; sex ratio 984, per Wikipedia's census-derived recomputation); Vijayanagara (created Nov 2021) 2011-equivalent pop 1,353,628, 26.57% urban, sex ratio 976 — its literacyPct is omitted because no official recomputed figure exists (likely ~63-66%, between Yadgir-belt and residual Ballari levels; do not treat as verified). Ballari's literacyPct 67.43 and Davanagere's 75.74 are the pre-split/undivided values applied to the new boundaries — approximate. Davanagere pop2011/urbanPct/sexRatio reflect post-2019 transfer of Harapanahalli taluk to (now) Vijayanagara. (3) popEstimate = unofficial ~2025-26 projections; Census 2021 was never conducted, and no official district-level projections exist. Figures were derived by extrapolating 2001-11 district growth rates with tapering, constrained to the NCP state projection of roughly 69-70.5 million for Karnataka in 2026; treat as ±5-10%, Bengaluru Urban most uncertain (13-14.5M range commonly cited). (4) Ramanagara was officially renamed Bengaluru South district in 2024. North-east districts (Yadgir, Raichur, Koppal, Kalaburagi, Vijayapura, Ballari) grow fastest ex-Bengaluru; Kodagu, Chikkamagaluru, Mandya, Hassan, Udupi are near-stagnant or declining. TASK B notes: Religion mix per Census 2011 Karnataka: Hindu 84.00%, Muslim 12.92%, Christian 1.87% — matches the requested sampling weights. Regional flavor: south/Old Mysuru male names favor -swamy/-anna/-aiah/-egowda endings and heavy initials use (Puttaswamy, Shivanna, Devegowda); north Karnataka (Kittur + Kalyana Karnataka) favors -appa/-avva endings and Basava/Sharana/Siddha (Lingayat) and Hanamant/Yallappa themes (Basavaraj, Sharanappa, Ningavva); coastal (DK/Udupi) uses Bunt/Billava/Mogaveera surnames (Shetty, Rai, Poojary, Salian, Kotian, Suvarna) and GSB surnames (Pai, Kamath, Shenoy, Prabhu, Kini, Baliga). -amma/-avva female forms skew to older rural cohorts; modern female names (Shruthi, Meghana, Chaitra) skew under-40 urban. Muslim usage: north-Karnataka rural Muslim men often carry the suffix 'Sab/Saab' (Hussainsab, Imamsab) or occupational surnames (Mulla, Nadaf, Bagwan, Mujawar, Killedar); Bengaluru/Mysuru Muslims commonly use 'Pasha' and 'Khan'; coastal Beary Muslims use forms like Fathuma, Bappa, and names ending -ichcha. Mangaluru Christians (Mangalorean Catholics) pair Western first names with Luso-Konkani surnames (D'Souza, Fernandes, Pinto, Lobo, Rodrigues, Pereira, Mascarenhas, Sequeira, Menezes). Name lists are compiled from general knowledge of Karnataka onomastics, not from a verified frequency corpus — no official first-name frequency data exists; treat relative frequencies as indicative.",
+  "sources": [
+    "https://www.census2011.co.in/census/state/districtlist/karnataka.html",
+    "https://www.census2011.co.in/census/district/241-bagalkot.html (and per-district pages 242-270 for urban share)",
+    "https://en.wikipedia.org/wiki/Vijayanagara_district",
+    "https://en.wikipedia.org/wiki/Ballari_district",
+    "https://en.wikipedia.org/wiki/Davanagere_district",
+    "https://en.wikipedia.org/wiki/Demographics_of_Karnataka",
+    "https://censusindia.gov.in/nada/index.php/catalog/11311/download/14423/PC11_PCA_Data_Highlights_Karnataka.pdf (official PCA highlights; scanned, used for cross-reference only)",
+    "https://karnataka.census.gov.in/document/Population%20Projection.pdf (state-level projections context)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "rollups": {
+    "agg_rows": 182033,
+    "sec": 0.4
+  },
+  "er": {
+    "er_precision": 0.9406,
+    "er_recall": 0.2911,
+    "er_f1": 0.4446,
+    "entities": 215789,
+    "accused_rows": 235084,
+    "hard_links": 16183,
+    "fuzzy_merges": 1694,
+    "mo_merges": 1418,
+    "elapsed_sec": 2.9,
+    "sec": 3.0
+  },
+  "network": {
+    "co_accused_edges": 163922,
+    "shared_phone_edges": 0,
+    "sec": 0.6
+  },
+  "risk": {
+    "entities_scored": 215789,
+    "max_risk": 76.0,
+    "sec": 1.6
+  },
+  "alerts": {
+    "spikes": 301,
+    "emerging_trends": 3,
+    "anomalies": 17,
+    "sec": 0.7
+  }
+}

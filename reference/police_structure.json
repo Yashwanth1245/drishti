@@ -1,0 +1,696 @@
+{
+  "districts": [
+    {
+      "name": "Bagalkote",
+      "hq": "Bagalkote",
+      "policing": "Bagalkote District Police",
+      "taluks": [
+        "Bagalkote",
+        "Badami",
+        "Bilagi",
+        "Hungund",
+        "Jamkhandi",
+        "Mudhol",
+        "Ilkal",
+        "Rabkavi-Banhatti"
+      ]
+    },
+    {
+      "name": "Ballari",
+      "hq": "Ballari",
+      "policing": "Ballari District Police",
+      "taluks": [
+        "Ballari",
+        "Siruguppa",
+        "Sandur",
+        "Kampli",
+        "Kurugodu"
+      ]
+    },
+    {
+      "name": "Belagavi",
+      "hq": "Belagavi",
+      "policing": "Belagavi City Police (city area); Belagavi District Police (rest of district)",
+      "taluks": [
+        "Belagavi",
+        "Athani",
+        "Bailhongal",
+        "Chikodi",
+        "Gokak",
+        "Hukkeri",
+        "Khanapur",
+        "Ramdurg"
+      ]
+    },
+    {
+      "name": "Bengaluru Urban",
+      "hq": "Bengaluru",
+      "policing": "Bengaluru City Police (commissionerate); small outlying areas under Bengaluru District Police",
+      "taluks": [
+        "Bengaluru North",
+        "Bengaluru South",
+        "Bengaluru East",
+        "Anekal",
+        "Yelahanka"
+      ]
+    },
+    {
+      "name": "Bengaluru Rural",
+      "hq": "Bengaluru",
+      "policing": "Bengaluru District Police (district police unit, official name 'Bengaluru District Police')",
+      "taluks": [
+        "Devanahalli",
+        "Doddaballapura",
+        "Hoskote",
+        "Nelamangala"
+      ]
+    },
+    {
+      "name": "Bengaluru South (formerly Ramanagara)",
+      "hq": "Ramanagara",
+      "policing": "Ramanagara District Police",
+      "taluks": [
+        "Ramanagara",
+        "Channapatna",
+        "Kanakapura",
+        "Magadi",
+        "Harohalli"
+      ]
+    },
+    {
+      "name": "Bidar",
+      "hq": "Bidar",
+      "policing": "Bidar District Police",
+      "taluks": [
+        "Bidar",
+        "Basavakalyan",
+        "Bhalki",
+        "Aurad",
+        "Humnabad",
+        "Chitgoppa",
+        "Kamalnagar",
+        "Hulsoor"
+      ]
+    },
+    {
+      "name": "Chamarajanagara",
+      "hq": "Chamarajanagara",
+      "policing": "Chamarajanagara District Police",
+      "taluks": [
+        "Chamarajanagara",
+        "Gundlupet",
+        "Kollegal",
+        "Yelandur",
+        "Hanur"
+      ]
+    },
+    {
+      "name": "Chikkaballapura",
+      "hq": "Chikkaballapura",
+      "policing": "Chikkaballapura District Police",
+      "taluks": [
+        "Chikkaballapura",
+        "Bagepalli",
+        "Chintamani",
+        "Gauribidanur",
+        "Gudibande",
+        "Sidlaghatta"
+      ]
+    },
+    {
+      "name": "Chikkamagaluru",
+      "hq": "Chikkamagaluru",
+      "policing": "Chikkamagaluru District Police",
+      "taluks": [
+        "Chikkamagaluru",
+        "Kadur",
+        "Koppa",
+        "Mudigere",
+        "Narasimharajapura",
+        "Sringeri",
+        "Tarikere",
+        "Ajjampura"
+      ]
+    },
+    {
+      "name": "Chitradurga",
+      "hq": "Chitradurga",
+      "policing": "Chitradurga District Police",
+      "taluks": [
+        "Chitradurga",
+        "Challakere",
+        "Hiriyur",
+        "Holalkere",
+        "Hosadurga",
+        "Molakalmuru"
+      ]
+    },
+    {
+      "name": "Dakshina Kannada",
+      "hq": "Mangaluru",
+      "policing": "Mangaluru City Police (city area); Dakshina Kannada District Police (rest of district)",
+      "taluks": [
+        "Mangaluru",
+        "Bantwal",
+        "Belthangady",
+        "Puttur",
+        "Sullia",
+        "Kadaba",
+        "Moodabidri"
+      ]
+    },
+    {
+      "name": "Davanagere",
+      "hq": "Davanagere",
+      "policing": "Davanagere District Police",
+      "taluks": [
+        "Davanagere",
+        "Channagiri",
+        "Harihara",
+        "Honnali",
+        "Jagalur",
+        "Nyamathi"
+      ]
+    },
+    {
+      "name": "Dharwad",
+      "hq": "Dharwad",
+      "policing": "Hubballi-Dharwad City Police (twin cities); Dharwad District Police (rest of district)",
+      "taluks": [
+        "Dharwad",
+        "Hubballi",
+        "Kalghatgi",
+        "Kundgol",
+        "Navalgund",
+        "Annigeri",
+        "Alnavar"
+      ]
+    },
+    {
+      "name": "Gadag",
+      "hq": "Gadag-Betageri",
+      "policing": "Gadag District Police",
+      "taluks": [
+        "Gadag",
+        "Mundargi",
+        "Nargund",
+        "Ron",
+        "Shirahatti",
+        "Gajendragad",
+        "Lakshmeshwar"
+      ]
+    },
+    {
+      "name": "Hassan",
+      "hq": "Hassan",
+      "policing": "Hassan District Police",
+      "taluks": [
+        "Hassan",
+        "Alur",
+        "Arkalgud",
+        "Arsikere",
+        "Belur",
+        "Channarayapatna",
+        "Holenarasipura",
+        "Sakleshpur"
+      ]
+    },
+    {
+      "name": "Haveri",
+      "hq": "Haveri",
+      "policing": "Haveri District Police",
+      "taluks": [
+        "Haveri",
+        "Byadgi",
+        "Hangal",
+        "Hirekerur",
+        "Ranebennur",
+        "Savanur",
+        "Shiggaon",
+        "Rattihalli"
+      ]
+    },
+    {
+      "name": "Kalaburagi",
+      "hq": "Kalaburagi",
+      "policing": "Kalaburagi City Police (city area); Kalaburagi District Police (rest of district)",
+      "taluks": [
+        "Kalaburagi",
+        "Afzalpur",
+        "Aland",
+        "Chincholi",
+        "Chittapur",
+        "Jevargi",
+        "Sedam",
+        "Kamalapur"
+      ]
+    },
+    {
+      "name": "Kodagu",
+      "hq": "Madikeri",
+      "policing": "Kodagu District Police",
+      "taluks": [
+        "Madikeri",
+        "Somwarpet",
+        "Virajpet",
+        "Kushalnagar",
+        "Ponnampet"
+      ]
+    },
+    {
+      "name": "Kolar",
+      "hq": "Kolar",
+      "policing": "Kolar District Police (KGF area is a separate police district)",
+      "taluks": [
+        "Kolar",
+        "Bangarapet",
+        "Malur",
+        "Mulbagal",
+        "Srinivaspur",
+        "Kolar Gold Field (KGF)"
+      ]
+    },
+    {
+      "name": "Koppal",
+      "hq": "Koppal",
+      "policing": "Koppal District Police",
+      "taluks": [
+        "Koppal",
+        "Gangavathi",
+        "Kushtagi",
+        "Yelburga",
+        "Karatagi",
+        "Kanakagiri",
+        "Kukanoor"
+      ]
+    },
+    {
+      "name": "Mandya",
+      "hq": "Mandya",
+      "policing": "Mandya District Police",
+      "taluks": [
+        "Mandya",
+        "Maddur",
+        "Malavalli",
+        "Krishnarajpet",
+        "Nagamangala",
+        "Pandavapura",
+        "Srirangapatna"
+      ]
+    },
+    {
+      "name": "Mysuru",
+      "hq": "Mysuru",
+      "policing": "Mysuru City Police (city area); Mysuru District Police (rest of district)",
+      "taluks": [
+        "Mysuru",
+        "Hunsur",
+        "Krishnarajanagara",
+        "Nanjangud",
+        "Periyapatna",
+        "T. Narasipura",
+        "H.D. Kote",
+        "Saligrama"
+      ]
+    },
+    {
+      "name": "Raichur",
+      "hq": "Raichur",
+      "policing": "Raichur District Police",
+      "taluks": [
+        "Raichur",
+        "Devadurga",
+        "Lingasugur",
+        "Manvi",
+        "Sindhanur",
+        "Maski",
+        "Sirwar"
+      ]
+    },
+    {
+      "name": "Shivamogga",
+      "hq": "Shivamogga",
+      "policing": "Shivamogga District Police",
+      "taluks": [
+        "Shivamogga",
+        "Bhadravathi",
+        "Hosanagara",
+        "Sagar",
+        "Shikaripura",
+        "Soraba",
+        "Thirthahalli"
+      ]
+    },
+    {
+      "name": "Tumakuru",
+      "hq": "Tumakuru",
+      "policing": "Tumakuru District Police",
+      "taluks": [
+        "Tumakuru",
+        "Chikkanayakanahalli",
+        "Gubbi",
+        "Koratagere",
+        "Kunigal",
+        "Madhugiri",
+        "Pavagada",
+        "Sira"
+      ]
+    },
+    {
+      "name": "Udupi",
+      "hq": "Udupi",
+      "policing": "Udupi District Police",
+      "taluks": [
+        "Udupi",
+        "Karkala",
+        "Kundapura",
+        "Kaup",
+        "Brahmavar",
+        "Byndoor",
+        "Hebri"
+      ]
+    },
+    {
+      "name": "Uttara Kannada",
+      "hq": "Karwar",
+      "policing": "Uttara Kannada District Police",
+      "taluks": [
+        "Karwar",
+        "Ankola",
+        "Bhatkal",
+        "Honnavar",
+        "Kumta",
+        "Sirsi",
+        "Siddapur",
+        "Yellapur"
+      ]
+    },
+    {
+      "name": "Vijayanagara",
+      "hq": "Hosapete",
+      "policing": "Vijayanagara District Police",
+      "taluks": [
+        "Hosapete",
+        "Hagaribommanahalli",
+        "Harapanahalli",
+        "Hoovina Hadagali",
+        "Kotturu",
+        "Kudligi"
+      ]
+    },
+    {
+      "name": "Vijayapura",
+      "hq": "Vijayapura",
+      "policing": "Vijayapura District Police",
+      "taluks": [
+        "Vijayapura",
+        "Basavana Bagevadi",
+        "Indi",
+        "Muddebihal",
+        "Sindagi",
+        "Babaleshwar",
+        "Talikoti",
+        "Tikota"
+      ]
+    },
+    {
+      "name": "Yadgir",
+      "hq": "Yadgir",
+      "policing": "Yadgir District Police",
+      "taluks": [
+        "Yadgir",
+        "Shahapur",
+        "Shorapur",
+        "Gurmitkal",
+        "Hunsagi",
+        "Vadagera"
+      ]
+    }
+  ],
+  "commissionerates": [
+    "Bengaluru City Police",
+    "Mysuru City Police",
+    "Hubballi-Dharwad City Police",
+    "Mangaluru City Police",
+    "Belagavi City Police",
+    "Kalaburagi City Police"
+  ],
+  "ranges": [
+    {
+      "name": "Central Range",
+      "hq": "Bengaluru",
+      "districts": [
+        "Bengaluru Rural",
+        "Bengaluru South (Ramanagara)",
+        "Chikkaballapura",
+        "Kolar",
+        "Kolar Gold Field (KGF) - police district only",
+        "Tumakuru"
+      ]
+    },
+    {
+      "name": "Eastern Range",
+      "hq": "Davanagere",
+      "districts": [
+        "Chitradurga",
+        "Davanagere",
+        "Haveri",
+        "Shivamogga"
+      ]
+    },
+    {
+      "name": "Northern Range",
+      "hq": "Belagavi",
+      "districts": [
+        "Bagalkote",
+        "Belagavi",
+        "Dharwad",
+        "Gadag",
+        "Vijayapura"
+      ]
+    },
+    {
+      "name": "North Eastern Range",
+      "hq": "Kalaburagi",
+      "districts": [
+        "Bidar",
+        "Kalaburagi",
+        "Yadgir"
+      ]
+    },
+    {
+      "name": "Southern Range",
+      "hq": "Mysuru",
+      "districts": [
+        "Chamarajanagara",
+        "Hassan",
+        "Kodagu",
+        "Mandya",
+        "Mysuru"
+      ]
+    },
+    {
+      "name": "Western Range",
+      "hq": "Mangaluru",
+      "districts": [
+        "Chikkamagaluru",
+        "Dakshina Kannada",
+        "Udupi",
+        "Uttara Kannada"
+      ]
+    },
+    {
+      "name": "Ballari Range",
+      "hq": "Ballari",
+      "districts": [
+        "Ballari",
+        "Koppal",
+        "Raichur",
+        "Vijayanagara"
+      ]
+    }
+  ],
+  "hierarchy": [
+    "State Police Headquarters, Bengaluru (Director General & Inspector General of Police - DG&IGP)",
+    "Range (Inspector General of Police / DIG) - 7 ranges; City Commissionerates report separately to DGP",
+    "District Police (Superintendent of Police) / City Commissionerate (Commissioner of Police)",
+    "Sub-Division (Sub-Divisional Police Officer: DySP in districts / ACP in commissionerates)",
+    "Circle (Circle Police Inspector)",
+    "Police Station (Police Inspector or Police Sub-Inspector as SHO)",
+    "Outpost / Beat (below station level)"
+  ],
+  "stationExamples": [
+    {
+      "unit": "Bengaluru City Police",
+      "stations": [
+        "Upparpet PS",
+        "Cubbon Park PS",
+        "Halasuru PS",
+        "Halasuru Gate PS",
+        "Commercial Street PS",
+        "Shivajinagar PS",
+        "Vidhana Soudha PS",
+        "Basavanagudi PS",
+        "Jayanagar PS",
+        "Banashankari PS",
+        "Koramangala PS",
+        "Indiranagar PS",
+        "Whitefield PS",
+        "Yelahanka PS",
+        "Hebbala PS",
+        "K.R. Puram PS",
+        "Madiwala PS",
+        "Kengeri PS",
+        "Rajajinagar PS",
+        "Malleswaram PS",
+        "Yeshwanthapura PS",
+        "Electronic City PS",
+        "HSR Layout PS",
+        "Chamarajpet PS",
+        "Wilson Garden PS"
+      ]
+    },
+    {
+      "unit": "Mysuru City Police",
+      "stations": [
+        "Devaraja PS",
+        "Lashkar PS",
+        "Nazarbad PS",
+        "Mandi PS",
+        "Krishnaraja PS",
+        "Narasimharaja PS",
+        "Udayagiri PS",
+        "Ashokapuram PS",
+        "Vidyaranyapuram PS",
+        "Saraswathipuram PS",
+        "Kuvempunagara PS",
+        "Jayalakshmipuram PS",
+        "Metagalli PS",
+        "Hebbal PS",
+        "Vijayanagar PS",
+        "Alanahalli PS",
+        "Lakshmipuram PS",
+        "V.V. Puram PS"
+      ]
+    },
+    {
+      "unit": "Hubballi-Dharwad City Police",
+      "stations": [
+        "Hubballi Town PS",
+        "Old Hubballi PS",
+        "Kasabapeth PS",
+        "Bendigeri PS",
+        "Ghantikeri PS",
+        "Keshwapur PS",
+        "Vidyanagar PS",
+        "Gokul Road PS",
+        "Ashoknagar PS",
+        "APMC Navanagar PS",
+        "Kamaripeth PS",
+        "Hubballi Sub-Urban PS",
+        "Dharwad Town PS",
+        "Dharwad Sub-Urban PS",
+        "Vidyagiri PS"
+      ]
+    },
+    {
+      "unit": "Mangaluru City Police",
+      "stations": [
+        "Mangaluru South PS (Pandeshwar)",
+        "Mangaluru North PS (Bunder)",
+        "Mangaluru East PS (Kadri)",
+        "Mangaluru Rural PS",
+        "Barke PS",
+        "Urwa PS",
+        "Kavoor PS",
+        "Panambur PS",
+        "Surathkal PS",
+        "Bajpe PS",
+        "Mulki PS",
+        "Konaje PS",
+        "Ullal PS",
+        "Women PS Mangaluru"
+      ]
+    },
+    {
+      "unit": "Belagavi City Police",
+      "stations": [
+        "Market PS",
+        "Khade Bazar PS",
+        "Camp PS",
+        "Tilakwadi PS",
+        "Shahapur PS",
+        "Malmaruti PS",
+        "APMC PS",
+        "Udyambag PS",
+        "Belagavi Rural PS",
+        "Kakti PS",
+        "Hirebagewadi PS",
+        "Marihal PS",
+        "Suvarna Soudha PS",
+        "Women PS Belagavi"
+      ]
+    },
+    {
+      "unit": "Kalaburagi City Police",
+      "stations": [
+        "Station Bazaar PS",
+        "Chowk PS",
+        "Brahmpur PS",
+        "Ashok Nagar PS",
+        "Roza PS",
+        "M.B. Nagar PS",
+        "Raghavendra Nagar PS",
+        "University PS",
+        "Women PS Kalaburagi"
+      ]
+    },
+    {
+      "unit": "Shivamogga District Police",
+      "stations": [
+        "Doddapete PS",
+        "Kote PS",
+        "Vinobanagar PS",
+        "Jayanagara PS (Shivamogga)",
+        "Shivamogga Rural PS",
+        "Kumsi PS",
+        "Bhadravathi Old Town PS",
+        "Paper Town PS",
+        "Holehonnur PS",
+        "Sagar Pete PS",
+        "Kargal PS",
+        "Thirthahalli PS",
+        "Agumbe PS",
+        "Hosanagara PS",
+        "Ripponpet PS",
+        "Shikaripura Town PS",
+        "Shiralakoppa PS",
+        "Soraba PS",
+        "Anavatti PS"
+      ]
+    },
+    {
+      "unit": "Tumakuru District Police",
+      "stations": [
+        "Tumakuru Town PS",
+        "Tilak Park PS",
+        "Kyathsandra PS",
+        "Gubbi PS",
+        "Kunigal PS",
+        "Huliyurdurga PS",
+        "Amruthur PS",
+        "Turuvekere PS",
+        "Tiptur PS",
+        "Nonavinakere PS",
+        "Chikkanayakanahalli PS",
+        "Huliyar PS",
+        "Sira PS",
+        "Madhugiri PS",
+        "Pavagada PS",
+        "Koratagere PS"
+      ]
+    }
+  ],
+  "totalStationsApprox": 1100,
+  "notes": "Verified against ksp.karnataka.gov.in (Organization page), official unit sites (mysurucitypolice, hubballidharwadcitypolice, bcp, kalaburagicitypolice, tumkurpolice), district NIC portals, and Wikipedia. Key points: (1) Karnataka has 31 revenue districts; Ramanagara district was officially renamed 'Bengaluru South' by gazette notification on 23 May 2025 (HQ remains Ramanagara town; the police unit is still commonly styled Ramanagara District Police) - do not confuse with the Bengaluru South TALUK inside Bengaluru Urban district. (2) KSP has 7 ranges (per official KSP Organization page): Central (Bengaluru), Eastern (Davanagere), Northern (Belagavi), North Eastern (Kalaburagi), Southern (Mysuru), Western (Mangaluru), Ballari (Ballari). Kolar Gold Field (KGF) is a separate POLICE district under Central Range but not a revenue district. Bengaluru District Police (HQ Bengaluru) covers Bengaluru Rural district plus non-city fringes of Bengaluru Urban. (3) 6 city commissionerates confirmed; each covers only the city, with the parent district's remainder under a separate district police unit (SP). Bengaluru CP holds ADGP rank; others DIG/IGP rank. (4) Station counts: Bengaluru City Police has ~108 law-and-order + ~42 traffic stations; Hubballi-Dharwad 15 L&O + 4 traffic + 2 special; Belagavi City 15 incl. women PS; Mangaluru City ~15; Kalaburagi City 10; Shivamogga district 32 stations + 17 outposts. Statewide, KSP reported 1,060 regular police stations in 2023 (Karnataka govt order on cybercrime registration) plus ~48 CEN/cyber and other special-purpose stations, so the ~1100 claim is approximately correct; Wikipedia's 906 figure is older/law-and-order-only - I used 1100 as the approximation. (5) Taluk lists are real but capped at 8 per district for brevity; several districts (Belagavi, Vijayapura, Uttara Kannada, Kalaburagi, Mysuru, Tumakuru) have additional newer taluks (e.g. Nippani, Kittur, Mudalagi, Savadatti; Devara Hipparagi, Kolhar; Haliyal, Joida, Mundgod, Dandeli; Shahabad, Yadrami, Kalagi; Saragur; Tiptur, Turuvekere). Lower-confidence items: 'Koratagere PS' and 'Tumakuru Rural PS' (taluk HQ stations, near-certain but not seen verbatim on the official page fetched); exact spelling variants (e.g. Kasabapeth/Kasbapeth, Malmaruti/Mal Maruti, Kakti/Kakati) follow the official unit websites where available."
+}

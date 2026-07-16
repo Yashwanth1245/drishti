@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Generated data (rebuilt from seed; too big for git)
+exports/*.db
+exports/csv/
+exports/excel/
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Secrets & env
+.env
+.env.*
+!.env.example
+
+# OS / editor / tooling
+.DS_Store
+.idea/
+.vscode/
+.claude/
+
+# Datathon official files (may be large; keep out until we confirm licensing)
+resources/*.xlsx
+resources/*.zip
+.zoho_token_cache.json

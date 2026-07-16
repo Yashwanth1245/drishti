@@ -1,0 +1,21 @@
+# Keep the build context lean. The image GENERATES its own data at build time
+# (see Dockerfile), so nothing under exports/ is needed — but datagen/ and
+# reference/ ARE required for that generation and must NOT be ignored.
+.git
+.venv
+venv
+**/__pycache__
+**/*.pyc
+node_modules
+frontend/node_modules
+frontend/dist
+exports
+docs
+deploy
+scripts
+resources
+.claude
+.env
+.env.*
+.zoho_token_cache.json
+.DS_Store
