@@ -4,9 +4,10 @@
 # image is fully self-contained and the git repo needs no multi-hundred-MB data
 # artifact — then serves the API + built UI + DB from one process.
 #
-# Build (repo root; NO pre-steps — data is generated inside the build):
-#   docker build -t drishti .
-# Run:
+# Build for Catalyst AppSail — its custom runtime accepts ONLY linux/amd64 OCI
+# images, so ALWAYS pass --platform (emulated on Apple Silicon Macs):
+#   docker build --platform linux/amd64 -t drishti .
+# Run locally to smoke-test (no data pre-step — the build generates it):
 #   docker run -p 9000:9000 -e DRISHTI_SECRET=$(openssl rand -hex 32) --env-file .env drishti
 # Then open http://localhost:9000 and sign in with a demo role.
 #

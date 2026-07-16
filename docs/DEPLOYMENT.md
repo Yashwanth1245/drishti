@@ -37,15 +37,38 @@ docker run -p 9000:9000 -e DRISHTI_SECRET=$(openssl rand -hex 32) --env-file .en
 The container honours `X_ZOHO_CATALYST_LISTEN_PORT` (AppSail), then `PORT`,
 then 9000. `DRISHTI_SECRET` is mandatory in a deployed environment.
 
-## Connect on Catalyst (AppSail)
+## Deploy to Catalyst AppSail (Docker custom runtime — recommended)
 
-1. Push this repo to a public GitHub repo (submission requirement).
-2. Catalyst console → **AppSail** → New app. Either connect the GitHub repo
-   (Docker build) **or** deploy the CLI bundle:
-   `npm i -g zcatalyst-cli && catalyst login && catalyst deploy` (Path B).
-3. AppSail app → **Environment**: set `DRISHTI_SECRET` and the `ZOHO_*` LLM
-   vars from `.env.example`. Do NOT upload `.env`.
-4. Deploy, then run the smoke test below against the AppSail URL.
+AppSail's custom runtime accepts an OCI image built for **linux/amd64 only**.
+The self-provisioning image IS the deploy unit — no data upload, no dependency
+vendoring, and it avoids the rapidfuzz-compiled-on-macOS problem (it builds on
+Linux inside the image).
+
+```bash
+# 1. Catalyst CLI
+npm i -g zcatalyst-cli && catalyst login          # opens Zoho auth in browser
+
+# 2. build the image for AppSail's platform (repo root; ~few min on Apple
+#    Silicon due to amd64 emulation — the build also generates the DB)
+docker build --platform linux/amd64 -t localhost/drishti:latest .
+
+# 3. deploy the local image to AppSail inside your Catalyst project ("Mainproject")
+catalyst deploy appsail --name drishti \
+  --source docker://localhost/drishti:latest
+#   size-limited / air-gapped alternative — deploy an archive instead:
+#   docker save localhost/drishti:latest | gzip > drishti.tar.gz
+#   catalyst deploy appsail --name drishti --source docker-archive://drishti.tar.gz
+```
+
+4. Console → **AppSail → drishti → Configurations / Environment**: set
+   `DRISHTI_SECRET` (required — auth fails closed without it) and the `ZOHO_*`
+   LLM vars from `.env.example`. Never upload `.env`. Redeploy.
+5. The container reads `X_ZOHO_CATALYST_LISTEN_PORT` (AppSail-provided) for its
+   port; the image `CMD` already honours it.
+6. Run the smoke test below against the AppSail URL.
+
+A public GitHub repo is still required for the submission, but it is separate
+from this image-based deploy (the image, not the repo, carries the data).
 
 ## Path B — native AppSail bundle
 
