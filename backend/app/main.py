@@ -902,8 +902,9 @@ def chat_endpoint(body: dict, user: User = Depends(current_user)):
     if not messages:
         raise HTTPException(400, "messages required")
     question = str(messages[-1].get("content", ""))[:160]
+    lang = "kn" if str(body.get("lang", "")).lower() in ("kn", "kannada") else "en"
     try:
-        out = ask(messages[-8:], scope=_chat_scope(user))
+        out = ask(messages[-8:], scope=_chat_scope(user), lang=lang)
     except TokenError as e:
         AUDIT.write(user, "chat",
                     {"summary": f'asked: "{question}" (LLM unavailable)'})

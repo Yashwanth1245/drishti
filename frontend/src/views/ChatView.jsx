@@ -16,6 +16,7 @@ export default function ChatView() {
   const [msgs, setMsgs] = useState([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [lang, setLang] = useState("en");   // "en" | "kn" — GLM answers in Kannada
   const endRef = useRef(null);
 
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [msgs]);
@@ -32,6 +33,7 @@ export default function ChatView() {
         method: "POST",
         json: {
           messages: history.map(({ role, content }) => ({ role, content })),
+          lang,
         },
       });
       setMsgs((m) => [...m, {
@@ -101,7 +103,7 @@ export default function ChatView() {
       {busy && <div className="loading">Agent is querying the database…</div>}
       <div ref={endRef} />
 
-      <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+      <div style={{ display: "flex", gap: 8, marginTop: 10, alignItems: "center" }}>
         <input style={{ flex: 1, background: "var(--panel)", color: "var(--text)",
                         border: "1px solid var(--border)", borderRadius: 8,
                         padding: "10px 12px", fontSize: 14 }}
@@ -109,6 +111,12 @@ export default function ChatView() {
                disabled={busy}
                onChange={(e) => setInput(e.target.value)}
                onKeyDown={(e) => e.key === "Enter" && send()} />
+        <button className={lang === "kn" ? "chip accent" : "chip"}
+                title="Answer language — English / ಕನ್ನಡ"
+                style={{ fontSize: 14, cursor: "pointer", minWidth: 46 }}
+                onClick={() => setLang((l) => (l === "en" ? "kn" : "en"))}>
+          {lang === "kn" ? "ಕನ್ನಡ" : "EN"}
+        </button>
         <button className="chip accent" style={{ fontSize: 14, cursor: "pointer" }}
                 disabled={busy} onClick={() => send()}>Send</button>
       </div>

@@ -355,9 +355,17 @@ def _collect_evidence(result) -> list[str]:
 
 
 def ask(messages: list[dict], llm: ZohoLLM | None = None,
-        scope: dict | None = None) -> dict:
+        scope: dict | None = None, lang: str = "en") -> dict:
     llm = llm or ZohoLLM()
     system = SYSTEM
+    if lang == "kn":
+        system += ("\nLANGUAGE: Write your final answer to the user in KANNADA "
+                   "(ಕನ್ನಡ script). BUT keep every FIR/crime number, the "
+                   "[square-bracket citations], person names, district/station "
+                   "names and IPC/BNS section numbers EXACTLY as they appear in "
+                   "the tool results — never translate or transliterate an "
+                   "identifier, name or number. Only the explanatory prose is "
+                   "in Kannada.")
     if scope:
         system += (f"\n7. JURISDICTION: you are serving {scope.get('label')}. "
                    f"Identity intelligence (offender profiles, linked case "
