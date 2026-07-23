@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { api, fmt } from "../api.js";
 import { go } from "../App.jsx";
+import { useT } from "../i18n.js";
 
 export default function CaseView({ crimeNo }) {
+  const t = useT();
   const [c, setC] = useState(null);
   const [err, setErr] = useState(null);
   const [reqState, setReqState] = useState(null);   // null | "busy" | message
@@ -31,7 +33,7 @@ export default function CaseView({ crimeNo }) {
 
   return (
     <div className="pad">
-      <a className="backlink" onClick={() => history.back()}>← back</a>
+      <a className="backlink" onClick={() => history.back()}>{t("ent.back")}</a>
       <h2 className="pagetitle">
         FIR <span className="mono">{c.CrimeNo}</span>
         <span className="chip" style={{ marginLeft: 10 }}>{c.head}</span>
@@ -46,10 +48,10 @@ export default function CaseView({ crimeNo }) {
 
       {restricted && (
         <div className="scopenote" style={{ marginBottom: 12 }}>
-          <b>Restricted record.</b> {c.restriction_note}{" "}
+          <b>{t("case.restricted")}</b> {c.restriction_note}{" "}
           {reqState === null && (
             <a onClick={requestAccess} style={{ fontWeight: 600 }}>
-              Request access →
+              {t("case.reqaccess")}
             </a>
           )}
           {reqState === "busy" && <i>recording request…</i>}
@@ -60,7 +62,7 @@ export default function CaseView({ crimeNo }) {
       <div className="grid31">
         <div>
           <div className="card">
-            <h3>Brief facts</h3>
+            <h3>{t("case.brief")}</h3>
             {restricted
               ? <div className="muted">Narrative restricted to the owning
                   jurisdiction.</div>
@@ -68,7 +70,7 @@ export default function CaseView({ crimeNo }) {
           </div>
 
           <div className="card">
-            <h3>Timeline</h3>
+            <h3>{t("case.timeline")}</h3>
             <div className="timeline">
               <div className="ev">Incident: <b>{c.IncidentFromDate}</b>
                 <span className="muted"> → {c.IncidentToDate}</span></div>
@@ -90,7 +92,7 @@ export default function CaseView({ crimeNo }) {
           </div>
 
           <div className="card">
-            <h3>Similar past cases (shared MO)</h3>
+            <h3>{t("case.similar")}</h3>
             {c.similar_cases.length === 0 && <div className="muted">None found.</div>}
             <table className="t">
               <tbody>
@@ -110,15 +112,15 @@ export default function CaseView({ crimeNo }) {
 
         <div>
           <div className="card">
-            <h3>Sections</h3>
+            <h3>{t("case.sections")}</h3>
             {c.sections.map((s, i) => (
               <span key={i} className="chip mono">{s.act} {s.section}</span>
             ))}
           </div>
 
           <div className="card">
-            <h3>Parties</h3>
-            <div className="muted" style={{ fontSize: 12 }}>Complainant</div>
+            <h3>{t("case.parties")}</h3>
+            <div className="muted" style={{ fontSize: 12 }}>{t("case.complainant")}</div>
             {restricted
               ? <div className="muted">🔒 {c.redacted?.complainants ?? 0} on
                   record — details restricted</div>
@@ -130,11 +132,11 @@ export default function CaseView({ crimeNo }) {
               </div>
             )}
             {!restricted && c.victims.length > 0 && <>
-              <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>Victims</div>
+              <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>{t("case.victims")}</div>
               {c.victims.map((p, i) => <div key={i}>{p.name} ({p.age}/{p.gender})</div>)}
             </>}
-            <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>Accused</div>
-            {c.accused.length === 0 && <div className="muted">Unknown</div>}
+            <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>{t("case.accused")}</div>
+            {c.accused.length === 0 && <div className="muted">{t("case.unknown")}</div>}
             {c.accused.map((p) => (
               <div key={p.AccusedMasterID}>
                 {p.entity_id
@@ -147,7 +149,7 @@ export default function CaseView({ crimeNo }) {
 
           {c.mo_tags.length > 0 && (
             <div className="card">
-              <h3>Modus operandi</h3>
+              <h3>{t("case.mo")}</h3>
               {c.mo_tags.map((t) => <span key={t} className="chip warn">{t}</span>)}
             </div>
           )}
@@ -168,7 +170,7 @@ export default function CaseView({ crimeNo }) {
 
           {c.property.length > 0 && (
             <div className="card">
-              <h3>Property</h3>
+              <h3>{t("case.property")}</h3>
               {c.property.map((p, i) => (
                 <div key={i} style={{ marginBottom: 6 }}>
                   {p.description}
@@ -183,7 +185,7 @@ export default function CaseView({ crimeNo }) {
 
           {c.captured_ids.length > 0 && (
             <div className="card">
-              <h3>Captured identifiers</h3>
+              <h3>{t("case.capturedids")}</h3>
               {c.captured_ids.map((i, k) => (
                 <div key={k} style={{ fontSize: 13 }}>
                   <span className="muted">{i.role} · {i.id_type}: </span>

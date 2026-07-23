@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { api, clearSession, fmt, getUser, setSession } from "./api.js";
+import { setLang, useLang, useT } from "./i18n.js";
 import AlertsView from "./views/AlertsView.jsx";
 import AuditView from "./views/AuditView.jsx";
 import CaseView from "./views/CaseView.jsx";
@@ -28,16 +29,18 @@ function useRoute() {
 export const go = (hash) => { window.location.hash = hash; };
 
 const TABS = [
-  ["map", "Command map"],
-  ["trends", "Trends"],
-  ["alerts", "Alerts"],
-  ["network", "Network"],
-  ["chat", "Ask the data"],
-  ["scan", "Scan FIR"],
+  ["map", "tab.map"],
+  ["trends", "tab.trends"],
+  ["alerts", "tab.alerts"],
+  ["network", "tab.network"],
+  ["chat", "tab.chat"],
+  ["scan", "tab.scan"],
 ];
 
 export default function App() {
   const { view, arg } = useRoute();
+  const t = useT();
+  const lang = useLang();
   const [user, setUser] = useState(getUser());
   const [kpis, setKpis] = useState(null);
   const [meta, setMeta] = useState(null);
@@ -60,12 +63,12 @@ export default function App() {
   // The audit lens exists only for state-level roles; the server enforces
   // the same rule (403) — hiding the tab is UX, not security.
   const tabs = useMemo(() => (
-    user?.scope_type === "state" ? [...TABS, ["audit", "Audit"]] : TABS
+    user?.scope_type === "state" ? [...TABS, ["audit", "tab.audit"]] : TABS
   ), [user]);
 
   const body = useMemo(() => {
     if (!user) return null;
-    if (!meta) return <div className="loading">Loading DRISHTI…</div>;
+    if (!meta) return <div className="loading">{t("app.loading")}</div>;
     if (view === "map") return <MapView meta={meta} />;
     if (view === "trends") return <TrendsView meta={meta} />;
     if (view === "alerts") return <AlertsView />;
@@ -85,26 +88,30 @@ export default function App() {
       <div className="topbar">
         <div className="brand">
           DRISHTI<span className="kn">ದೃಷ್ಟಿ</span>
-          <small>KARNATAKA CRIME INTELLIGENCE — SYNTHETIC DATA PROTOTYPE</small>
+          <small>{t("app.tagline")}</small>
         </div>
         <RoleSwitcher user={user} />
+        <button className="logout" title="Language · ಭಾಷೆ" style={{ minWidth: 46 }}
+                onClick={() => setLang(lang === "en" ? "kn" : "en")}>
+          {lang === "kn" ? "ಕನ್ನಡ" : "EN"}
+        </button>
         <button className="logout" onClick={() => { clearSession(); go("/map"); }}>
-          Sign out
+          {t("app.signout")}
         </button>
       </div>
 
       {kpis && (
         <div className="kpis">
-          <Kpi v={fmt(kpis.cases_last_30d)} l="FIRs, last 30 days"
+          <Kpi v={fmt(kpis.cases_last_30d)} l={t("kpi.firs30")}
                delta={kpis.yoy_change_pct} onClick={() => go("/trends")} />
-          <Kpi v={fmt(kpis.open_investigations)} l="Open investigations" />
-          <Kpi v={`${kpis.chargesheet_rate_pct ?? "—"}%`} l="Chargesheet rate" />
-          <Kpi v={fmt(kpis.median_days_to_chargesheet)} l="Median days to chargesheet" />
+          <Kpi v={fmt(kpis.open_investigations)} l={t("kpi.open")} />
+          <Kpi v={`${kpis.chargesheet_rate_pct ?? "—"}%`} l={t("kpi.csrate")} />
+          <Kpi v={fmt(kpis.median_days_to_chargesheet)} l={t("kpi.median")} />
           <Kpi v={`${kpis.property_recovery_pct ?? "—"}%`}
-               l="Property value recovered" />
+               l={t("kpi.property")} />
           <Kpi v={fmt(kpis.repeat_offender_entities)}
-               l="Repeat offenders (resolved)" onClick={() => go("/network")} />
-          <Kpi v={fmt(kpis.active_alerts)} l="Active alerts" hot
+               l={t("kpi.repeat")} onClick={() => go("/network")} />
+          <Kpi v={fmt(kpis.active_alerts)} l={t("kpi.alerts")} hot
                onClick={() => go("/alerts")} />
         </div>
       )}
@@ -112,7 +119,7 @@ export default function App() {
       <div className="nav">
         {tabs.map(([id, label]) => (
           <button key={id} className={view === id ? "active" : ""}
-                  onClick={() => go(`/${id}`)}>{label}</button>
+                  onClick={() => go(`/${id}`)}>{t(label)}</button>
         ))}
         <SearchBar />
       </div>

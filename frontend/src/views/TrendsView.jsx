@@ -1,8 +1,10 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef, useState } from "react";
 import { api } from "../api.js";
+import { useT } from "../i18n.js";
 
 export default function TrendsView({ meta }) {
+  const t = useT();
   const el = useRef(null);
   const chartRef = useRef(null);
   const [district, setDistrict] = useState("");
@@ -47,16 +49,16 @@ export default function TrendsView({ meta }) {
 
   return (
     <div className="pad">
-      <h2 className="pagetitle">Crime trends</h2>
+      <h2 className="pagetitle">{t("trends.title")}</h2>
       <div className="filters">
         <select value={district} onChange={(e) => setDistrict(e.target.value)}>
-          <option value="">All Karnataka</option>
+          <option value="">{t("trends.allka")}</option>
           {meta.districts.map((d) => (
             <option key={d.id} value={d.id}>{d.name}</option>
           ))}
         </select>
         <select value={head} onChange={(e) => setHead(e.target.value)}>
-          <option value="">All crime heads</option>
+          <option value="">{t("map.allheads")}</option>
           {meta.heads.map((h) => (
             <option key={h.id} value={h.id}>{h.name}</option>
           ))}
@@ -67,7 +69,7 @@ export default function TrendsView({ meta }) {
       </div>
       {data && data.spikes.length > 0 && (
         <div className="card">
-          <h3>Active spikes in scope</h3>
+          <h3>{t("trends.spikes")}</h3>
           {data.spikes.slice(0, 12).map((s, i) => (
             <div key={i} style={{ marginBottom: 6 }}>
               <span className="chip danger">z {s.zscore}</span> {s.summary}

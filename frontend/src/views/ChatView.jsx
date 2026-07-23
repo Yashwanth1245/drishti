@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { api } from "../api.js";
 import { go } from "../App.jsx";
+import { useLang, useT } from "../i18n.js";
 
 // Ask-the-Data: the agentic lens. Every assistant answer carries evidence
 // FIR chips and a collapsible tool trace ("how I got this") — the judged
@@ -13,10 +14,11 @@ const SUGGESTIONS = [
 ];
 
 export default function ChatView() {
+  const t = useT();
+  const lang = useLang();                    // global UI + GLM answer language
   const [msgs, setMsgs] = useState([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [lang, setLang] = useState("en");   // "en" | "kn" — GLM answers in Kannada
   const endRef = useRef(null);
 
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [msgs]);
@@ -50,15 +52,15 @@ export default function ChatView() {
 
   return (
     <div className="pad" style={{ maxWidth: 900, margin: "0 auto" }}>
-      <h2 className="pagetitle">Ask the data
+      <h2 className="pagetitle">{t("chat.title")}
         <span className="muted" style={{ fontSize: 13, marginLeft: 10 }}>
-          GLM 4.7 on Zoho Catalyst · typed query tools only · every claim cited
+          {t("chat.subtitle")}
         </span>
       </h2>
 
       {msgs.length === 0 && (
         <div className="card">
-          <h3>Try asking</h3>
+          <h3>{t("chat.try")}</h3>
           {SUGGESTIONS.map((s) => (
             <div key={s} style={{ marginBottom: 6 }}>
               <a onClick={() => send(s)}>{s}</a>
@@ -72,12 +74,12 @@ export default function ChatView() {
           ? { background: "var(--panel-2)", marginLeft: 60 }
           : { marginRight: 60 }}>
           <div className="muted" style={{ fontSize: 11, marginBottom: 4 }}>
-            {m.role === "user" ? "You" : "DRISHTI agent"}
+            {m.role === "user" ? t("chat.you") : t("chat.agent")}
           </div>
           <div style={{ whiteSpace: "pre-wrap" }}>{renderCited(m.content)}</div>
           {m.evidence?.length > 0 && (
             <div style={{ marginTop: 8 }}>
-              <span className="muted" style={{ fontSize: 11 }}>Evidence: </span>
+              <span className="muted" style={{ fontSize: 11 }}>{t("chat.evidence")}</span>
               {m.evidence.slice(0, 12).map((cn) => (
                 <span key={cn} className="chip mono accent rowlink"
                       onClick={() => go(`/case/${cn}`)}>{cn}</span>
@@ -87,7 +89,7 @@ export default function ChatView() {
           {m.trace?.length > 0 && (
             <details style={{ marginTop: 8 }}>
               <summary className="muted" style={{ fontSize: 12, cursor: "pointer" }}>
-                How I got this ({m.trace.length} tool call{m.trace.length > 1 ? "s" : ""})
+                {t("chat.howigot")} ({m.trace.length} tool call{m.trace.length > 1 ? "s" : ""})
               </summary>
               {m.trace.map((t, k) => (
                 <div key={k} className="mono"
@@ -100,25 +102,19 @@ export default function ChatView() {
           )}
         </div>
       ))}
-      {busy && <div className="loading">Agent is querying the database…</div>}
+      {busy && <div className="loading">{t("chat.querying")}</div>}
       <div ref={endRef} />
 
       <div style={{ display: "flex", gap: 8, marginTop: 10, alignItems: "center" }}>
         <input style={{ flex: 1, background: "var(--panel)", color: "var(--text)",
                         border: "1px solid var(--border)", borderRadius: 8,
                         padding: "10px 12px", fontSize: 14 }}
-               placeholder="Ask about cases, offenders, alerts…" value={input}
+               placeholder={t("chat.ph")} value={input}
                disabled={busy}
                onChange={(e) => setInput(e.target.value)}
                onKeyDown={(e) => e.key === "Enter" && send()} />
-        <button className={lang === "kn" ? "chip accent" : "chip"}
-                title="Answer language — English / ಕನ್ನಡ"
-                style={{ fontSize: 14, cursor: "pointer", minWidth: 46 }}
-                onClick={() => setLang((l) => (l === "en" ? "kn" : "en"))}>
-          {lang === "kn" ? "ಕನ್ನಡ" : "EN"}
-        </button>
         <button className="chip accent" style={{ fontSize: 14, cursor: "pointer" }}
-                disabled={busy} onClick={() => send()}>Send</button>
+                disabled={busy} onClick={() => send()}>{t("chat.send")}</button>
       </div>
     </div>
   );

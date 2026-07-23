@@ -2,6 +2,7 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import React, { useEffect, useRef, useState } from "react";
 import { api, fmt } from "../api.js";
+import { useT } from "../i18n.js";
 
 const BASE_STYLE = {
   version: 8,
@@ -29,6 +30,7 @@ const HOUR_BANDS = ["", "00-03", "03-06", "06-09", "09-12", "12-15",
 // map coordinates) — not HTML markers — so they stay pinned to their exact
 // location at every zoom level. Spike districts get an animated glow layer.
 export default function MapView({ meta }) {
+  const t = useT();
   const mapEl = useRef(null);
   const mapRef = useRef(null);
   const readyRef = useRef(false);
@@ -225,7 +227,7 @@ export default function MapView({ meta }) {
     <div className="mapwrap">
       <div ref={mapEl} className="map" />
       <button className="map-side-open" onClick={() => setPanelOpen(true)}>
-        ☰ Map controls
+        ☰ {t("map.controls")}
         {(head || hourBand) && <span className="dot" title="filters active" />}
       </button>
     </div>
@@ -236,28 +238,26 @@ export default function MapView({ meta }) {
       <div ref={mapEl} className="map" />
       <div className="map-side">
         <div className="card">
-          <h3>Command map
+          <h3>{t("map.title")}
             <a className="panel-toggle" onClick={() => setPanelOpen(false)}>
-              hide ⟨
+              {t("map.hide")}
             </a>
           </h3>
           <div className="filters">
             <select value={head} onChange={(e) => setHead(e.target.value)}>
-              <option value="">All crime heads</option>
+              <option value="">{t("map.allheads")}</option>
               {meta.heads.map((h) => (
                 <option key={h.id} value={h.id}>{h.name}</option>
               ))}
             </select>
             <select value={hourBand} onChange={(e) => setHourBand(e.target.value)}>
               {HOUR_BANDS.map((b) => (
-                <option key={b} value={b}>{b ? `${b} hrs` : "All hours"}</option>
+                <option key={b} value={b}>{b ? `${b} hrs` : t("map.allhours")}</option>
               ))}
             </select>
           </div>
           <div className="muted" style={{ fontSize: 12 }}>
-            Circle size = case volume · <span style={{ color: "var(--danger)" }}>
-            pulsing red = the hottest spike zones</span>
-            {head ? " in this crime head" : ""}. Click a district to drill in.
+            {t("map.hint")}
           </div>
         </div>
 
@@ -304,7 +304,7 @@ export default function MapView({ meta }) {
           </div>
         ) : (
           <div className="card">
-            <h3>Highest rate per lakh</h3>
+            <h3>{t("map.leaderboard")}</h3>
             <table className="t">
               <tbody>
                 {top.map((d) => (

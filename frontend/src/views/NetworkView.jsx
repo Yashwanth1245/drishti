@@ -2,11 +2,13 @@ import cytoscape from "cytoscape";
 import React, { useEffect, useRef, useState } from "react";
 import { api } from "../api.js";
 import { go } from "../App.jsx";
+import { useT } from "../i18n.js";
 
 // Network lens: the ego graph around one entity. Nodes are people (sized by
 // case count, coloured by risk); edges are associations (co-accused / shared
 // phone) that carry their evidence FIRs.
 export default function NetworkView({ entityId }) {
+  const t = useT();
   const el = useRef(null);
   const [info, setInfo] = useState(null);
   const [sel, setSel] = useState(null);
@@ -82,10 +84,9 @@ export default function NetworkView({ entityId }) {
     if (!top) return <div className="loading">Finding organized groups…</div>;
     return (
       <div className="pad">
-        <h2 className="pagetitle">Criminal networks
+        <h2 className="pagetitle">{t("net.title")}
           <span className="muted" style={{ fontSize: 13, marginLeft: 10 }}>
-            most-connected offenders statewide · resolved by entity resolution
-            · pick one to open their association graph
+            {t("net.subtitle")}
           </span>
         </h2>
         <div className="netgrid">
@@ -102,7 +103,7 @@ export default function NetworkView({ entityId }) {
               </div>
               <div className="deg">
                 <div className="v">{g.degree}</div>
-                <div className="l">known associates</div>
+                <div className="l">{t("net.assoc")}</div>
               </div>
             </div>
           ))}
@@ -121,7 +122,7 @@ export default function NetworkView({ entityId }) {
       <div ref={el} style={{ position: "absolute", inset: 0 }} />
       <div className="map-side">
         <div className="card">
-          <h3>Criminal network</h3>
+          <h3>{t("net.graphtitle")}</h3>
           <div className="muted" style={{ fontSize: 12 }}>
             {info.nodes.length} entities, {info.edges.length} associations.
             Node size = cases, colour = risk. Click for detail, double-click to

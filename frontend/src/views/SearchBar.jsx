@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { api } from "../api.js";
 import { go } from "../App.jsx";
+import { useT } from "../i18n.js";
 
 export default function SearchBar() {
+  const t = useT();
   const [q, setQ] = useState("");
   const [res, setRes] = useState(null);
   const timer = useRef();
@@ -21,7 +23,7 @@ export default function SearchBar() {
 
   return (
     <div className="searchbox">
-      <input placeholder="Search person or FIR number…" value={q}
+      <input placeholder={t("search.ph")} value={q}
              onChange={(e) => setQ(e.target.value)} />
       {res && (res.entities.length || res.cases.length) > 0 && (
         <div className="results">

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { api, fmt, riskClass } from "../api.js";
 import { go } from "../App.jsx";
+import { useT } from "../i18n.js";
 
 export default function EntityView({ entityId }) {
+  const t = useT();
   const [e, setE] = useState(null);
   const [err, setErr] = useState(null);
 
@@ -21,7 +23,7 @@ export default function EntityView({ entityId }) {
 
   return (
     <div className="pad">
-      <a className="backlink" onClick={() => history.back()}>← back</a>
+      <a className="backlink" onClick={() => history.back()}>{t("ent.back")}</a>
       <div style={{ display: "flex", gap: 16, alignItems: "center",
                     marginBottom: 14 }}>
         <div>
@@ -36,18 +38,18 @@ export default function EntityView({ entityId }) {
           <div className={`badge-risk ${riskClass(e.risk_score)}`}>
             {e.risk_score ?? "—"}
           </div>
-          <div className="muted" style={{ fontSize: 11 }}>risk score</div>
+          <div className="muted" style={{ fontSize: 11 }}>{t("ent.risk")}</div>
         </div>
         <button className="chip accent" style={{ cursor: "pointer", fontSize: 13 }}
                 onClick={() => go(`/network/${e.entity_id}`)}>
-          View network →
+          {t("ent.viewnet")}
         </button>
       </div>
 
       <div className="grid31">
         <div>
           <div className="card">
-            <h3>Case history ({e.cases.length})</h3>
+            <h3>{t("ent.casehistory")} ({e.cases.length})</h3>
             {e.cases_outside_scope > 0 && (
               <div className="scopenote">
                 {e.cases_outside_scope} case{e.cases_outside_scope > 1 && "s"} (marked 🔒)
@@ -83,7 +85,7 @@ export default function EntityView({ entityId }) {
 
         <div>
           <div className="card">
-            <h3>Why this risk score</h3>
+            <h3>{t("ent.whyrisk")}</h3>
             {factors.map(([k, f]) => (
               <div key={k} className="factor">
                 <div className="lbl"><span>{k}</span>
@@ -97,13 +99,13 @@ export default function EntityView({ entityId }) {
           </div>
 
           <div className="card">
-            <h3>Known names / spellings</h3>
+            <h3>{t("ent.aliases")}</h3>
             {e.aliases.map((a) => <span key={a} className="chip">{a}</span>)}
           </div>
 
           {e.captured_ids.length > 0 && (
             <div className="card">
-              <h3>Captured identifiers</h3>
+              <h3>{t("ent.captured")}</h3>
               <table className="t">
                 <tbody>
                   {e.captured_ids.map((i, k) => (
@@ -123,7 +125,7 @@ export default function EntityView({ entityId }) {
 
           {e.associates.length > 0 && (
             <div className="card">
-              <h3>Known associates</h3>
+              <h3>{t("ent.knownassoc")}</h3>
               {e.associates.map((a) => (
                 <div key={a.entity_id} style={{ marginBottom: 6 }}>
                   <a onClick={() => go(`/entity/${a.entity_id}`)}>

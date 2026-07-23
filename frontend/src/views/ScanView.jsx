@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { api } from "../api.js";
+import { useT } from "../i18n.js";
 
 // Scan-FIR lens: Qwen VLM on Zoho Catalyst digitizes a photographed/scanned
 // FIR into a structured draft record — the "beyond manual records" demo.
 export default function ScanView() {
+  const t = useT();
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -29,7 +31,7 @@ export default function ScanView() {
 
   return (
     <div className="pad">
-      <h2 className="pagetitle">Scan a paper FIR
+      <h2 className="pagetitle">{t("scan.title")}
         <span className="muted" style={{ fontSize: 13, marginLeft: 10 }}>
           Qwen VLM on Zoho Catalyst · photograph → structured draft record
         </span>

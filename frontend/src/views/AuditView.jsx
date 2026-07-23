@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../api.js";
+import { useT } from "../i18n.js";
 
 // The audit trail lens (state roles only): the accountability record — who
 // searched which name, who opened whose profile / which FIR, what was asked
@@ -17,6 +18,7 @@ const EVENT_CHIP = {
 };
 
 export default function AuditView() {
+  const t = useT();
   const [entries, setEntries] = useState(null);
   const [err, setErr] = useState(null);
 
@@ -36,7 +38,7 @@ export default function AuditView() {
 
   return (
     <div className="pad">
-      <h2 className="pagetitle">Audit trail
+      <h2 className="pagetitle">{t("audit.title")}
         <span className="muted" style={{ fontSize: 13, marginLeft: 10 }}>
           record access · AI usage · sign-ins · denials — x_audit_log
         </span>
