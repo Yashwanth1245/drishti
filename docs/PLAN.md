@@ -11,9 +11,9 @@ story in four minutes.
 
 1. No real data — only schema + master tables provided. Teams generate synthetic data.
    Suggested volume: 1–2 lakh cases (~1,100 police stations in reality).
-2. Deployment on **Zoho Catalyst** is mandatory. LLMs must run on Zoho cloud
-   (available: GLM 4.7 `crm-di-glm47b_30b_it` text, Qwen `VL-Qwen3.6-35B-A3B`
-   image — image input compulsory for Qwen).
+2. Deployment on **Zoho Catalyst** is mandatory. LLMs must run on Zoho cloud;
+   we use GLM 4.7 `crm-di-glm47b_30b_it` (text) for the agentic layer. (Qwen
+   VLM is also available on the platform but our FIR-scan feature was removed.)
 3. One team pitches ONE challenge. We pitch Challenge 2 only.
 4. Submission (re-submittable until deadline): prototype brief + public GitHub +
    public demo video + Catalyst deployed link + deck in official template.
@@ -25,7 +25,7 @@ story in four minutes.
 | Judge signal | Our answer |
 |---|---|
 | "Static handbook → dynamic drill-down" (DGP) | Map lens: state → district → station, filters by crime head / period / hour band |
-| "Proactive, not reactive" | Spike alerts vs historical baseline, hotspot forecasting, early-warning feed |
+| "Proactive, not reactive" | Spike alerts vs historical baseline (z-score), rate-per-lakh hotspot ranking, early-warning feed |
 | "Today's crimes are done by networks" | Entity resolution + link graph (co-accused, shared locations, shared accounts), MO tracking |
 | "We would like to see agentic AI" | Monitoring agent (watches data, investigates spikes, drafts briefs) + ask-the-data agent |
 | "Production grade, model-flat, sustain a decade" | Catalyst deploy, RBAC by real rank, audit log, 2M rows, rollups, load-tested API |
@@ -34,9 +34,11 @@ story in four minutes.
 
 ## Phases
 
-> Live status (2026-07-03): Phases 1–5 COMPLETE (Phase 5's Catalyst upload
-> itself waits only on the Catalyst project — everything is built, verified
-> and deploy-ready). Remaining: the deploy click + Phase 6 (submission).
+> Live status (2026-07-16): Phases 1–5 COMPLETE + audited + hardened. Scan-FIR
+> removed; interface now bilingual English / ಕನ್ನಡ. Public GitHub repo LIVE
+> (github.com/Yashwanth1245/drishti); Catalyst AppSail deploy prepared (Docker
+> custom runtime + GitHub Actions CI). Phase 6 in progress: deck + demo video
+> built; remaining = run the Catalyst deploy, upload the video, submit.
 > See `STATUS.md` for the authoritative, granular state.
 
 ### Phase 1 — Data foundation (Jul 2–5) — ✅ DONE 2026-07-02
@@ -50,8 +52,9 @@ Excel workbook opens clean; all planted stories present and discoverable by SQL.
 FastAPI app; SQLite with indexes + rollup tables (daily station × crime-head counts);
 engines: hotspots (grid/KDE + hour-band layering), trends & spike detection (baseline
 z-scores), entity resolution runner (blocking + fuzzy scoring → PersonMaster),
-network builder (co-occurrence edges → NetworkX), offender risk scoring, anomaly
-flags, similar-case retrieval. Every endpoint returns `evidence: [crimeNos]`.
+network builder (co-occurrence edges, plain SQL — no NetworkX), offender risk
+scoring, anomaly flags, similar-case retrieval. Every endpoint returns
+`evidence: [crimeNos]`.
 **Exit criteria**: all engines answer over the full dataset in <1s warm (rollups),
 <5s cold; unit tests on engine correctness against planted stories.
 
@@ -62,14 +65,15 @@ offender profile page (timeline, MO tags, risk, aliases), alerts feed, KPI heade
 **Exit criteria**: demo storyline walkable end-to-end by hand.
 
 ### Phase 4 — Agentic layer (Jul 17–20) — ✅ DONE 2026-07-02
-LLM client (real Zoho GLM 4.7 + Qwen VLM, OAuth auto-refresh); ask-the-data
-agent (8 typed query tools — model never writes SQL — + citation enforcement);
-monitoring-agent intelligence briefs (print-to-PDF); Qwen VL scanned-FIR
-ingestion (image → structured draft record). Note: MO extraction currently
-rule-based in datagen (GLM batch extraction is an available upgrade).
-**Exit criteria met**: multi-tool questions answered with FIR citations live;
-Dharwad brief generated; scan extracts all fields. All three GLM/Qwen features
-verified live against the real Catalyst endpoints (API + browser).
+LLM client (real Zoho GLM 4.7, OAuth auto-refresh); ask-the-data agent (8 typed
+query tools — model never writes SQL — + citation enforcement, bilingual
+English/Kannada answers); monitoring-agent intelligence briefs (print-to-PDF).
+(Scan-FIR / Qwen VLM was later removed by product decision, 2026-07-16.) Note:
+MO extraction is rule-based in datagen (GLM batch extraction is an available
+upgrade).
+**Exit criteria met**: multi-tool questions answered with FIR citations live
+(English + Kannada); Dharwad brief generated — verified live against the real
+Catalyst GLM endpoint (API + browser).
 
 ### Phase 5 — Production hardening (Jul 21–23) — ✅ DONE 2026-07-03
 Login + RBAC by rank (state/range/district/station) on x_app_user/x_role,
@@ -83,10 +87,13 @@ ladder; role demo verified in browser; Docker image built + smoke-tested.
 Remaining: the Catalyst upload itself — blocked on the Catalyst project (see
 STATUS blocked list).
 
-### Phase 6 — Submission (Jul 24–26)
-Demo video (script in DEMO_SCRIPT.md), deck on official template, README polish,
-final submission. Submit an early version and re-submit improvements. (We are
-well ahead of schedule, so early submission is comfortably achievable.)
+### Phase 6 — Submission (Jul 24–26) — IN PROGRESS
+Public GitHub repo LIVE (github.com/Yashwanth1245/drishti). Submission deck
+built in the official template (`DRISHTI_Submission.pptx`). Captioned demo video
+recorded (`DRISHTI_demo.mp4`; 3-min shot list in `VIDEO_SCRIPT_3MIN.md`).
+REMAINING: run the Catalyst AppSail deploy → paste the live URL + the uploaded
+video URL into deck slide 13, verify all three links open, submit. Re-submittable
+until the deadline.
 
 ## Risks and mitigations
 
@@ -100,8 +107,8 @@ well ahead of schedule, so early submission is comfortably achievable.)
 
 ## Submission checklist (from portal)
 
-- [ ] Prototype brief (their template)
-- [ ] Public GitHub repository
-- [ ] Public demo video link
-- [ ] Deployed solution link on Catalyst
-- [ ] Deck uploaded, challenge = Challenge 2 selected
+- [x] Prototype brief — in the deck (slides 2–4)
+- [x] Public GitHub repository — github.com/Yashwanth1245/drishti
+- [~] Public demo video — recorded (`DRISHTI_demo.mp4`); upload to YouTube/Drive
+- [ ] Deployed solution link on Catalyst — run the AppSail deploy
+- [x] Deck built (official template); confirm Challenge 2 on submit

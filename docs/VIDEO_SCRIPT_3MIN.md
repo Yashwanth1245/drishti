@@ -42,8 +42,8 @@ Click a **district** → drill into its **stations**. Reset to *All hours*.
 **Do:** Ask-the-Data → type **"Tell me about the repeat offender Ravikumar B"** → answer.
 > "This is our agentic layer — GLM 4.7 running on Zoho Catalyst QuickML. It answers in
 > plain English, and every claim is a clickable FIR citation. It never writes SQL — it
-> calls typed, access-controlled tools. We also ingest a photographed FIR with a vision
-> model." *(optional: Scan FIR tab, upload `exports/demo_fir_scan.png`.)*
+> calls typed, access-controlled tools." Flip **EN → ಕನ್ನಡ**: the whole interface
+> and the AI's answer switch to Kannada — regional-language support in one click.
 
 ### 2:40–2:55 · RBAC + evidence doctrine
 **Do:** switch rank chip DGP → **sp.dharwad**.

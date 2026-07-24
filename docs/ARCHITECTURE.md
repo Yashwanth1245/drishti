@@ -12,18 +12,18 @@ reference/*.json ──┐
                    ├─► datagen ─► exports/drishti.db (SQLite) + CSV + Excel
 planted stories ───┘                    │
                                         ▼
-                    backend (FastAPI, Python 3.11)
+                    backend (FastAPI, Python 3.12)
      ┌──────────────┬──────────────┬──────────────┬─────────────┐
-     │ patterns     │ networks     │ forecasting  │ anomalies   │   engines
-     │ hotspots,    │ ER + link    │ baselines,   │ outlier     │
-     │ trends       │ graph        │ risk scores  │ cases       │
+     │ patterns     │ networks     │ risk         │ alerts      │   engines
+     │ hotspots,    │ ER + link    │ explainable  │ spikes +    │
+     │ trends       │ graph        │ scoring      │ anomalies   │
      └──────┬───────┴──────┬───────┴──────┬───────┴──────┬──────┘
             ▼              ▼              ▼              ▼
        REST API  (every response carries evidence: [CrimeNo...])
             │
             ▼
      frontend (React + Vite)
-     Command map · Networks · Profiles · Ask the data · Reports
+     Command map · Trends · Alerts · Network · Ask the data (bilingual EN/ಕನ್ನಡ)
             │
      RBAC + audit log on every request
 ```
@@ -33,11 +33,11 @@ planted stories ───┘                    │
 | Layer | Choice | Why |
 |---|---|---|
 | Data store | SQLite (WAL) shipped inside the app image; rollup tables precomputed | Zero-ops, read-mostly workload, 2M rows trivial with indexes; judges test the app, not our DB ops |
-| Mutable state | Catalyst Data Store (users, audit log, saved reports) | Survives container restarts; uses the mandated platform visibly |
-| Backend | FastAPI + pandas/NetworkX/scikit-learn + rapidfuzz | Fast to build, easy to read, standard DS toolchain |
-| Frontend | React + Vite, MapLibre GL (map), Cytoscape.js (graph), ECharts (charts) | All open source, no keys needed, proven for exactly these visualizations |
+| Mutable state | Ships inside the SQLite DB (users/audit, WAL single-writer); Catalyst Data Store is the documented production path | Prototype keeps one system of record; the Data Store migration is config, not code |
+| Backend | FastAPI + rapidfuzz (entity resolution) + Python stdlib `statistics` | Lean footprint — NO heavy DS stack (no pandas/sklearn/NetworkX); every threshold lives in `config.py`, auditable in one file |
+| Frontend | React + Vite, MapLibre GL (map), Cytoscape.js (graph), ECharts (charts); full English/ಕನ್ನಡ i18n | All open source, no keys needed, proven for exactly these visualizations |
 | Geo | Karnataka district GeoJSON (public), station points from generator | District choropleth + point drill-down |
-| LLM | `ZohoLLM` client (backend/app/llm/zoho.py) → real Catalyst QuickML: GLM 4.7 `crm-di-glm47b_30b_it` (text) + Qwen VLM `VL-Qwen3.6-35B-A3B` (vision), OAuth auto-refresh | Mandated platform; LLM features degrade gracefully (rest of app never touches the LLM) |
+| LLM | `ZohoLLM` client (backend/app/llm/zoho.py) → real Catalyst QuickML: GLM 4.7 `crm-di-glm47b_30b_it` powers the agentic "ask the data" layer (English + Kannada), OAuth auto-refresh | Mandated platform; LLM features degrade gracefully (rest of app never touches the LLM) |
 | Deploy | Zoho Catalyst AppSail, single Docker image (backend serves built frontend) | Mandatory platform; one container = fewest moving parts |
 
 ## Backend API surface (Phase 2 target)
@@ -57,7 +57,6 @@ POST /api/chat                                ask-the-data agent (tools + citati
 POST /api/brief                               monitoring-agent intelligence brief
                                               ({district_id} or {alert_id};
                                               print-to-PDF in the UI)
-POST /api/ingest/scan                         Qwen VLM: FIR image → draft record
 GET  /api/er/metrics                          ER precision/recall (honesty endpoint)
 POST /api/auth/login · GET /api/auth/me       login (PBKDF2 + stateless HMAC tokens)
 GET  /api/auth/demo                           demo role roster for the login screen
@@ -92,10 +91,14 @@ row references) behind the figure. The UI renders this as an expandable drawer.
    threshold merge into `person_master`; every merge stores its score and inputs
    (explainability); precision/recall measured against generator gold labels and
    REPORTED in the UI ("ER accuracy on test set: X%") — honesty as a feature.
-4. **Forecasting & risk**: offender risk = recency/frequency/gravity/escalation
-   composite (documented formula, not a black box); area risk = trend + seasonality
-   projection per district × head; anomaly flags = isolation-forest over case
-   feature vectors + rule-based flags (e.g. complainant with N false cases).
+4. **Risk & alerts**: offender risk = recency/frequency/gravity/escalation/breadth
+   composite (documented formula in `config.py`, not a black box; every factor is
+   reported in the profile); spike alerts = z-score of a 90-day window vs 8 trailing
+   windows; emerging-trend alerts = year-over-year growth; anomalies = rule-based
+   (serial false complainant, duplicate FIRs, slow stations).
+   **Honest scope**: the intelligence is deterministic statistics + rapidfuzz entity
+   resolution + hosted-LLM orchestration — there is NO trained ML model, and
+   forward-looking crime FORECASTING is roadmap, not built.
 
 ## RBAC model (mirrors real rank hierarchy) — BUILT (Phase 5)
 

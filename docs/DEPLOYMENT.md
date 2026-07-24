@@ -114,12 +114,12 @@ bash deploy/build_appsail_bundle.sh     # -> deploy/bundle/
 | `ZOHO_ACCESS_TOKEN` | for LLM | QuickML OAuth (auto-refreshes) |
 | `ZOHO_REFRESH_TOKEN` | for LLM | " |
 | `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` | for LLM | " |
-| `ZOHO_ACCOUNTS_BASE`, `QUICKML_BASE`, `QUICKML_PROJECT_ID`, `CATALYST_ORG`, `GLM_MODEL`, `VLM_MODEL` | for LLM | prefilled in `.env.example` |
+| `ZOHO_ACCOUNTS_BASE`, `QUICKML_BASE`, `QUICKML_PROJECT_ID`, `CATALYST_ORG`, `GLM_MODEL` | for LLM | prefilled in `.env.example` |
 | `DRISHTI_STATIC` | no | override built-frontend dir (default `frontend/dist`) |
 
 `backend/app/llm/zoho.py` reads process env first, repo `.env` second — the
 container needs no `.env` file. Without LLM vars the app runs fully; only
-chat / brief / scan return 503 with a clear message.
+chat / brief return 503 with a clear message.
 
 ## Users, audit log, and container restarts
 

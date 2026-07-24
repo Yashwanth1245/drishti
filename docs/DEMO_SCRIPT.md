@@ -1,13 +1,15 @@
 # DEMO_SCRIPT — the four-minute judge walkthrough
 
-Updated 2026-07-02 to match the BUILT product (every step verified live in the
+Updated 2026-07-16 to match the BUILT product (every step verified live in the
 browser). One continuous investigation story; every judged capability appears
 as a natural step. Rehearse to 4 minutes; judges' Q&A follows.
+(Scan-FIR/Qwen was removed by product decision; the interface is now fully
+bilingual English / ಕನ್ನಡ.)
 
 Pre-demo state: backend (`uvicorn app.main:app --port 8000`) + frontend
 (`npm run dev`) running, data regenerated (seed 2026), `app.precompute` run.
-Demo asset: `exports/demo_fir_scan.png`. Warm the LLM once (ask any chat
-question) before going on stage so the first live answer isn't cold.
+Warm the LLM once (ask any chat question) before going on stage so the first
+live answer isn't cold.
 SIGN IN AS `dgp` BEFORE going on stage (password `drishti2026`) — the app
 opens on the login screen; the close at 3:45 does the live role switch.
 
@@ -82,19 +84,16 @@ this" trace showing the 3 typed tool calls.
 > typed, parameter-bound query tools, so it cannot be prompt-injected and
 > cannot invent a case number. Every claim is cited; every tool call is shown."
 
-Optionally ask a fresh one: *"How many chain snatching cases in Dharwad in
-2026?"* → "7", one tool call.
+## 3:20–3:35 — Bilingual (regional language)
 
-## 3:20–3:45 — Beyond manual records (Qwen scan)
+Flip the **EN → ಕನ್ನಡ** toggle (top bar). The WHOLE interface switches to
+Kannada — tabs, KPIs, headings — and re-ask the question: the agent now answers
+in fluent Kannada with the SAME cited FIR numbers.
 
-Tab **Scan FIR**, upload `demo_fir_scan.png` (a photographed paper FIR). Qwen
-VLM returns a structured draft record — FIR number, station, parties, BNS
-sections, brief, property — with an "officer must verify" guard.
+> "One click switches the entire interface and the AI's answers to Kannada —
+> for officers who work in the regional language."
 
-> "This is the 'moving beyond Excel and paper' pillar — a photographed FIR
-> becomes a structured, searchable record in seconds."
-
-## 3:45–4:00 — Close: RBAC + production readiness
+## 3:35–4:00 — Close: RBAC + production readiness
 
 Back to **Alerts** → "Generate brief" on the Dharwad spike (pre-generated in
 rehearsal if time is tight) → cited intelligence brief with **Save as PDF**.
@@ -117,9 +116,8 @@ trail.
 
 - Network dead: local run + a pre-recorded screen capture of this exact flow.
 - LLM slow/down: the map, alerts, entity, network, and case lenses never touch
-  the LLM — only Ask-the-data / Scan / Generate-brief do. Lead with the
-  non-LLM reveal (search → profile → network) and treat the agent as the
-  bonus.
+  the LLM — only Ask-the-data / Generate-brief do. Lead with the non-LLM
+  reveal (search → profile → network) and treat the agent as the bonus.
 - Time cut to 2 min: cold open (map+alert) → search → profile → ask-the-data.
 
 ## Concrete anchors (verified live 2026-07-02)

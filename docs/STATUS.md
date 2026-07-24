@@ -11,43 +11,75 @@
 > auto-generated each datagen run. reference/README.md documents the curated
 > real-world data.
 
-## Audit + submission prep (2026-07-16)
+## SESSION HANDOFF — current state (updated 2026-07-16, end of session)
 
-Full app audit (18 agents + hands-on verification). VERDICT: functionally strong
-— datagen --verify, selfcheck, apicheck ALL PASS; live UI verified (MapLibre +
-ECharts + Cytoscape, zero console errors); Zoho GLM probe PASS. Challenge
-coverage ~60%: Pillar 1 (viz) ~80%; Pillars 2-6 partial.
+READ THIS FIRST. The "Done"/"Pending" sections below are historical detail; THIS
+block is the authoritative current state after this session's audit + hardening
++ feature changes. Team: **Team - Alpha**, leader **Yashwanth Kannamaneni**.
 
-Fixes applied this session (all verified):
-- schema.sql: removed DUPLICATE `idx_property_case` index that crashed a clean
-  `executescript` regen (the current DB was a pre-dup artifact). Clean regen now
-  works; determinism holds (ER 0.9406 / 215,789 entities reproduced).
-- auth.py: `_secret()` now FAILS CLOSED in a deployed env (X_ZOHO_CATALYST_
-  LISTEN_PORT set, or DRISHTI_ENV=production) when DRISHTI_SECRET is unset —
-  previously fell back to a public in-source secret (token-forgery risk).
-- Dockerfile: now SELF-PROVISIONS data at build (datagen + precompute inside the
-  build) so deploy-from-GitHub needs no committed DB; .dockerignore updated.
-- Added LICENSE (MIT). Initial git commit created (81 files, no secrets tracked).
-- DEPLOYMENT.md: clarified target is AppSail, NOT Slate (Slate = frontend-only;
-  cannot run FastAPI/SQLite) + added Catalyst connect steps.
+**What DRISHTI is now:** full-stack KSP Challenge 2 crime-intelligence platform.
+FastAPI + React + SQLite, 200,846 synthetic NCRB-calibrated FIRs, deterministic
+(seed 2026). FIVE lenses — Command map · Trends · Alerts · Network · Ask-the-data
+— plus Audit (state roles). Entity resolution (0.94 precision, the
+differentiator), criminal networks, explainable risk, spike/anomaly/emerging
+alerts, evidence doctrine (every claim cites CrimeNos), RBAC + graduated
+disclosure + audit trail. Agentic "ask the data" = GLM 4.7 on Zoho QuickML, 8
+typed tools, cited answers. The WHOLE interface + the chat answers switch
+English ⇄ ಕನ್ನಡ (`frontend/src/i18n.js`; topbar + login toggle; persisted).
 
-Second fix pass (2026-07-16, pushed ed43b28 — all verified, harnesses PASS):
-map never-blank background fallback; CaseView/EntityView err-reset; emerging-
-trend YoY derived from AS_OF; x_mo_tag + x_network_edge single-col indexes
-(/api/cases 169ms->23ms); restricted case_detail rebuilt from a field whitelist
-(was leaking incident lat/long via cm.*); brief.py alert scope = API scope;
-scan upload Content-Length precheck + bounded read + image magic-byte check;
-per-IP rate limiting on login/LLM + security headers + CORS allow-list; LLMError
--> 503 (not 500); chat no longer echoes exception text. Excel workbook
-REGENERATED fresh (134MB, 3.13M rows) — regen now works post dup-index fix.
-GitHub public repo live: https://github.com/Yashwanth1245/drishti
+**Audit (18 agents + hands-on):** functionally strong — datagen --verify /
+selfcheck / apicheck ALL PASS; live UI verified; Zoho GLM probe PASS. Challenge
+coverage ~60% (Pillar 1 viz ~80%; Pillars 2–6 partial).
 
-Still-open CAPABILITY gaps (bigger features for later planning, NOT bugs): no
-forecasting/predictive model (Pillars 3,6); no genuine spatial hotspot
-clustering — CaseMaster lat/long populated but unread (Pillar 4); no organized-
-crime STRUCTURE/role detection (Pillar 5); victims+locations not graphed
-(Pillar 2); no trained ML lib anywhere (Pillar 6); ARCHITECTURE.md claims ML
-(isolation-forest/sklearn) that does not exist — honesty fix needed.
+**Changes this session (all verified + pushed to GitHub main):**
+- Blockers: fixed duplicate schema index (crashed clean regen); DRISHTI_SECRET
+  now fails closed in prod; self-provisioning Dockerfile (deploy-from-Git needs
+  no committed DB); MIT LICENSE; git history created.
+- Bugs/security: map never-blank fallback; CaseView/EntityView err-reset; YoY
+  from AS_OF; x_mo_tag/x_network_edge indexes (/api/cases 169ms→23ms);
+  coordinate-redaction whitelist; brief scope = API scope; upload validation;
+  per-IP rate limiting + security headers + CORS allow-list; LLM 503 not 500.
+  Excel regenerated fresh (134MB).
+- HONESTY FIX DONE: ARCHITECTURE.md (and README/PLAN) no longer claim
+  pandas/NetworkX/scikit-learn/isolation-forest/forecasting — none exist. Docs
+  now state the intelligence is deterministic stats + rapidfuzz ER + hosted-LLM,
+  NO trained ML, forecasting is roadmap.
+- Bilingual English/ಕನ್ನಡ: chat answers + full interface language switch.
+- Scan-FIR (Qwen VLM) REMOVED entirely (product decision): ScanView, the tab,
+  /api/ingest/scan, ZohoLLM.vlm_chat, probe --vlm, demo_fir_scan.png all gone.
+- GitHub PUBLIC repo LIVE: https://github.com/Yashwanth1245/drishti (main, clean,
+  no secrets tracked).
+- Catalyst deploy PREPARED: target = AppSail Docker **CUSTOM RUNTIME** (linux/
+  amd64 ONLY — build with `--platform linux/amd64`; NOT Slate, which is
+  frontend-only). Self-provisioning image builds + was smoke-tested. GitHub
+  Actions CI at `.github/workflows/deploy-catalyst.yml` (builds on GitHub's
+  amd64 runners + `catalyst deploy appsail --source docker://...` via a
+  CATALYST_TOKEN secret). Full steps: `docs/DEPLOYMENT.md`.
+- Submission artifacts (both gitignored, in ~/Downloads + repo root):
+  `DRISHTI_Submission.pptx` (16-slide official template) + `DRISHTI_demo.mp4`
+  (2:28 captioned walkthrough). Built by `scratchpad/build_deck.py` /
+  `record.py` in the session temp dir (paths in the deck section below).
+
+**WHERE TO PICK UP (remaining to submit):**
+1. Deploy to Catalyst AppSail — needs the user's `catalyst login` (CLI installed).
+   Either run the GitHub Actions workflow (set CATALYST_TOKEN secret) or
+   `docker build --platform linux/amd64 -t localhost/drishti:latest . && catalyst
+   deploy appsail --name drishti --source docker://localhost/drishti:latest`.
+   Set DRISHTI_SECRET + ZOHO_* in the AppSail console. → get the live URL.
+2. Upload DRISHTI_demo.mp4 to unlisted YouTube / public Google Drive → get URL.
+   (The current video predates the Kannada UI; optional to re-record showing it.)
+3. Put both URLs into deck slide 13, verify all 3 links open, submit (Challenge 2).
+
+**Honest capability GAPS (roadmap, NOT bugs — the challenge asks for these):** no
+forecasting/predictive model (Pillars 3,6); no true spatial hotspot clustering
+(CaseMaster lat/long populated but unread — Pillar 4); no organized-crime
+STRUCTURE/role detection (Pillar 5); victims+locations not graphed (Pillar 2);
+no trained ML library anywhere (Pillar 6). S3 finance/money-trail deferred
+(x_fin_* empty).
+
+**Env note:** `preview_start` (name-based) can't run the venv — the sandbox
+blocks `~/Desktop/.venv`. Start the backend via Bash: `.venv/bin/uvicorn
+app.main:app --app-dir backend --port 8000`, then `preview_start {url}`.
 
 ## Done
 
@@ -321,7 +353,10 @@ these endpoints; then Phase 4 agentic layer; Phase 5 Catalyst deploy.
             "Generate brief" button -> markdown brief w/ ## Situation/Emerging
             patterns/Entities/Recommended deployment, FIR citations, print-to-
             PDF). Live tested: Dharwad brief, 29 evidence FIRs, real numbers.
-      - [x] 4d. Qwen scan-ingestion DONE (backend /api/ingest/scan + ScanView):
+      - [x] 4d. Qwen scan-ingestion — built, then REMOVED 2026-07-16 (product
+            decision; endpoint/view/vlm_chat/probe --vlm/demo asset all deleted).
+            Original notes kept for history:
+            (backend /api/ingest/scan + ScanView):
             upload FIR photo -> Qwen VLM -> structured draft JSON (fir_no,
             station, parties, sections, brief, property) + "officer must verify"
             note. Live tested on a generated FIR scan (exports/demo_fir_scan.png)
