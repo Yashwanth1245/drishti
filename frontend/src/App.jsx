@@ -9,7 +9,6 @@ import EntityView from "./views/EntityView.jsx";
 import LoginView from "./views/LoginView.jsx";
 import MapView from "./views/MapView.jsx";
 import NetworkView from "./views/NetworkView.jsx";
-import ScanView from "./views/ScanView.jsx";
 import SearchBar from "./views/SearchBar.jsx";
 import TrendsView from "./views/TrendsView.jsx";
 
@@ -34,7 +33,6 @@ const TABS = [
   ["alerts", "tab.alerts"],
   ["network", "tab.network"],
   ["chat", "tab.chat"],
-  ["scan", "tab.scan"],
 ];
 
 export default function App() {
@@ -74,7 +72,6 @@ export default function App() {
     if (view === "alerts") return <AlertsView />;
     if (view === "network") return <NetworkView entityId={arg} />;
     if (view === "chat") return <ChatView />;
-    if (view === "scan") return <ScanView />;
     if (view === "audit") return <AuditView />;
     if (view === "entity") return <EntityView entityId={arg} />;
     if (view === "case") return <CaseView crimeNo={arg} />;

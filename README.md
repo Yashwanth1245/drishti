@@ -62,9 +62,9 @@ cd ../frontend && npm run dev                         # frontend on :5173
 #   or: docker build -t drishti . && docker run -p 9000:9000 drishti
 ```
 
-Six lenses in the UI (plus Audit for state roles): Command map · Trends ·
-Alerts · Network · Ask the data (GLM agent with cited answers) · Scan FIR
-(Qwen document extraction). Demo scan asset: `exports/demo_fir_scan.png`.
+Five lenses in the UI (plus Audit for state roles): Command map · Trends ·
+Alerts · Network · Ask the data (GLM agent with cited answers, bilingual
+English / ಕನ್ನಡ). The whole interface switches between English and Kannada.
 
 ## Sign-in (RBAC demo roles)
 
@@ -103,8 +103,8 @@ bulk browsing of another jurisdiction is refused outright. Deployment guide:
 ## Datathon constraints (non-negotiable)
 
 - Deployment on **Zoho Catalyst** is mandatory; LLMs must run on Zoho cloud
-  (GLM 4.7 `crm-di-glm47b_30b_it` for text, Qwen VLM `VL-Qwen3.6-35B-A3B` for
-  images — both wired live via `backend/app/llm/zoho.py` with OAuth auto-refresh).
+  (GLM 4.7 `crm-di-glm47b_30b_it` powers the agentic "ask the data" layer, wired
+  live via `backend/app/llm/zoho.py` with OAuth auto-refresh).
 - Prototype submission deadline: **26 July 2026** (re-submission allowed until then).
 - Submission = public GitHub repo + public demo video + deployed Catalyst link +
   deck in the official template.

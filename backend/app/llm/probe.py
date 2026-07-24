@@ -1,14 +1,12 @@
 """Connectivity probe for the Zoho QuickML models. Run from backend/:
 
     ../.venv/bin/python -m app.llm.probe             # GLM text model
-    ../.venv/bin/python -m app.llm.probe --vlm PATH  # Qwen VLM on an image
 
 Prints masked token state, forces a real call, exercises the auto-refresh
 path if the access token has expired, and shows the raw response shape (so we
 learn the exact schema QuickML returns before wiring features to it).
 """
 
-import base64
 import json
 import sys
 
@@ -28,14 +26,6 @@ def main():
     print(f"access token : {mask(llm.access_token)}"
           f"{' (from cache)' if CACHE_PATH.exists() else ''}")
     print(f"glm endpoint : {llm.glm_url}")
-
-    if len(sys.argv) > 2 and sys.argv[1] == "--vlm":
-        img = base64.b64encode(open(sys.argv[2], "rb").read()).decode()
-        print(f"vlm image    : {sys.argv[2]} ({len(img) // 1024} KB b64)")
-        resp = llm.vlm_chat("Describe this image in one sentence.", [img])
-        print("vlm raw keys :", list(resp)[:8])
-        print("vlm text     :", chat_text(resp)[:400])
-        return 0
 
     resp = llm.glm_chat(
         [{"role": "system", "content": "You are a terse test responder."},

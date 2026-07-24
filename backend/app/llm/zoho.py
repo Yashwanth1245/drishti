@@ -11,8 +11,6 @@ file itself is never modified.
 Endpoints (from the datathon's QuickML docs):
   POST {QUICKML_BASE}/project/{PROJECT}/glm/chat   — GLM 4.7, OpenAI-style
        messages + optional function tools
-  POST {QUICKML_BASE}/project/{PROJECT}/vlm/chat   — Qwen VLM, prompt +
-       base64 images (image input is compulsory for this model)
 """
 
 import json
@@ -80,7 +78,6 @@ class ZohoLLM:
                             "https://api.catalyst.zoho.in/quickml/v1")
         project = self.env["QUICKML_PROJECT_ID"]
         self.glm_url = f"{base}/project/{project}/glm/chat"
-        self.vlm_url = f"{base}/project/{project}/vlm/chat"
         self.client = httpx.Client(timeout=120)
 
     # ---- auth ------------------------------------------------------------
@@ -151,19 +148,6 @@ class ZohoLLM:
             payload["tools"] = tools
             payload["tool_choice"] = "auto"
         return self._post(self.glm_url, payload)
-
-    def vlm_chat(self, prompt: str, images_b64: list[str],
-                 system_prompt: str = "Be concise and factual.",
-                 temperature: float = 0.2, max_tokens: int = 900) -> dict:
-        payload = {
-            "model": self.env.get("VLM_MODEL", "VL-Qwen3.6-35B-A3B"),
-            "prompt": prompt,
-            "images": images_b64,
-            "system_prompt": system_prompt,
-            "top_k": 50, "top_p": 0.9,
-            "temperature": temperature, "max_tokens": max_tokens,
-        }
-        return self._post(self.vlm_url, payload)
 
 
 def chat_text(resp: dict) -> str:

@@ -41,7 +41,7 @@ const DICT = {
     "app.loading": "Loading DRISHTI…",
     "search.ph": "Search person or FIR number…",
     "tab.map": "Command map", "tab.trends": "Trends", "tab.alerts": "Alerts",
-    "tab.network": "Network", "tab.chat": "Ask the data", "tab.scan": "Scan FIR",
+    "tab.network": "Network", "tab.chat": "Ask the data",
     "tab.audit": "Audit",
     "kpi.firs30": "FIRs, last 30 days", "kpi.open": "Open investigations",
     "kpi.csrate": "Chargesheet rate", "kpi.median": "Median days to chargesheet",
@@ -78,7 +78,7 @@ const DICT = {
     "chat.evidence": "Evidence: ", "chat.howigot": "How I got this",
     "chat.ph": "Ask about cases, offenders, alerts…", "chat.send": "Send",
     "chat.querying": "Agent is querying the database…",
-    "scan.title": "Scan a paper FIR", "audit.title": "Audit trail",
+    "audit.title": "Audit trail",
   },
   kn: {
     // topbar / chrome
@@ -92,7 +92,6 @@ const DICT = {
     "tab.alerts": "ಎಚ್ಚರಿಕೆಗಳು",
     "tab.network": "ಜಾಲ",
     "tab.chat": "ದತ್ತಾಂಶ ಕೇಳಿ",
-    "tab.scan": "FIR ಸ್ಕ್ಯಾನ್",
     "tab.audit": "ಲೆಕ್ಕಪರಿಶೋಧನೆ",
     // KPI strip
     "kpi.firs30": "FIRಗಳು, ಕಳೆದ 30 ದಿನ",
@@ -164,8 +163,6 @@ const DICT = {
     "chat.ph": "ಪ್ರಕರಣ, ಅಪರಾಧಿ, ಎಚ್ಚರಿಕೆ ಬಗ್ಗೆ ಕೇಳಿ…",
     "chat.send": "ಕಳುಹಿಸಿ",
     "chat.querying": "ಏಜೆಂಟ್ ದತ್ತಾಂಶ ಪರಿಶೀಲಿಸುತ್ತಿದೆ…",
-    // scan
-    "scan.title": "ಕಾಗದದ FIR ಸ್ಕ್ಯಾನ್ ಮಾಡಿ",
     // audit
     "audit.title": "ಲೆಕ್ಕಪರಿಶೋಧನಾ ಜಾಡು",
   },

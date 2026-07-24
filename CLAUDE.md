@@ -29,8 +29,8 @@ This is the DRISHTI project: KSP Datathon 2026, Challenge 2. Two-person team
   checksums) so police can verify Excel ↔ DB equivalence.
 - **Deployment target is Zoho Catalyst** (AppSail). LLM calls go through
   `backend/app/llm/zoho.py` — never call a model API directly from feature code.
-  Real Zoho QuickML endpoints are wired (GLM 4.7 + Qwen VLM) with OAuth
-  auto-refresh; credentials live in repo-root `.env` (gitignored, never commit).
+  The real Zoho QuickML GLM 4.7 endpoint is wired with OAuth auto-refresh;
+  credentials live in repo-root `.env` (gitignored, never commit).
   QuickML's GLM response is `{"response": str, "tool_calls": [...]}` — NOT
   OpenAI `choices[]`. Never inject synthetic assistant turns into the chat loop
   (GLM mimics them); feed tool results back as user turns.

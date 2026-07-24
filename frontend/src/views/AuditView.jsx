@@ -14,7 +14,6 @@ const EVENT_CHIP = {
   "login": "ok",
   "chat": "accent",
   "brief": "accent",
-  "scan-ingest": "accent",
 };
 
 export default function AuditView() {

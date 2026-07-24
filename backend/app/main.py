@@ -60,7 +60,7 @@ app.add_middleware(GZipMiddleware, minimum_size=1500)
 # it (the test harness sets this). Every response also gets baseline security
 # headers.
 _RL_RULES = {"/api/auth/login": (30, 60), "/api/chat": (30, 60),
-             "/api/brief": (20, 60), "/api/ingest/scan": (20, 60)}
+             "/api/brief": (20, 60)}
 _RL: dict[tuple, deque] = {}
 _SEC_HEADERS = {"X-Content-Type-Options": "nosniff",
                 "X-Frame-Options": "DENY", "Referrer-Policy": "no-referrer"}
@@ -164,8 +164,8 @@ def alert_scope_sql(user: User, dids: list[int] | None) -> tuple[str, list]:
 
 # -------------------------------------------------------------------- audit --
 # The trail records SENSITIVE ACTIONS, not HTTP traffic: record access
-# (search / profile / FIR / network / case lists), AI usage (chat / brief /
-# scan), sign-ins, and every denial. Dashboard aggregates are not audited —
+# (search / profile / FIR / network / case lists), AI usage (chat / brief),
+# sign-ins, and every denial. Dashboard aggregates are not audited —
 # see AuditSink's docstring for the doctrine.
 
 @app.exception_handler(StarletteHTTPException)
@@ -883,7 +883,7 @@ def er_metrics(user: User = Depends(current_user)):
     return out
 
 
-# ------------------------------------------------- agentic layer (GLM/Qwen) --
+# ------------------------------------------------------- agentic layer (GLM) --
 
 def _chat_scope(user: User) -> dict | None:
     if user.district_ids is None:
@@ -961,63 +961,6 @@ def brief_endpoint(body: dict, user: User = Depends(current_user)):
                             f"{out.get('scope', district_id or 'statewide')}"
                             + (f" (alert {alert_id})" if alert_id else "")})
     return out
-
-
-@app.post("/api/ingest/scan")
-async def ingest_scan(request: Request, file: UploadFile,
-                      user: User = Depends(current_user)):
-    """Qwen VLM: photographed/scanned FIR -> structured draft record."""
-    import base64
-    from .llm import ZohoLLM, chat_text as _text
-    from .llm.zoho import TokenError, LLMError
-    MAX = 8_000_000
-    # Reject oversized uploads BEFORE buffering/base64-encoding them (memory-DoS).
-    clen = request.headers.get("content-length")
-    if clen and clen.isdigit() and int(clen) > MAX + 4096:
-        raise HTTPException(413, "image too large (8MB max)")
-    raw = await file.read(MAX + 1)                   # bounded read
-    if len(raw) > MAX:
-        raise HTTPException(413, "image too large (8MB max)")
-    sig = raw[:12]                                   # validate it is an image
-    if not (sig[:3] == b"\xff\xd8\xff"                        # JPEG
-            or sig[:8] == b"\x89PNG\r\n\x1a\n"                # PNG
-            or (sig[:4] == b"RIFF" and sig[8:12] == b"WEBP")  # WebP
-            or sig[:4] == b"GIF8" or sig[:2] == b"BM"):       # GIF / BMP
-        raise HTTPException(415, "unsupported file — upload a JPEG/PNG/WebP image")
-    b64 = base64.b64encode(raw).decode()
-    prompt = (
-        "This is a photograph or scan of an Indian police FIR (First "
-        "Information Report) or similar case document. Extract these fields "
-        "and reply with ONLY a JSON object (no prose): fir_number, "
-        "police_station, district, date_registered, incident_datetime, "
-        "complainant_name, accused_names (array), victim_names (array), "
-        "acts_sections (array), brief_facts, property_description. Use null "
-        "for anything not visible.")
-    try:
-        resp = ZohoLLM().vlm_chat(prompt, [b64],
-                                  system_prompt="You extract structured data "
-                                  "from police documents. JSON only.")
-    except TokenError as e:
-        raise HTTPException(503, f"LLM credentials not configured: {e}")
-    except LLMError:
-        raise HTTPException(503, "AI service temporarily unavailable — retry.")
-    text = _text(resp)
-    fields = None
-    try:
-        start, end = text.find("{"), text.rfind("}")
-        if start >= 0 <= end:
-            fields = json.loads(text[start:end + 1])
-    except json.JSONDecodeError:
-        fields = None
-    # First write-shaped action in the system: when draft-record saving is
-    # built, it will log as record-update with before/after references.
-    AUDIT.write(user, "scan-ingest",
-                {"summary": f"scanned document '{(file.filename or '?')[:60]}'"
-                            f" ({len(raw) // 1024} KB) → "
-                            f"{'draft record extracted' if fields else 'no fields extracted'}"})
-    return {"fields": fields, "raw_text": text[:3000],
-            "note": "Draft extraction — an officer must verify before the "
-                    "record enters the database."}
 
 
 # ---------------------------------------------------------------- frontend --

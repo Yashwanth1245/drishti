@@ -314,11 +314,11 @@ class AuditSink:
 
     This is NOT a request log (uvicorn already has one). It records the
     actions oversight actually asks about: who searched which name, who
-    opened whose profile / which FIR, what was asked of the AI, briefs and
-    scans, sign-ins, and every DENIED attempt. Dashboard navigation (KPIs,
+    opened whose profile / which FIR, what was asked of the AI, briefs,
+    sign-ins, and every DENIED attempt. Dashboard navigation (KPIs,
     map aggregates, trends) is deliberately not audited — logging it drowns
-    the signal. When write paths arrive (e.g. saving a scanned-FIR draft),
-    they log as record-update events with the same vocabulary.
+    the signal. When write paths arrive (e.g. record updates), they log as
+    record-update events with the same vocabulary.
 
     Viewing the audit trail itself is not self-logged (it would spam at the
     UI's refresh rate); production would log it once per session.
