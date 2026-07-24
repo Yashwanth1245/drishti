@@ -51,8 +51,14 @@ _CORS = os.environ.get("DRISHTI_CORS_ORIGINS",
 app.add_middleware(CORSMiddleware,
                    allow_origins=[o.strip() for o in _CORS.split(",") if o.strip()],
                    allow_methods=["*"], allow_headers=["*"])
-# Map/meta payloads are large, repetitive JSON — gzip cuts them ~85%.
-app.add_middleware(GZipMiddleware, minimum_size=1500)
+# Map/meta payloads are large, repetitive JSON — gzip cuts them ~85%. BUT
+# Catalyst AppSail's edge proxy already compresses responses; adding a second
+# app-level gzip double-encodes the body, and browsers fail it with
+# net::ERR_CONTENT_DECODING_FAILED (curl, sending only `Accept-Encoding: gzip`,
+# is unaffected — which masks it). So compress at the app ONLY when NOT behind
+# the Catalyst proxy (standalone Docker / local dev); on AppSail the edge does it.
+if not os.environ.get("X_ZOHO_CATALYST_LISTEN_PORT"):
+    app.add_middleware(GZipMiddleware, minimum_size=1500)
 
 # Per-IP sliding-window rate limiting on the expensive/abusable endpoints:
 # login runs 120k-round PBKDF2 (CPU-DoS) and the LLM endpoints cost real money.
@@ -160,6 +166,34 @@ def alert_scope_sql(user: User, dids: list[int] | None) -> tuple[str, list]:
             f"scope_id IN ({m})) OR (scope_type='station' AND scope_id IN "
             f"(SELECT UnitID FROM Unit WHERE DistrictID IN ({m}))))",
             args + args)
+
+
+# ---------------------------------------------------------- query-result cache --
+# The analytical tables (x_agg_daily, x_alert, CaseMaster, x_property, x_entity)
+# are STATIC between datagen runs — only x_app_user/x_audit_log are written at
+# runtime, and no analytical endpoint reads those. So the expensive per-request
+# aggregations (kpis, trends, alerts) can be memoized in-process. The key MUST
+# carry the caller's scope so one rank never serves another's data from cache.
+# FIFO-bounded; the process (hence cache) resets on every redeploy.
+_QCACHE: dict = {}
+_QCACHE_MAX = 512
+
+
+def _scope_key(user: User) -> tuple:
+    return (user.station_id,
+            tuple(sorted(user.district_ids)) if user.district_ids is not None
+            else None)
+
+
+def _cache_get(key):
+    return _QCACHE.get(key)
+
+
+def _cache_put(key, val):
+    _QCACHE[key] = val
+    if len(_QCACHE) > _QCACHE_MAX:
+        del _QCACHE[next(iter(_QCACHE))]
+    return val
 
 
 # -------------------------------------------------------------------- audit --
@@ -280,6 +314,10 @@ def meta(user: User = Depends(current_user)):
 @app.get("/api/kpis")
 def kpis(district_id: int | None = None, user: User = Depends(current_user)):
     dids = scoped_districts(user, district_id)
+    key = ("kpis", _scope_key(user), district_id)
+    hit = _cache_get(key)
+    if hit is not None:
+        return hit
     conn = db()
     as_of = dt.date.fromisoformat(AS_OF)
     d30 = (as_of - dt.timedelta(days=29)).isoformat()
@@ -337,7 +375,7 @@ def kpis(district_id: int | None = None, user: User = Depends(current_user)):
         f"JOIN Unit u ON u.UnitID=c.PoliceStationID WHERE 1=1 {cscope}",
         cargs).fetchone()
     conn.close()
-    return {
+    return _cache_put(key, {
         "cases_last_30d": cur30,
         "yoy_change_pct": round(100 * (cur30 - prev30) / prev30, 1) if prev30 else None,
         "open_investigations": open_cases,
@@ -348,7 +386,7 @@ def kpis(district_id: int | None = None, user: User = Depends(current_user)):
         "property_recovery_pct": round(100 * prop[1] / prop[0], 1)
                                  if prop and prop[0] else None,
         "scope_label": user.label,
-    }
+    })
 
 
 # ---------------------------------------------------------------------- map --
@@ -479,6 +517,10 @@ def map_stations(district_id: int, head_id: int | None = None,
 def trends(district_id: int | None = None, head_id: int | None = None,
            months: int = 24, user: User = Depends(current_user)):
     dids = scoped_districts(user, district_id)
+    key = ("trends", _scope_key(user), district_id, head_id, months)
+    hit = _cache_get(key)
+    if hit is not None:
+        return hit
     conn = db()
     scope, args = "", []
     if user.station_id:
@@ -504,7 +546,8 @@ def trends(district_id: int | None = None, head_id: int | None = None,
         f"SELECT summary, window_start, window_end, observed, baseline, zscore "
         f"FROM x_alert WHERE kind='spike' {sscope}", sargs))
     conn.close()
-    return {"series": series, "monthly_baseline": baseline, "spikes": spikes}
+    return _cache_put(key, {"series": series, "monthly_baseline": baseline,
+                            "spikes": spikes})
 
 
 # ------------------------------------------------------------------- alerts --
@@ -513,6 +556,10 @@ def trends(district_id: int | None = None, head_id: int | None = None,
 def alerts(district_id: int | None = None, kind: str | None = None,
            user: User = Depends(current_user)):
     dids = scoped_districts(user, district_id)
+    key = ("alerts", _scope_key(user), district_id, kind)
+    hit = _cache_get(key)
+    if hit is not None:
+        return hit
     conn = db()
     scope, args = alert_scope_sql(user, dids)
     if kind:
@@ -523,12 +570,24 @@ def alerts(district_id: int | None = None, kind: str | None = None,
         f"baseline, zscore, window_start, window_end, evidence "
         f"FROM x_alert WHERE 1=1 {scope} ORDER BY zscore DESC NULLS LAST",
         args))
-    for a in data:
-        ids = json.loads(a.pop("evidence") or "[]")
-        a["evidence"] = crime_nos(conn, ids)
+    # Resolve evidence CrimeNos for ALL alerts in ONE query (was a query per
+    # alert -> ~300 round-trips + a 170 KB payload). The list view shows only a
+    # few chips per alert; the true total is preserved in evidence_count.
+    LIST_EVIDENCE_CAP = 12
+    ev_ids = [json.loads(a.pop("evidence") or "[]") for a in data]
+    wanted = {int(i) for ids in ev_ids for i in ids[:LIST_EVIDENCE_CAP]}
+    cnmap = {}
+    if wanted:
+        marks = ",".join(str(i) for i in wanted)
+        cnmap = {r["CaseMasterID"]: r["CrimeNo"] for r in conn.execute(
+            f"SELECT CaseMasterID, CrimeNo FROM CaseMaster "
+            f"WHERE CaseMasterID IN ({marks})")}
+    for a, ids in zip(data, ev_ids):
+        a["evidence"] = [cnmap[int(i)] for i in ids[:LIST_EVIDENCE_CAP]
+                         if int(i) in cnmap]
         a["evidence_count"] = len(ids)
     conn.close()
-    return {"alerts": data}
+    return _cache_put(key, {"alerts": data})
 
 
 # ----------------------------------------------------------------- entities --
@@ -961,6 +1020,31 @@ def brief_endpoint(body: dict, user: User = Depends(current_user)):
                             f"{out.get('scope', district_id or 'statewide')}"
                             + (f" (alert {alert_id})" if alert_id else "")})
     return out
+
+
+# --------------------------------------------------------- startup warm --
+
+@app.on_event("startup")
+def _warm_statewide_cache() -> None:
+    """Precompute the heavy statewide (DGP) aggregates in a background thread at
+    boot, so the FIRST dashboard load is already cached and instant — the common
+    demo entry point, and the widest (slowest) scope. Best-effort and fully
+    isolated: any failure here is swallowed so it can never stop the app from
+    serving, and the daemon thread never blocks startup."""
+    import threading
+
+    def _work():
+        try:
+            ensure_seeded()
+            u = verify_password("dgp", DEMO_PASSWORD)
+            if u is not None:
+                kpis(None, u)
+                trends(None, None, 24, u)
+                alerts(None, None, u)
+        except Exception:
+            pass
+
+    threading.Thread(target=_work, daemon=True).start()
 
 
 # ---------------------------------------------------------------- frontend --

@@ -42,6 +42,17 @@ def load_env() -> dict:
     for k, v in os.environ.items():
         if k.startswith(("ZOHO_", "QUICKML_", "CATALYST_", "DRISHTI_")) and v:
             env[k] = v
+    # Catalyst AppSail RESERVES some env-var names (CATALYST_*, and it also
+    # blocks ZOHO_*/QUICKML_* in the console with "must not contain reserved
+    # keywords"). So accept a DRISHTI_-prefixed alias for any config key —
+    # DRISHTI_ZOHO_ACCESS_TOKEN -> ZOHO_ACCESS_TOKEN, DRISHTI_CATALYST_ORG ->
+    # CATALYST_ORG — because DRISHTI_ is never reserved. An explicit alias wins
+    # (it is what the operator set in the console to work around the block).
+    for k, v in os.environ.items():
+        if k.startswith("DRISHTI_") and v:
+            canonical = k[len("DRISHTI_"):]
+            if canonical:
+                env[canonical] = v
     return env
 
 
@@ -76,7 +87,9 @@ class ZohoLLM:
                 pass
         base = self.env.get("QUICKML_BASE",
                             "https://api.catalyst.zoho.in/quickml/v1")
-        project = self.env["QUICKML_PROJECT_ID"]
+        # Public datathon QuickML identifiers (also in .env.example) — defaulted
+        # so a deploy needs only the SECRET vars set; override via env if needed.
+        project = self.env.get("QUICKML_PROJECT_ID", "50351000000013025")
         self.glm_url = f"{base}/project/{project}/glm/chat"
         self.client = httpx.Client(timeout=120)
 
@@ -84,7 +97,7 @@ class ZohoLLM:
     def _headers(self):
         return {"Content-Type": "application/json",
                 "Authorization": f"Bearer {self.access_token}",
-                "CATALYST-ORG": self.env["CATALYST_ORG"]}
+                "CATALYST-ORG": self.env.get("CATALYST_ORG", "60075642221")}
 
     def refresh(self) -> str:
         """Exchange the refresh token for a new access token; cache it."""

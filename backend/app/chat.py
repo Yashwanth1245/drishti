@@ -21,6 +21,8 @@ import datetime as dt
 import json
 import sqlite3
 
+from rapidfuzz import fuzz as _rf_fuzz, process as _rf_process
+
 from .config import AS_OF, DB_PATH
 from .llm import ZohoLLM, chat_text
 from .llm.zoho import tool_calls
@@ -111,6 +113,13 @@ class ScopeError(Exception):
     jurisdiction; surfaced to the model as a tool error it must relay."""
 
 
+class ToolInputError(Exception):
+    """Raised when a tool argument can't be resolved (e.g. an unknown/misspelt
+    district). The tool must NEVER silently drop the filter and return a broader
+    figure — that once made 'cases in Dhaward' answer with the STATEWIDE total.
+    Surfaced to the model as an error it must relay so it can ask/clarify."""
+
+
 def _scope_case_sql(scope, unit_alias="u", case_alias="c"):
     """WHERE fragment pinning case rows to the caller's jurisdiction."""
     if not scope:
@@ -124,12 +133,39 @@ def _scope_case_sql(scope, unit_alias="u", case_alias="c"):
     return "", []
 
 
+# Old / alternate names people (and judges) still use, mapped to the current
+# official district name in the DB (post-2014 Karnataka renames).
+_DISTRICT_ALIASES = {
+    "bangalore": "Bengaluru Urban", "bangalore urban": "Bengaluru Urban",
+    "bangalore rural": "Bengaluru Rural", "bengaluru": "Bengaluru Urban",
+    "mysore": "Mysuru", "belgaum": "Belagavi", "bellary": "Ballari",
+    "bijapur": "Vijayapura", "gulbarga": "Kalaburagi",
+    "chikmagalur": "Chikkamagaluru", "tumkur": "Tumakuru",
+    "shimoga": "Shivamogga", "mangalore": "Dakshina Kannada",
+    "hospet": "Vijayanagara", "hosapete": "Vijayanagara",
+    "bagalkot": "Bagalkote", "chamrajnagar": "Chamarajanagara",
+}
+
+
 def _district_id(conn, name):
     if not name:
         return None
+    q = name.strip()
+    look = _DISTRICT_ALIASES.get(q.lower(), q)      # old name -> current name
     r = conn.execute("SELECT DistrictID FROM District WHERE DistrictName LIKE ?",
-                     (f"%{name.strip()}%",)).fetchone()
-    return r[0] if r else None
+                     (f"%{look}%",)).fetchone()
+    if r:
+        return r[0]
+    # Still nothing — the name is probably misspelt ('Dhaward'). Match it against
+    # the 31 real district names with rapidfuzz; a strong score wins, anything
+    # weak returns None so the caller fails loudly (never counts the whole state).
+    names = {row[1]: row[0] for row in
+             conn.execute("SELECT DistrictID, DistrictName FROM District")}
+    # processor=str.lower so matching is case-insensitive — the model passes the
+    # district lowercased ('dhaward'), which otherwise scores below the cutoff.
+    best = _rf_process.extractOne(q, names.keys(), scorer=_rf_fuzz.WRatio,
+                                  processor=str.lower, score_cutoff=80)
+    return names[best[0]] if best else None
 
 
 STATUS_MAP = {"open": (1,), "chargesheeted": (2, 5), "false": (3,),
@@ -138,8 +174,13 @@ STATUS_MAP = {"open": (1,), "chargesheeted": (2, 5), "false": (3,),
 
 def _case_filters(conn, a, scope=None):
     conds, args = ["1=1"], []
-    did = _district_id(conn, a.get("district"))
-    if did:
+    dname = (a.get("district") or "").strip()
+    if dname:
+        did = _district_id(conn, dname)
+        if did is None:                    # provided but unresolved -> fail LOUD
+            raise ToolInputError(
+                f"No Karnataka district matches '{dname}'. Check the spelling, "
+                f"or omit the district for a statewide figure.")
         if scope and scope.get("district_ids") \
                 and did not in scope["district_ids"]:
             raise ScopeError(
@@ -397,7 +438,7 @@ def ask(messages: list[dict], llm: ZohoLLM | None = None,
         for c in calls:
             try:
                 out = run_tool(c["name"], c["arguments"], scope)
-            except ScopeError as exc:              # relayed, never bypassed
+            except (ScopeError, ToolInputError) as exc:  # relayed, never bypassed
                 out = {"error": str(exc)}
             except Exception:                      # tool bugs must not kill chat
                 # Don't echo internal exception text to the client/model.
